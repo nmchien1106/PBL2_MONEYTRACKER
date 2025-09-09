@@ -34,7 +34,7 @@ namespace MoneyTracker {
 				delete components;
 			}
 		}
-	private: System::Windows::Forms::CheckBox^ checkBox1;
+
 	protected:
 
 	protected:
@@ -52,30 +52,16 @@ namespace MoneyTracker {
 		/// </summary>
 		void InitializeComponent(void)
 		{
-			this->checkBox1 = (gcnew System::Windows::Forms::CheckBox());
 			this->SuspendLayout();
-			// 
-			// checkBox1
-			// 
-			this->checkBox1->AutoSize = true;
-			this->checkBox1->Location = System::Drawing::Point(341, 199);
-			this->checkBox1->Name = L"checkBox1";
-			this->checkBox1->Size = System::Drawing::Size(61, 17);
-			this->checkBox1->TabIndex = 0;
-			this->checkBox1->Text = L"Ví dụ 1";
-			this->checkBox1->UseVisualStyleBackColor = true;
-			this->checkBox1->CheckedChanged += gcnew System::EventHandler(this, &Login::checkBox1_CheckedChanged);
 			// 
 			// Login
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(1030, 523);
-			this->Controls->Add(this->checkBox1);
 			this->Name = L"Login";
 			this->Text = L"Login";
 			this->ResumeLayout(false);
-			this->PerformLayout();
 
 		}
 #pragma endregion

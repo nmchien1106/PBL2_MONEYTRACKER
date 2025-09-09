@@ -80,7 +80,7 @@ namespace MoneyTracker {
 		}
 #pragma endregion
 	private: System::Void checkBox1_CheckedChanged(System::Object^ sender, System::EventArgs^ e) {
-
+		
 	}
 	};
 }

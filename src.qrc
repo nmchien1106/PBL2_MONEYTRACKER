@@ -1,0 +1,28 @@
+<RCC>
+    <qresource prefix="/image"/>
+    <qresource prefix="/img">
+        <file>src/9055226_bxs_dashboard_icon.png</file>
+        <file>src/add.png</file>
+        <file>src/analyitics.png</file>
+        <file>src/calendar.png</file>
+        <file>src/dashboard.png</file>
+        <file>src/dept.png</file>
+        <file>src/icon.ico</file>
+        <file>src/images.jpg</file>
+        <file>src/images.png</file>
+        <file>src/income.png</file>
+        <file>src/logout.png</file>
+        <file>src/piggy-bank.png</file>
+        <file>src/remove.png</file>
+        <file>src/reports.png</file>
+        <file>src/salary.png</file>
+        <file>src/saving.png</file>
+        <file>src/seo-report.png</file>
+        <file>src/solid_user.png</file>
+        <file>src/spending.png</file>
+        <file>src/transaction.png</file>
+        <file>src/update.png</file>
+        <file>src/wallet.png</file>
+        <file>src/write.png</file>
+    </qresource>
+</RCC>

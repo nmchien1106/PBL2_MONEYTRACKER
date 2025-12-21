@@ -1,0 +1,11 @@
+id,createdAt,name,description,type
+CAT0001,01/01/2025,Ăn uống,Chi phí ăn uống hàng ngày,Expense
+CAT0002,01/01/2025,Di chuyển,Chi phí đi lại xe bus taxi,Expense
+CAT0003,01/01/2025,Giải trí,Chi phí giải trí xem phim,Expense
+CAT0004,01/01/2025,Mua sắm,Chi phí mua sắm quần áo,Expense
+CAT0005,01/01/2025,Y tế,Chi phí khám bệnh thuốc men,Expense
+CAT0006,01/01/2025,Học tập,Chi phí học phí sách vở,Expense
+CAT0007,01/01/2025,Lương,Thu nhập từ công việc,Income
+CAT0008,01/01/2025,Thưởng,Thu nhập từ tiền thưởng,Income
+CAT0009,01/01/2025,Đầu tư,Thu nhập từ đầu tư,Income
+CAT0010,15/12/2025,Nhà ở,Chi phí thuê nhà tiền điện nước,Expense

@@ -129,6 +129,13 @@ template <> constexpr inline auto Dashboard::qt_create_metaobjectdata<qt_meta_ta
         "clearExpenseSearch",
         "searchIncome",
         "clearIncomeSearch",
+        "onExpenseFilterChanged",
+        "onExpenseSortChanged",
+        "onIncomeFilterChanged",
+        "onIncomeSortChanged",
+        "updateExpenseResultLabel",
+        "count",
+        "updateIncomeResultLabel",
         "showAddTransactionDialog",
         "type",
         "on_expenseExpandingButton_clicked",
@@ -214,43 +221,67 @@ template <> constexpr inline auto Dashboard::qt_create_metaobjectdata<qt_meta_ta
         }}),
         // Slot 'clearIncomeSearch'
         QtMocHelpers::SlotData<void()>(32, 2, QMC::AccessPrivate, QMetaType::Void),
+        // Slot 'onExpenseFilterChanged'
+        QtMocHelpers::SlotData<void(int)>(33, 2, QMC::AccessPrivate, QMetaType::Void, {{
+            { QMetaType::Int, 26 },
+        }}),
+        // Slot 'onExpenseSortChanged'
+        QtMocHelpers::SlotData<void(int)>(34, 2, QMC::AccessPrivate, QMetaType::Void, {{
+            { QMetaType::Int, 26 },
+        }}),
+        // Slot 'onIncomeFilterChanged'
+        QtMocHelpers::SlotData<void(int)>(35, 2, QMC::AccessPrivate, QMetaType::Void, {{
+            { QMetaType::Int, 26 },
+        }}),
+        // Slot 'onIncomeSortChanged'
+        QtMocHelpers::SlotData<void(int)>(36, 2, QMC::AccessPrivate, QMetaType::Void, {{
+            { QMetaType::Int, 26 },
+        }}),
+        // Slot 'updateExpenseResultLabel'
+        QtMocHelpers::SlotData<void(int)>(37, 2, QMC::AccessPrivate, QMetaType::Void, {{
+            { QMetaType::Int, 38 },
+        }}),
+        // Slot 'updateIncomeResultLabel'
+        QtMocHelpers::SlotData<void(int)>(39, 2, QMC::AccessPrivate, QMetaType::Void, {{
+            { QMetaType::Int, 38 },
+        }}),
         // Slot 'showAddTransactionDialog'
-        QtMocHelpers::SlotData<void(const QString &)>(33, 2, QMC::AccessPrivate, QMetaType::Void, {{
-            { QMetaType::QString, 34 },
+        QtMocHelpers::SlotData<void(const QString &)>(40, 2, QMC::AccessPrivate, QMetaType::Void, {{
+            { QMetaType::QString, 41 },
         }}),
         // Slot 'on_expenseExpandingButton_clicked'
-        QtMocHelpers::SlotData<void()>(35, 2, QMC::AccessPrivate, QMetaType::Void),
+        QtMocHelpers::SlotData<void()>(42, 2, QMC::AccessPrivate, QMetaType::Void),
         // Slot 'on_incomeExpandingButton_clicked'
-        QtMocHelpers::SlotData<void()>(36, 2, QMC::AccessPrivate, QMetaType::Void),
+        QtMocHelpers::SlotData<void()>(43, 2, QMC::AccessPrivate, QMetaType::Void),
         // Slot 'handleExpenseCardAction'
-        QtMocHelpers::SlotData<void()>(37, 2, QMC::AccessPrivate, QMetaType::Void),
+        QtMocHelpers::SlotData<void()>(44, 2, QMC::AccessPrivate, QMetaType::Void),
         // Slot 'handleIncomeCardAction'
-        QtMocHelpers::SlotData<void()>(38, 2, QMC::AccessPrivate, QMetaType::Void),
+        QtMocHelpers::SlotData<void()>(45, 2, QMC::AccessPrivate, QMetaType::Void),
         // Slot 'editIncomeTransaction'
-        QtMocHelpers::SlotData<void(const QString &)>(39, 2, QMC::AccessPrivate, QMetaType::Void, {{
-            { QMetaType::QString, 40 },
+        QtMocHelpers::SlotData<void(const QString &)>(46, 2, QMC::AccessPrivate, QMetaType::Void, {{
+            { QMetaType::QString, 47 },
         }}),
         // Slot 'editExpenseTransaction'
-        QtMocHelpers::SlotData<void(const QString &)>(41, 2, QMC::AccessPrivate, QMetaType::Void, {{
-            { QMetaType::QString, 42 },
+        QtMocHelpers::SlotData<void(const QString &)>(48, 2, QMC::AccessPrivate, QMetaType::Void, {{
+            { QMetaType::QString, 49 },
         }}),
         // Slot 'removeIncomeTransaction'
-        QtMocHelpers::SlotData<void(const QString &)>(43, 2, QMC::AccessPrivate, QMetaType::Void, {{
-            { QMetaType::QString, 40 },
+        QtMocHelpers::SlotData<void(const QString &)>(50, 2, QMC::AccessPrivate, QMetaType::Void, {{
+            { QMetaType::QString, 47 },
         }}),
         // Slot 'removeExpenseTransaction'
-        QtMocHelpers::SlotData<void(const QString &)>(44, 2, QMC::AccessPrivate, QMetaType::Void, {{
-            { QMetaType::QString, 42 },
+        QtMocHelpers::SlotData<void(const QString &)>(51, 2, QMC::AccessPrivate, QMetaType::Void, {{
+            { QMetaType::QString, 49 },
         }}),
         // Slot 'applyExpenseFiltersToMainList'
-        QtMocHelpers::SlotData<void()>(45, 2, QMC::AccessPrivate, QMetaType::Void),
+        QtMocHelpers::SlotData<void()>(52, 2, QMC::AccessPrivate, QMetaType::Void),
         // Slot 'applyIncomeFiltersToMainList'
-        QtMocHelpers::SlotData<void()>(46, 2, QMC::AccessPrivate, QMetaType::Void),
+        QtMocHelpers::SlotData<void()>(53, 2, QMC::AccessPrivate, QMetaType::Void),
         // Slot 'clearAllFilters'
-        QtMocHelpers::SlotData<void()>(47, 2, QMC::AccessPrivate, QMetaType::Void),
+        QtMocHelpers::SlotData<void()>(54, 2, QMC::AccessPrivate, QMetaType::Void),
         // Slot 'applySortToMainList'
-        QtMocHelpers::SlotData<void(const QString &, const QString &, bool)>(48, 2, QMC::AccessPrivate, QMetaType::Void, {{
-            { QMetaType::QString, 34 }, { QMetaType::QString, 49 }, { QMetaType::Bool, 50 },
+        QtMocHelpers::SlotData<void(const QString &, const QString &, bool)>(55, 2, QMC::AccessPrivate, QMetaType::Void, {{
+            { QMetaType::QString, 41 }, { QMetaType::QString, 56 }, { QMetaType::Bool, 57 },
         }}),
     };
     QtMocHelpers::UintData qt_properties {
@@ -303,19 +334,25 @@ void Dashboard::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, v
         case 25: _t->clearExpenseSearch(); break;
         case 26: _t->searchIncome((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1]))); break;
         case 27: _t->clearIncomeSearch(); break;
-        case 28: _t->showAddTransactionDialog((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1]))); break;
-        case 29: _t->on_expenseExpandingButton_clicked(); break;
-        case 30: _t->on_incomeExpandingButton_clicked(); break;
-        case 31: _t->handleExpenseCardAction(); break;
-        case 32: _t->handleIncomeCardAction(); break;
-        case 33: _t->editIncomeTransaction((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1]))); break;
-        case 34: _t->editExpenseTransaction((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1]))); break;
-        case 35: _t->removeIncomeTransaction((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1]))); break;
-        case 36: _t->removeExpenseTransaction((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1]))); break;
-        case 37: _t->applyExpenseFiltersToMainList(); break;
-        case 38: _t->applyIncomeFiltersToMainList(); break;
-        case 39: _t->clearAllFilters(); break;
-        case 40: _t->applySortToMainList((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1])),(*reinterpret_cast< std::add_pointer_t<QString>>(_a[2])),(*reinterpret_cast< std::add_pointer_t<bool>>(_a[3]))); break;
+        case 28: _t->onExpenseFilterChanged((*reinterpret_cast< std::add_pointer_t<int>>(_a[1]))); break;
+        case 29: _t->onExpenseSortChanged((*reinterpret_cast< std::add_pointer_t<int>>(_a[1]))); break;
+        case 30: _t->onIncomeFilterChanged((*reinterpret_cast< std::add_pointer_t<int>>(_a[1]))); break;
+        case 31: _t->onIncomeSortChanged((*reinterpret_cast< std::add_pointer_t<int>>(_a[1]))); break;
+        case 32: _t->updateExpenseResultLabel((*reinterpret_cast< std::add_pointer_t<int>>(_a[1]))); break;
+        case 33: _t->updateIncomeResultLabel((*reinterpret_cast< std::add_pointer_t<int>>(_a[1]))); break;
+        case 34: _t->showAddTransactionDialog((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1]))); break;
+        case 35: _t->on_expenseExpandingButton_clicked(); break;
+        case 36: _t->on_incomeExpandingButton_clicked(); break;
+        case 37: _t->handleExpenseCardAction(); break;
+        case 38: _t->handleIncomeCardAction(); break;
+        case 39: _t->editIncomeTransaction((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1]))); break;
+        case 40: _t->editExpenseTransaction((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1]))); break;
+        case 41: _t->removeIncomeTransaction((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1]))); break;
+        case 42: _t->removeExpenseTransaction((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1]))); break;
+        case 43: _t->applyExpenseFiltersToMainList(); break;
+        case 44: _t->applyIncomeFiltersToMainList(); break;
+        case 45: _t->clearAllFilters(); break;
+        case 46: _t->applySortToMainList((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1])),(*reinterpret_cast< std::add_pointer_t<QString>>(_a[2])),(*reinterpret_cast< std::add_pointer_t<bool>>(_a[3]))); break;
         default: ;
         }
     }
@@ -340,14 +377,14 @@ int Dashboard::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 41)
+        if (_id < 47)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 41;
+        _id -= 47;
     }
     if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 41)
+        if (_id < 47)
             *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType();
-        _id -= 41;
+        _id -= 47;
     }
     return _id;
 }

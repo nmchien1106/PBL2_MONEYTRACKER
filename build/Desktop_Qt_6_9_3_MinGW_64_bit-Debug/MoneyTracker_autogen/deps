@@ -211,6 +211,7 @@ MoneyTracker_autogen/timestamp: \
 	D:/App/qt/6.9.3/mingw_64/include/QtWidgets/QApplication \
 	D:/App/qt/6.9.3/mingw_64/include/QtWidgets/QComboBox \
 	D:/App/qt/6.9.3/mingw_64/include/QtWidgets/QDateEdit \
+	D:/App/qt/6.9.3/mingw_64/include/QtWidgets/QDateTimeEdit \
 	D:/App/qt/6.9.3/mingw_64/include/QtWidgets/QDialog \
 	D:/App/qt/6.9.3/mingw_64/include/QtWidgets/QFrame \
 	D:/App/qt/6.9.3/mingw_64/include/QtWidgets/QHBoxLayout \
@@ -709,6 +710,8 @@ MoneyTracker_autogen/timestamp: \
 	D:/App/qt/Tools/mingw1310_64/x86_64-w64-mingw32/include/wchar.h \
 	D:/App/qt/Tools/mingw1310_64/x86_64-w64-mingw32/include/wctype.h \
 	D:/My\ Workspace/PBL2/MoneyTracker/MoneyTracker/CMakeLists.txt \
+	D:/My\ Workspace/PBL2/MoneyTracker/MoneyTracker/add_transaction_dialog.cpp \
+	D:/My\ Workspace/PBL2/MoneyTracker/MoneyTracker/add_transaction_dialog.h \
 	D:/My\ Workspace/PBL2/MoneyTracker/MoneyTracker/app.cpp \
 	D:/My\ Workspace/PBL2/MoneyTracker/MoneyTracker/app.h \
 	D:/My\ Workspace/PBL2/MoneyTracker/MoneyTracker/build/Desktop_Qt_6_9_3_MinGW_64_bit-Debug/.qtc/package-manager/auto-setup.cmake \
@@ -739,6 +742,7 @@ MoneyTracker_autogen/timestamp: \
 	D:/My\ Workspace/PBL2/MoneyTracker/MoneyTracker/src.qrc \
 	D:/My\ Workspace/PBL2/MoneyTracker/MoneyTracker/transaction.cpp \
 	D:/My\ Workspace/PBL2/MoneyTracker/MoneyTracker/transaction.h \
+	D:/My\ Workspace/PBL2/MoneyTracker/MoneyTracker/add_transaction_dialog.ui \
 	D:/My\ Workspace/PBL2/MoneyTracker/MoneyTracker/dashboard.ui \
 	D:/My\ Workspace/PBL2/MoneyTracker/MoneyTracker/login_dialog.ui \
 	D:/App/qt/Tools/CMake_64/bin/cmake.exe

@@ -1,6 +1,7 @@
 #include "dashboard.h"
 #include "./ui_dashboard.h"
 #include "app.h"
+#include "add_transaction_dialog.h"
 #include <QVBoxLayout>
 #include <QHBoxLayout>
 #include <QGridLayout>
@@ -30,6 +31,36 @@ Dashboard::Dashboard(QWidget *parent)
 
     connect(ui->expenseSearchInput, &QLineEdit::returnPressed, this, &Dashboard::on_expenseSearchButton_clicked);
     connect(ui->incomeSearchInput, &QLineEdit::returnPressed, this, &Dashboard::on_incomeSearchButton_clicked);
+
+    QComboBox* expenseFilterCombo = this->findChild<QComboBox*>("expenseFilterCombo");
+    if (expenseFilterCombo) {
+        for (const Category& cat : App::getCategoryList()) {
+            if (cat.getType() == "Expense" || cat.getType() == "system") {
+                expenseFilterCombo->addItem(cat.getName(), cat.getID());
+            }
+        }
+        connect(expenseFilterCombo, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &Dashboard::onExpenseFilterChanged);
+    }
+
+    QComboBox* expenseSortCombo = this->findChild<QComboBox*>("expenseSortCombo");
+    if (expenseSortCombo) {
+        connect(expenseSortCombo, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &Dashboard::onExpenseSortChanged);
+    }
+
+    QComboBox* incomeFilterCombo = this->findChild<QComboBox*>("incomeFilterCombo");
+    if (incomeFilterCombo) {
+        for (const Category& cat : App::getCategoryList()) {
+            if (cat.getType() == "Income" || cat.getType() == "system") {
+                incomeFilterCombo->addItem(cat.getName(), cat.getID());
+            }
+        }
+        connect(incomeFilterCombo, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &Dashboard::onIncomeFilterChanged);
+    }
+
+    QComboBox* incomeSortCombo = this->findChild<QComboBox*>("incomeSortCombo");
+    if (incomeSortCombo) {
+        connect(incomeSortCombo, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &Dashboard::onIncomeSortChanged);
+    }
 
     // Connect debt search
     QLineEdit* debtSearchInput = this->findChild<QLineEdit*>("debtSearchInput");
@@ -124,7 +155,6 @@ Dashboard::Dashboard(QWidget *parent)
         }
     });
 
-    // Note: updateSavingStatistics and refreshSavingGoals are now called from App::loadData()
 }
 
 Dashboard::~Dashboard()
@@ -139,12 +169,12 @@ void Dashboard::on_DashBoard_btn_2_clicked()
 
 void Dashboard::on_expense_btn_2_clicked()
 {
-    ui->stackedWidget->setCurrentIndex(4);
+    ui->stackedWidget->setCurrentIndex(3);
 }
 
 void Dashboard::on_income_btn_2_clicked()
 {
-    ui->stackedWidget->setCurrentIndex(5);
+    ui->stackedWidget->setCurrentIndex(4);
 }
 
 void Dashboard::on_saving_btn_2_clicked()
@@ -155,13 +185,11 @@ void Dashboard::on_saving_btn_2_clicked()
 void Dashboard::on_dept_btn_2_clicked()
 {
     ui->stackedWidget->setCurrentIndex(2);
-    // Data already loaded on app startup, no need to reload
 }
 
 void Dashboard::on_debt_btn_2_clicked()
 {
     ui->stackedWidget->setCurrentIndex(2);
-    // Data already loaded on app startup, no need to reload
 }
 
 
@@ -245,6 +273,8 @@ void Dashboard::renderCards(){
     for (const Income &inc : App::getIncomeList())
     {
         QFrame* card = inc.createCard(QString::number(incomeIndex++));
+        card->setProperty("incomeId", inc.getID());
+        card->setProperty("categoryId", inc.getCategory() ? inc.getCategory()->getID() : "");
 
         QPushButton* editBtn = card->findChild<QPushButton*>("edit_" + inc.getID());
         QPushButton* deleteBtn = card->findChild<QPushButton*>("delete_" + inc.getID());
@@ -270,6 +300,8 @@ void Dashboard::renderCards(){
     for (const Expense &exp : App::getExpenseList())
     {
         QFrame* card = exp.createCard(QString::number(expenseIndex++));
+        card->setProperty("expenseId", exp.getID());
+        card->setProperty("categoryId", exp.getCategory() ? exp.getCategory()->getID() : "");
 
         QPushButton* editBtn = card->findChild<QPushButton*>("edit_" + exp.getID());
         QPushButton* deleteBtn = card->findChild<QPushButton*>("delete_" + exp.getID());
@@ -509,11 +541,7 @@ void Dashboard::searchExpense(const QString& keyword) {
     }
 
     ensureCardsAtTop(expenseScroll);
-
-    if (visibleCount == 0) {
-        QMessageBox::information(this, "Kết quả tìm kiếm",
-                                 QString("Không tìm thấy chi tiêu nào chứa từ khóa: %1").arg(keyword));
-    }
+    updateExpenseResultLabel(visibleCount);
 }
 
 void Dashboard::clearExpenseSearch() {
@@ -537,6 +565,7 @@ void Dashboard::clearExpenseSearch() {
     originalExpenseCards.clear();
     searchModeActive = false;
     ui->expenseSearchInput->clear();
+    updateExpenseResultLabel(0);
 }
 
 QString Dashboard::extractCardText(QFrame* card) {
@@ -612,11 +641,7 @@ void Dashboard::searchIncome(const QString& keyword) {
     }
 
     ensureCardsAtTop(incomeScroll);
-
-    if (visibleCount == 0) {
-        QMessageBox::information(this, "Kết quả tìm kiếm",
-                                 QString("Không tìm thấy thu nhập nào chứa từ khóa: %1").arg(keyword));
-    }
+    updateIncomeResultLabel(visibleCount);
 }
 
 void Dashboard::clearIncomeSearch() {
@@ -643,96 +668,253 @@ void Dashboard::clearIncomeSearch() {
     originalIncomeCards.clear();
     incomeSearchModeActive = false;
     ui->incomeSearchInput->clear();
+    updateIncomeResultLabel(0);
 }
 
-void Dashboard::showAddTransactionDialog(const QString& type) {
-    QDialog dialog(this);
-    dialog.setWindowTitle(type == "expense" ? "Thêm Chi Tiêu" : "Thêm Thu Nhập");
-    dialog.setModal(true);
-    dialog.resize(400, 300);
+void Dashboard::updateExpenseResultLabel(int count) {
+    QLabel* resultLabel = this->findChild<QLabel*>("expenseResultLabel");
+    if (resultLabel) {
+        if (count == 0 && !ui->expenseSearchInput->text().isEmpty()) {
+            resultLabel->setText("❌ Không tìm thấy kết quả");
+            resultLabel->setStyleSheet("color: #f44336; font-size: 12px; font-weight: bold;");
+        } else if (count > 0) {
+            resultLabel->setText(QString("✅ Tìm thấy %1 kết quả").arg(count));
+            resultLabel->setStyleSheet("color: #4CAF50; font-size: 12px; font-weight: bold;");
+        } else {
+            resultLabel->setText("");
+        }
+    }
+}
 
+void Dashboard::updateIncomeResultLabel(int count) {
+    QLabel* resultLabel = this->findChild<QLabel*>("incomeResultLabel");
+    if (resultLabel) {
+        if (count == 0 && !ui->incomeSearchInput->text().isEmpty()) {
+            resultLabel->setText("❌ Không tìm thấy kết quả");
+            resultLabel->setStyleSheet("color: #f44336; font-size: 12px; font-weight: bold;");
+        } else if (count > 0) {
+            resultLabel->setText(QString("✅ Tìm thấy %1 kết quả").arg(count));
+            resultLabel->setStyleSheet("color: #2196F3; font-size: 12px; font-weight: bold;");
+        } else {
+            resultLabel->setText("");
+        }
+    }
+}
 
-    QVBoxLayout* layout = new QVBoxLayout(&dialog);
+void Dashboard::onExpenseFilterChanged(int index) {
+    QComboBox* filterCombo = this->findChild<QComboBox*>("expenseFilterCombo");
+    if (!filterCombo) return;
 
+    QString selectedCategoryId = "";
+    if (index > 0) {
+        selectedCategoryId = filterCombo->itemData(index).toString();
+    }
 
-    QLabel* categoryLabel = new QLabel("Danh mục:", &dialog);
-    QComboBox* categoryCombo = new QComboBox(&dialog);
+    QScrollArea* expenseScroll = ui->expenseList;
+    if (!expenseScroll || !expenseScroll->widget()) return;
 
-    for (const Category& category : App::getCategoryList()) {
-        QString categoryType = category.getType();
-        if ((type == "expense" && categoryType == "Expense") ||
-            (type == "income" && categoryType == "Income") ||
-            categoryType == "system") {
-            categoryCombo->addItem(category.getName(), category.getID());
+    QLayout* expenseLayout = expenseScroll->widget()->layout();
+    if (!expenseLayout) return;
+
+    int visibleCount = 0;
+    for (int i = 0; i < expenseLayout->count(); i++) {
+        QLayoutItem* item = expenseLayout->itemAt(i);
+        if (item && item->widget()) {
+            QFrame* card = qobject_cast<QFrame*>(item->widget());
+            if (card) {
+                if (index == 0) {
+                    card->show();
+                    visibleCount++;
+                } else {
+                    QString cardCategoryId = card->property("categoryId").toString();
+                    if (cardCategoryId == selectedCategoryId) {
+                        card->show();
+                        visibleCount++;
+                    } else {
+                        card->hide();
+                    }
+                }
+            }
         }
     }
 
+    if (ui->expenseSearchInput->text().isEmpty()) {
+        updateExpenseResultLabel(index > 0 ? visibleCount : 0);
+    }
+}
 
-    QLabel* amountLabel = new QLabel("Số tiền:", &dialog);
-    QLineEdit* amountEdit = new QLineEdit(&dialog);
-    amountEdit->setPlaceholderText("Nhập số tiền...");
+void Dashboard::onExpenseSortChanged(int index) {
+    QScrollArea* expenseScroll = ui->expenseList;
+    if (!expenseScroll || !expenseScroll->widget()) return;
 
-    QLabel* descLabel = new QLabel("Mô tả:", &dialog);
-    QTextEdit* descEdit = new QTextEdit(&dialog);
-    descEdit->setPlaceholderText("Nhập mô tả (tùy chọn)...");
-    descEdit->setMaximumHeight(80);
+    QVBoxLayout* expenseLayout = qobject_cast<QVBoxLayout*>(expenseScroll->widget()->layout());
+    if (!expenseLayout) return;
 
-    QHBoxLayout* buttonLayout = new QHBoxLayout();
-    QPushButton* okButton = new QPushButton("Thêm", &dialog);
-    QPushButton* cancelButton = new QPushButton("Hủy", &dialog);
+    QVector<QPair<QFrame*, Expense>> cardExpensePairs;
 
-    buttonLayout->addWidget(okButton);
-    buttonLayout->addWidget(cancelButton);
-
-    layout->addWidget(categoryLabel);
-    layout->addWidget(categoryCombo);
-    layout->addWidget(amountLabel);
-    layout->addWidget(amountEdit);
-    layout->addWidget(descLabel);
-    layout->addWidget(descEdit);
-    layout->addLayout(buttonLayout);
-
-    connect(okButton, &QPushButton::clicked, [&dialog, categoryCombo, amountEdit, descEdit, type, this]() {
-        QString categoryId = categoryCombo->currentData().toString();
-        QString amountText = amountEdit->text().trimmed();
-        QString description = descEdit->toPlainText().trimmed();
-
-        if (categoryId.isEmpty()) {
-            QMessageBox::warning(&dialog, "Lỗi", "Vui lòng chọn danh mục!");
-            return;
+    for (int i = 0; i < expenseLayout->count(); i++) {
+        QLayoutItem* item = expenseLayout->itemAt(i);
+        if (item && item->widget()) {
+            QFrame* card = qobject_cast<QFrame*>(item->widget());
+            if (card) {
+                QString expenseId = card->property("expenseId").toString();
+                for (const Expense& exp : App::getExpenseList()) {
+                    if (exp.getID() == expenseId) {
+                        cardExpensePairs.append({card, exp});
+                        break;
+                    }
+                }
+            }
         }
+    }
 
-        if (amountText.isEmpty()) {
-            QMessageBox::warning(&dialog, "Lỗi", "Vui lòng nhập số tiền!");
-            return;
+    switch(index) {
+        case 0:
+            std::sort(cardExpensePairs.begin(), cardExpensePairs.end(),
+                [](const QPair<QFrame*, Expense>& a, const QPair<QFrame*, Expense>& b) {
+                    return a.second.getCreatedAt() > b.second.getCreatedAt();
+                });
+            break;
+        case 1:
+            std::sort(cardExpensePairs.begin(), cardExpensePairs.end(),
+                [](const QPair<QFrame*, Expense>& a, const QPair<QFrame*, Expense>& b) {
+                    return a.second.getCreatedAt() < b.second.getCreatedAt();
+                });
+            break;
+        case 2:
+            std::sort(cardExpensePairs.begin(), cardExpensePairs.end(),
+                [](const QPair<QFrame*, Expense>& a, const QPair<QFrame*, Expense>& b) {
+                    return a.second.getAmount() > b.second.getAmount();
+                });
+            break;
+        case 3:
+            std::sort(cardExpensePairs.begin(), cardExpensePairs.end(),
+                [](const QPair<QFrame*, Expense>& a, const QPair<QFrame*, Expense>& b) {
+                    return a.second.getAmount() < b.second.getAmount();
+                });
+            break;
+    }
+
+    for (int i = cardExpensePairs.size() - 1; i >= 0; --i) {
+        expenseLayout->removeWidget(cardExpensePairs[i].first);
+    }
+
+    for (const auto& pair : cardExpensePairs) {
+        expenseLayout->addWidget(pair.first);
+    }
+}
+
+void Dashboard::onIncomeFilterChanged(int index) {
+    QComboBox* filterCombo = this->findChild<QComboBox*>("incomeFilterCombo");
+    if (!filterCombo) return;
+
+    QString selectedCategoryId = "";
+    if (index > 0) {
+        selectedCategoryId = filterCombo->itemData(index).toString();
+    }
+
+    QScrollArea* incomeScroll = ui->incomeList;
+    if (!incomeScroll || !incomeScroll->widget()) return;
+
+    QLayout* incomeLayout = incomeScroll->widget()->layout();
+    if (!incomeLayout) return;
+
+    int visibleCount = 0;
+    for (int i = 0; i < incomeLayout->count(); i++) {
+        QLayoutItem* item = incomeLayout->itemAt(i);
+        if (item && item->widget()) {
+            QFrame* card = qobject_cast<QFrame*>(item->widget());
+            if (card) {
+                if (index == 0) {
+                    card->show();
+                    visibleCount++;
+                } else {
+                    QString cardCategoryId = card->property("categoryId").toString();
+                    if (cardCategoryId == selectedCategoryId) {
+                        card->show();
+                        visibleCount++;
+                    } else {
+                        card->hide();
+                    }
+                }
+            }
         }
+    }
 
-        bool ok;
-        double amount = amountText.toDouble(&ok);
-        if (!ok || amount <= 0) {
-            QMessageBox::warning(&dialog, "Lỗi", "Số tiền không hợp lệ!");
-            return;
+    if (ui->incomeSearchInput->text().isEmpty()) {
+        updateIncomeResultLabel(index > 0 ? visibleCount : 0);
+    }
+}
+
+void Dashboard::onIncomeSortChanged(int index) {
+    QScrollArea* incomeScroll = ui->incomeList;
+    if (!incomeScroll || !incomeScroll->widget()) return;
+
+    QVBoxLayout* incomeLayout = qobject_cast<QVBoxLayout*>(incomeScroll->widget()->layout());
+    if (!incomeLayout) return;
+
+    QVector<QPair<QFrame*, Income>> cardIncomePairs;
+
+    for (int i = 0; i < incomeLayout->count(); i++) {
+        QLayoutItem* item = incomeLayout->itemAt(i);
+        if (item && item->widget()) {
+            QFrame* card = qobject_cast<QFrame*>(item->widget());
+            if (card) {
+                QString incomeId = card->property("incomeId").toString();
+                for (const Income& inc : App::getIncomeList()) {
+                    if (inc.getID() == incomeId) {
+                        cardIncomePairs.append({card, inc});
+                        break;
+                    }
+                }
+            }
         }
+    }
 
-        if (type == "expense") {
-            App::addExpense(categoryId, amount, description);
-        } else {
-            App::addIncome(categoryId, amount, description);
-        }
+    switch(index) {
+        case 0:
+            std::sort(cardIncomePairs.begin(), cardIncomePairs.end(),
+                [](const QPair<QFrame*, Income>& a, const QPair<QFrame*, Income>& b) {
+                    return a.second.getCreatedAt() > b.second.getCreatedAt();
+                });
+            break;
+        case 1:
+            std::sort(cardIncomePairs.begin(), cardIncomePairs.end(),
+                [](const QPair<QFrame*, Income>& a, const QPair<QFrame*, Income>& b) {
+                    return a.second.getCreatedAt() < b.second.getCreatedAt();
+                });
+            break;
+        case 2:
+            std::sort(cardIncomePairs.begin(), cardIncomePairs.end(),
+                [](const QPair<QFrame*, Income>& a, const QPair<QFrame*, Income>& b) {
+                    return a.second.getAmount() > b.second.getAmount();
+                });
+            break;
+        case 3:
+            std::sort(cardIncomePairs.begin(), cardIncomePairs.end(),
+                [](const QPair<QFrame*, Income>& a, const QPair<QFrame*, Income>& b) {
+                    return a.second.getAmount() < b.second.getAmount();
+                });
+            break;
+    }
 
+    for (int i = cardIncomePairs.size() - 1; i >= 0; --i) {
+        incomeLayout->removeWidget(cardIncomePairs[i].first);
+    }
+
+    for (const auto& pair : cardIncomePairs) {
+        incomeLayout->addWidget(pair.first);
+    }
+}
+
+void Dashboard::showAddTransactionDialog(const QString& type) {
+    AddTransactionDialog dialog(type, this);
+
+    if (dialog.exec() == QDialog::Accepted) {
         refreshAllDataViews();
-
         updateMonthlyExpenseTotal();
         updateMonthlyIncomeTotal();
-
-        QMessageBox::information(&dialog, "Thành công",
-                                 type == "expense" ? "Đã thêm chi tiêu thành công!" : "Đã thêm thu nhập thành công!");
-        dialog.accept();
-    });
-
-    connect(cancelButton, &QPushButton::clicked, &dialog, &QDialog::reject);
-
-    dialog.exec();
+    }
 }
 
 void Dashboard::updateDashboardOverview() {
@@ -775,7 +957,7 @@ void Dashboard::updateDashboardOverview() {
     QLabel* balanceLabel = this->findChild<QLabel*>("label_135");
     if (balanceLabel) {
         QString color = balance >= 0 ? "#26af08" : "#af1d00";
-        QString formattedBalance = App::formatMoney(balance) + " VNĐ";
+        QString formattedBalance = App::formatMoney(balance);
         QString htmlText = QString("<html><head/><body><p><span style=\" font-size:18pt; font-weight:700; color:%1;\">%2</span></p></body></html>")
                           .arg(color).arg(formattedBalance);
         balanceLabel->setText(htmlText);
@@ -787,7 +969,7 @@ void Dashboard::updateDashboardOverview() {
 
     QLabel* expenseLabel = this->findChild<QLabel*>("label_137");
     if (expenseLabel) {
-        QString formattedExpense = App::formatMoney(monthExpense) + " VNĐ";
+        QString formattedExpense = App::formatMoney(monthExpense);
         QString htmlText = QString("<html><head/><body><p><span style=\" font-size:18pt; font-weight:700; color:#af1d00;\">%1</span></p></body></html>")
                           .arg(formattedExpense);
         expenseLabel->setText(htmlText);
@@ -799,7 +981,7 @@ void Dashboard::updateDashboardOverview() {
 
     QLabel* incomeLabel = this->findChild<QLabel*>("label_139");
     if (incomeLabel) {
-        QString formattedIncome = App::formatMoney(monthIncome) + " VNĐ";
+        QString formattedIncome = App::formatMoney(monthIncome);
         QString htmlText = QString("<html><head/><body><p><span style=\" font-size:18pt; font-weight:700; color:#26af08;\">%1</span></p></body></html>")
                           .arg(formattedIncome);
         incomeLabel->setText(htmlText);
@@ -2909,10 +3091,8 @@ void Dashboard::on_addDebtButton_clicked() {
             }
         }
 
-        // Add debt
         App::addDebt(categoryId, amount, description, debtorName, dueDate, debtType, isPaid);
 
-        // Refresh UI
         renderDebtCards();
         updateDebtOverview();
         updateDashboardOverview();
@@ -2944,7 +3124,7 @@ void Dashboard::on_debtClearButton_clicked() {
 
     QComboBox* filterCombo = this->findChild<QComboBox*>("debtFilterCombo");
     if (filterCombo) {
-        filterCombo->setCurrentIndex(0); // Reset to "Tất cả"
+        filterCombo->setCurrentIndex(0);
     }
 
     clearDebtSearch();

@@ -156,13 +156,17 @@ public:
     QLabel *label_8;
     QLabel *label_9;
     QGroupBox *groupBox_2;
-    QHBoxLayout *horizontalLayout_5;
-    QSpacerItem *horizontalSpacer;
+    QVBoxLayout *verticalLayout_expense_tools;
+    QHBoxLayout *horizontalLayout_expense_row1;
     QPushButton *addExpenseButton;
     QLineEdit *expenseSearchInput;
-    QPushButton *expenseSearchButton;
+    QComboBox *expenseSortCombo;
+    QSpacerItem *horizontalSpacer_expense1;
+    QHBoxLayout *horizontalLayout_expense_row2;
     QPushButton *expenseClearButton;
     QPushButton *expenseExpandingButton;
+    QLabel *expenseResultLabel;
+    QSpacerItem *horizontalSpacer_expense2;
     QGroupBox *Category;
     QGridLayout *gridLayout_2;
     QScrollArea *expenseList;
@@ -191,13 +195,17 @@ public:
     QLabel *label_17;
     QLabel *label_18;
     QGroupBox *groupBox_4;
-    QHBoxLayout *horizontalLayout_8;
-    QSpacerItem *horizontalSpacer_3;
+    QVBoxLayout *verticalLayout_income_tools;
+    QHBoxLayout *horizontalLayout_income_row1;
     QPushButton *addIncomeButton;
     QLineEdit *incomeSearchInput;
-    QPushButton *incomeSearchButton;
+    QComboBox *incomeSortCombo;
+    QSpacerItem *horizontalSpacer_income1;
+    QHBoxLayout *horizontalLayout_income_row2;
     QPushButton *incomeClearButton;
     QPushButton *incomeExpandingButton;
+    QLabel *incomeResultLabel;
+    QSpacerItem *horizontalSpacer_income2;
     QGroupBox *Category_2;
     QGridLayout *gridLayout_4;
     QScrollArea *incomeList;
@@ -235,6 +243,9 @@ public:
         if (Dashboard->objectName().isEmpty())
             Dashboard->setObjectName("Dashboard");
         Dashboard->resize(1020, 731);
+        QIcon icon;
+        icon.addFile(QString::fromUtf8(":/img/src/salary.png"), QSize(), QIcon::Mode::Selected, QIcon::State::On);
+        Dashboard->setWindowIcon(icon);
         centralwidget = new QWidget(Dashboard);
         centralwidget->setObjectName("centralwidget");
         stackedWidget = new QStackedWidget(centralwidget);
@@ -702,7 +713,7 @@ public:
         savingList->setWidgetResizable(true);
         savingListContent = new QWidget();
         savingListContent->setObjectName("savingListContent");
-        savingListContent->setGeometry(QRect(0, 0, 769, 343));
+        savingListContent->setGeometry(QRect(0, 0, 515, 125));
         savingListContentLayout = new QVBoxLayout(savingListContent);
         savingListContentLayout->setObjectName("savingListContentLayout");
         noGoalsLabel = new QLabel(savingListContent);
@@ -862,9 +873,9 @@ public:
         sizePolicy4.setHeightForWidth(addDebtButton->sizePolicy().hasHeightForWidth());
         addDebtButton->setSizePolicy(sizePolicy4);
         addDebtButton->setStyleSheet(QString::fromUtf8("font: 12pt \"Segoe UI\";"));
-        QIcon icon;
-        icon.addFile(QString::fromUtf8(":/img/src/add.png"), QSize(), QIcon::Mode::Normal, QIcon::State::Off);
-        addDebtButton->setIcon(icon);
+        QIcon icon1;
+        icon1.addFile(QString::fromUtf8(":/img/src/add.png"), QSize(), QIcon::Mode::Normal, QIcon::State::Off);
+        addDebtButton->setIcon(icon1);
         addDebtButton->setIconSize(QSize(16, 16));
 
         debtToolsLayout->addWidget(addDebtButton);
@@ -880,9 +891,9 @@ public:
         sizePolicy4.setHeightForWidth(debtSearchButton->sizePolicy().hasHeightForWidth());
         debtSearchButton->setSizePolicy(sizePolicy4);
         debtSearchButton->setStyleSheet(QString::fromUtf8("font: 12pt \"Segoe UI\";"));
-        QIcon icon1;
-        icon1.addFile(QString::fromUtf8(":/img/src/search.png"), QSize(), QIcon::Mode::Normal, QIcon::State::Off);
-        debtSearchButton->setIcon(icon1);
+        QIcon icon2;
+        icon2.addFile(QString::fromUtf8(":/img/src/search.png"), QSize(), QIcon::Mode::Normal, QIcon::State::Off);
+        debtSearchButton->setIcon(icon2);
 
         debtToolsLayout->addWidget(debtSearchButton);
 
@@ -920,7 +931,7 @@ public:
         debtList->setWidgetResizable(true);
         debtListContent = new QWidget();
         debtListContent->setObjectName("debtListContent");
-        debtListContent->setGeometry(QRect(0, 0, 769, 445));
+        debtListContent->setGeometry(QRect(0, 0, 41, 18));
         QSizePolicy sizePolicy5(QSizePolicy::Policy::Preferred, QSizePolicy::Policy::Expanding);
         sizePolicy5.setHorizontalStretch(0);
         sizePolicy5.setVerticalStretch(0);
@@ -1070,52 +1081,155 @@ public:
         groupBox_2->setAlignment(Qt::AlignmentFlag::AlignBottom|Qt::AlignmentFlag::AlignLeading|Qt::AlignmentFlag::AlignLeft);
         groupBox_2->setFlat(false);
         groupBox_2->setCheckable(false);
-        horizontalLayout_5 = new QHBoxLayout(groupBox_2);
-        horizontalLayout_5->setObjectName("horizontalLayout_5");
-        horizontalSpacer = new QSpacerItem(40, 20, QSizePolicy::Policy::Expanding, QSizePolicy::Policy::Minimum);
-
-        horizontalLayout_5->addItem(horizontalSpacer);
-
+        verticalLayout_expense_tools = new QVBoxLayout(groupBox_2);
+        verticalLayout_expense_tools->setSpacing(10);
+        verticalLayout_expense_tools->setObjectName("verticalLayout_expense_tools");
+        verticalLayout_expense_tools->setContentsMargins(10, 10, 10, 10);
+        horizontalLayout_expense_row1 = new QHBoxLayout();
+        horizontalLayout_expense_row1->setSpacing(10);
+        horizontalLayout_expense_row1->setObjectName("horizontalLayout_expense_row1");
         addExpenseButton = new QPushButton(groupBox_2);
         addExpenseButton->setObjectName("addExpenseButton");
-        sizePolicy4.setHeightForWidth(addExpenseButton->sizePolicy().hasHeightForWidth());
-        addExpenseButton->setSizePolicy(sizePolicy4);
-        addExpenseButton->setStyleSheet(QString::fromUtf8("font: 12pt \"Segoe UI\";"));
-        addExpenseButton->setIcon(icon);
-        addExpenseButton->setIconSize(QSize(16, 16));
+        addExpenseButton->setMinimumSize(QSize(100, 40));
+        addExpenseButton->setMaximumSize(QSize(120, 40));
+        addExpenseButton->setStyleSheet(QString::fromUtf8("QPushButton {\n"
+"    background-color: #4CAF50;\n"
+"    color: white;\n"
+"    border: none;\n"
+"    border-radius: 8px;\n"
+"    padding: 8px 15px;\n"
+"    font-size: 13px;\n"
+"    font-weight: bold;\n"
+"}\n"
+"QPushButton:hover {\n"
+"    background-color: #45a049;\n"
+"}\n"
+"QPushButton:pressed {\n"
+"    background-color: #3d8b40;\n"
+"}"));
 
-        horizontalLayout_5->addWidget(addExpenseButton);
+        horizontalLayout_expense_row1->addWidget(addExpenseButton);
 
         expenseSearchInput = new QLineEdit(groupBox_2);
         expenseSearchInput->setObjectName("expenseSearchInput");
-        expenseSearchInput->setStyleSheet(QString::fromUtf8("background-color: rgb(255, 255, 255);"));
+        expenseSearchInput->setMinimumSize(QSize(350, 40));
+        expenseSearchInput->setStyleSheet(QString::fromUtf8("QLineEdit {\n"
+"    background-color: white;\n"
+"    border: 2px solid #e0e0e0;\n"
+"    border-radius: 20px;\n"
+"    padding: 8px 15px;\n"
+"    font-size: 13px;\n"
+"}\n"
+"QLineEdit:focus {\n"
+"    border: 2px solid #4CAF50;\n"
+"    background-color: #f9f9f9;\n"
+"}"));
+        expenseSearchInput->setClearButtonEnabled(true);
 
-        horizontalLayout_5->addWidget(expenseSearchInput);
+        horizontalLayout_expense_row1->addWidget(expenseSearchInput);
 
-        expenseSearchButton = new QPushButton(groupBox_2);
-        expenseSearchButton->setObjectName("expenseSearchButton");
-        sizePolicy4.setHeightForWidth(expenseSearchButton->sizePolicy().hasHeightForWidth());
-        expenseSearchButton->setSizePolicy(sizePolicy4);
-        expenseSearchButton->setStyleSheet(QString::fromUtf8("font: 12pt \"Segoe UI\";"));
-        expenseSearchButton->setIcon(icon1);
+        expenseSortCombo = new QComboBox(groupBox_2);
+        expenseSortCombo->addItem(QString());
+        expenseSortCombo->addItem(QString());
+        expenseSortCombo->addItem(QString());
+        expenseSortCombo->addItem(QString());
+        expenseSortCombo->setObjectName("expenseSortCombo");
+        sizePolicy2.setHeightForWidth(expenseSortCombo->sizePolicy().hasHeightForWidth());
+        expenseSortCombo->setSizePolicy(sizePolicy2);
+        expenseSortCombo->setMinimumSize(QSize(180, 38));
+        expenseSortCombo->setStyleSheet(QString::fromUtf8("QComboBox {\n"
+"    background-color: white;\n"
+"    border: 2px solid #e0e0e0;\n"
+"    border-radius: 8px;\n"
+"    padding: 8px 12px;\n"
+"    font-size: 12px;\n"
+"}\n"
+"QComboBox:hover {\n"
+"    border: 2px solid #4CAF50;\n"
+"}\n"
+"QComboBox::drop-down {\n"
+"    border: none;\n"
+"    width: 30px;\n"
+"}\n"
+"QComboBox::down-arrow {\n"
+"    image: none;\n"
+"    border-left: 5px solid transparent;\n"
+"    border-right: 5px solid transparent;\n"
+"    border-top: 5px solid #666;\n"
+"}"));
 
-        horizontalLayout_5->addWidget(expenseSearchButton);
+        horizontalLayout_expense_row1->addWidget(expenseSortCombo);
 
+        horizontalSpacer_expense1 = new QSpacerItem(40, 20, QSizePolicy::Policy::Expanding, QSizePolicy::Policy::Minimum);
+
+        horizontalLayout_expense_row1->addItem(horizontalSpacer_expense1);
+
+
+        verticalLayout_expense_tools->addLayout(horizontalLayout_expense_row1);
+
+        horizontalLayout_expense_row2 = new QHBoxLayout();
+        horizontalLayout_expense_row2->setSpacing(10);
+        horizontalLayout_expense_row2->setObjectName("horizontalLayout_expense_row2");
         expenseClearButton = new QPushButton(groupBox_2);
         expenseClearButton->setObjectName("expenseClearButton");
-        sizePolicy4.setHeightForWidth(expenseClearButton->sizePolicy().hasHeightForWidth());
-        expenseClearButton->setSizePolicy(sizePolicy4);
-        expenseClearButton->setStyleSheet(QString::fromUtf8("font: 12pt \"Segoe UI\";"));
+        expenseClearButton->setMinimumSize(QSize(110, 38));
+        expenseClearButton->setMaximumSize(QSize(130, 38));
+        expenseClearButton->setStyleSheet(QString::fromUtf8("QPushButton {\n"
+"    background-color: #f44336;\n"
+"    color: white;\n"
+"    border: none;\n"
+"    border-radius: 8px;\n"
+"    padding: 8px 15px;\n"
+"    font-size: 12px;\n"
+"    font-weight: bold;\n"
+"}\n"
+"QPushButton:hover {\n"
+"    background-color: #da190b;\n"
+"}\n"
+"QPushButton:pressed {\n"
+"    background-color: #b71c1c;\n"
+"}"));
 
-        horizontalLayout_5->addWidget(expenseClearButton);
+        horizontalLayout_expense_row2->addWidget(expenseClearButton);
 
         expenseExpandingButton = new QPushButton(groupBox_2);
         expenseExpandingButton->setObjectName("expenseExpandingButton");
-        sizePolicy4.setHeightForWidth(expenseExpandingButton->sizePolicy().hasHeightForWidth());
-        expenseExpandingButton->setSizePolicy(sizePolicy4);
-        expenseExpandingButton->setStyleSheet(QString::fromUtf8("font: 12pt \"Segoe UI\";"));
+        expenseExpandingButton->setMinimumSize(QSize(130, 38));
+        expenseExpandingButton->setMaximumSize(QSize(150, 38));
+        expenseExpandingButton->setStyleSheet(QString::fromUtf8("QPushButton {\n"
+"    background-color: #FF9800;\n"
+"    color: white;\n"
+"    border: none;\n"
+"    border-radius: 8px;\n"
+"    padding: 8px 15px;\n"
+"    font-size: 12px;\n"
+"    font-weight: bold;\n"
+"}\n"
+"QPushButton:hover {\n"
+"    background-color: #F57C00;\n"
+"}\n"
+"QPushButton:pressed {\n"
+"    background-color: #E65100;\n"
+"}"));
 
-        horizontalLayout_5->addWidget(expenseExpandingButton);
+        horizontalLayout_expense_row2->addWidget(expenseExpandingButton);
+
+        expenseResultLabel = new QLabel(groupBox_2);
+        expenseResultLabel->setObjectName("expenseResultLabel");
+        expenseResultLabel->setMinimumSize(QSize(150, 0));
+        expenseResultLabel->setStyleSheet(QString::fromUtf8("color: #666;\n"
+"font-size: 12px;\n"
+"font-weight: bold;\n"
+"padding: 5px;"));
+
+        horizontalLayout_expense_row2->addWidget(expenseResultLabel);
+
+        horizontalSpacer_expense2 = new QSpacerItem(40, 20, QSizePolicy::Policy::Expanding, QSizePolicy::Policy::Minimum);
+
+        horizontalLayout_expense_row2->addItem(horizontalSpacer_expense2);
+
+
+        verticalLayout_expense_tools->addLayout(horizontalLayout_expense_row2);
 
 
         verticalLayout->addWidget(groupBox_2);
@@ -1130,7 +1244,7 @@ public:
         expenseList->setWidgetResizable(true);
         DM_SrollContents = new QWidget();
         DM_SrollContents->setObjectName("DM_SrollContents");
-        DM_SrollContents->setGeometry(QRect(0, 0, 769, 445));
+        DM_SrollContents->setGeometry(QRect(0, 0, 769, 380));
         sizePolicy5.setHeightForWidth(DM_SrollContents->sizePolicy().hasHeightForWidth());
         DM_SrollContents->setSizePolicy(sizePolicy5);
         DM_SrollContents->setLayoutDirection(Qt::LayoutDirection::RightToLeft);
@@ -1274,51 +1388,153 @@ public:
         groupBox_4->setAlignment(Qt::AlignmentFlag::AlignBottom|Qt::AlignmentFlag::AlignLeading|Qt::AlignmentFlag::AlignLeft);
         groupBox_4->setFlat(false);
         groupBox_4->setCheckable(false);
-        horizontalLayout_8 = new QHBoxLayout(groupBox_4);
-        horizontalLayout_8->setObjectName("horizontalLayout_8");
-        horizontalSpacer_3 = new QSpacerItem(40, 20, QSizePolicy::Policy::Expanding, QSizePolicy::Policy::Minimum);
-
-        horizontalLayout_8->addItem(horizontalSpacer_3);
-
+        verticalLayout_income_tools = new QVBoxLayout(groupBox_4);
+        verticalLayout_income_tools->setSpacing(10);
+        verticalLayout_income_tools->setObjectName("verticalLayout_income_tools");
+        verticalLayout_income_tools->setContentsMargins(10, 10, 10, 10);
+        horizontalLayout_income_row1 = new QHBoxLayout();
+        horizontalLayout_income_row1->setSpacing(10);
+        horizontalLayout_income_row1->setObjectName("horizontalLayout_income_row1");
         addIncomeButton = new QPushButton(groupBox_4);
         addIncomeButton->setObjectName("addIncomeButton");
-        sizePolicy4.setHeightForWidth(addIncomeButton->sizePolicy().hasHeightForWidth());
-        addIncomeButton->setSizePolicy(sizePolicy4);
-        addIncomeButton->setStyleSheet(QString::fromUtf8("font: 12pt \"Segoe UI\";"));
-        addIncomeButton->setIcon(icon);
-        addIncomeButton->setIconSize(QSize(16, 16));
+        addIncomeButton->setMinimumSize(QSize(100, 40));
+        addIncomeButton->setMaximumSize(QSize(120, 40));
+        addIncomeButton->setStyleSheet(QString::fromUtf8("QPushButton {\n"
+"    background-color: #2196F3;\n"
+"    color: white;\n"
+"    border: none;\n"
+"    border-radius: 8px;\n"
+"    padding: 8px 15px;\n"
+"    font-size: 13px;\n"
+"    font-weight: bold;\n"
+"}\n"
+"QPushButton:hover {\n"
+"    background-color: #0b7dda;\n"
+"}\n"
+"QPushButton:pressed {\n"
+"    background-color: #0069c0;\n"
+"}"));
 
-        horizontalLayout_8->addWidget(addIncomeButton);
+        horizontalLayout_income_row1->addWidget(addIncomeButton);
 
         incomeSearchInput = new QLineEdit(groupBox_4);
         incomeSearchInput->setObjectName("incomeSearchInput");
-        incomeSearchInput->setStyleSheet(QString::fromUtf8("background-color: rgb(255, 255, 255);"));
+        incomeSearchInput->setMinimumSize(QSize(350, 40));
+        incomeSearchInput->setStyleSheet(QString::fromUtf8("QLineEdit {\n"
+"    background-color: white;\n"
+"    border: 2px solid #e0e0e0;\n"
+"    border-radius: 20px;\n"
+"    padding: 8px 15px;\n"
+"    font-size: 13px;\n"
+"}\n"
+"QLineEdit:focus {\n"
+"    border: 2px solid #2196F3;\n"
+"    background-color: #f9f9f9;\n"
+"}"));
+        incomeSearchInput->setClearButtonEnabled(true);
 
-        horizontalLayout_8->addWidget(incomeSearchInput);
+        horizontalLayout_income_row1->addWidget(incomeSearchInput);
 
-        incomeSearchButton = new QPushButton(groupBox_4);
-        incomeSearchButton->setObjectName("incomeSearchButton");
-        sizePolicy4.setHeightForWidth(incomeSearchButton->sizePolicy().hasHeightForWidth());
-        incomeSearchButton->setSizePolicy(sizePolicy4);
-        incomeSearchButton->setStyleSheet(QString::fromUtf8("font: 12pt \"Segoe UI\";"));
+        incomeSortCombo = new QComboBox(groupBox_4);
+        incomeSortCombo->addItem(QString());
+        incomeSortCombo->addItem(QString());
+        incomeSortCombo->addItem(QString());
+        incomeSortCombo->addItem(QString());
+        incomeSortCombo->setObjectName("incomeSortCombo");
+        incomeSortCombo->setMinimumSize(QSize(180, 38));
+        incomeSortCombo->setStyleSheet(QString::fromUtf8("QComboBox {\n"
+"    background-color: white;\n"
+"    border: 2px solid #e0e0e0;\n"
+"    border-radius: 8px;\n"
+"    padding: 8px 12px;\n"
+"    font-size: 12px;\n"
+"}\n"
+"QComboBox:hover {\n"
+"    border: 2px solid #2196F3;\n"
+"}\n"
+"QComboBox::drop-down {\n"
+"    border: none;\n"
+"    width: 30px;\n"
+"}\n"
+"QComboBox::down-arrow {\n"
+"    image: none;\n"
+"    border-left: 5px solid transparent;\n"
+"    border-right: 5px solid transparent;\n"
+"    border-top: 5px solid #666;\n"
+"}"));
 
-        horizontalLayout_8->addWidget(incomeSearchButton);
+        horizontalLayout_income_row1->addWidget(incomeSortCombo);
 
+        horizontalSpacer_income1 = new QSpacerItem(40, 20, QSizePolicy::Policy::Expanding, QSizePolicy::Policy::Minimum);
+
+        horizontalLayout_income_row1->addItem(horizontalSpacer_income1);
+
+
+        verticalLayout_income_tools->addLayout(horizontalLayout_income_row1);
+
+        horizontalLayout_income_row2 = new QHBoxLayout();
+        horizontalLayout_income_row2->setSpacing(10);
+        horizontalLayout_income_row2->setObjectName("horizontalLayout_income_row2");
         incomeClearButton = new QPushButton(groupBox_4);
         incomeClearButton->setObjectName("incomeClearButton");
-        sizePolicy4.setHeightForWidth(incomeClearButton->sizePolicy().hasHeightForWidth());
-        incomeClearButton->setSizePolicy(sizePolicy4);
-        incomeClearButton->setStyleSheet(QString::fromUtf8("font: 12pt \"Segoe UI\";"));
+        incomeClearButton->setMinimumSize(QSize(110, 38));
+        incomeClearButton->setMaximumSize(QSize(130, 38));
+        incomeClearButton->setStyleSheet(QString::fromUtf8("QPushButton {\n"
+"    background-color: #f44336;\n"
+"    color: white;\n"
+"    border: none;\n"
+"    border-radius: 8px;\n"
+"    padding: 8px 15px;\n"
+"    font-size: 12px;\n"
+"    font-weight: bold;\n"
+"}\n"
+"QPushButton:hover {\n"
+"    background-color: #da190b;\n"
+"}\n"
+"QPushButton:pressed {\n"
+"    background-color: #b71c1c;\n"
+"}"));
 
-        horizontalLayout_8->addWidget(incomeClearButton);
+        horizontalLayout_income_row2->addWidget(incomeClearButton);
 
         incomeExpandingButton = new QPushButton(groupBox_4);
         incomeExpandingButton->setObjectName("incomeExpandingButton");
-        sizePolicy4.setHeightForWidth(incomeExpandingButton->sizePolicy().hasHeightForWidth());
-        incomeExpandingButton->setSizePolicy(sizePolicy4);
-        incomeExpandingButton->setStyleSheet(QString::fromUtf8("font: 12pt \"Segoe UI\";"));
+        incomeExpandingButton->setMinimumSize(QSize(130, 38));
+        incomeExpandingButton->setMaximumSize(QSize(150, 38));
+        incomeExpandingButton->setStyleSheet(QString::fromUtf8("QPushButton {\n"
+"    background-color: #FF9800;\n"
+"    color: white;\n"
+"    border: none;\n"
+"    border-radius: 8px;\n"
+"    padding: 8px 15px;\n"
+"    font-size: 12px;\n"
+"    font-weight: bold;\n"
+"}\n"
+"QPushButton:hover {\n"
+"    background-color: #F57C00;\n"
+"}\n"
+"QPushButton:pressed {\n"
+"    background-color: #E65100;\n"
+"}"));
 
-        horizontalLayout_8->addWidget(incomeExpandingButton);
+        horizontalLayout_income_row2->addWidget(incomeExpandingButton);
+
+        incomeResultLabel = new QLabel(groupBox_4);
+        incomeResultLabel->setObjectName("incomeResultLabel");
+        incomeResultLabel->setMinimumSize(QSize(150, 0));
+        incomeResultLabel->setStyleSheet(QString::fromUtf8("color: #666;\n"
+"font-size: 12px;\n"
+"font-weight: bold;\n"
+"padding: 5px;"));
+
+        horizontalLayout_income_row2->addWidget(incomeResultLabel);
+
+        horizontalSpacer_income2 = new QSpacerItem(40, 20, QSizePolicy::Policy::Expanding, QSizePolicy::Policy::Minimum);
+
+        horizontalLayout_income_row2->addItem(horizontalSpacer_income2);
+
+
+        verticalLayout_income_tools->addLayout(horizontalLayout_income_row2);
 
 
         verticalLayout_7->addWidget(groupBox_4);
@@ -1333,7 +1549,7 @@ public:
         incomeList->setWidgetResizable(true);
         DM_SrollContents_2 = new QWidget();
         DM_SrollContents_2->setObjectName("DM_SrollContents_2");
-        DM_SrollContents_2->setGeometry(QRect(0, 0, 769, 445));
+        DM_SrollContents_2->setGeometry(QRect(0, 0, 769, 380));
         sizePolicy5.setHeightForWidth(DM_SrollContents_2->sizePolicy().hasHeightForWidth());
         DM_SrollContents_2->setSizePolicy(sizePolicy5);
         DM_SrollContents_2->setLayoutDirection(Qt::LayoutDirection::RightToLeft);
@@ -1364,9 +1580,9 @@ public:
         remove_btn_2->setMaximumSize(QSize(30, 16777215));
         remove_btn_2->setStyleSheet(QString::fromUtf8("border: none;\n"
 "background-color: none"));
-        QIcon icon2;
-        icon2.addFile(QString::fromUtf8(":/img/src/remove.png"), QSize(), QIcon::Mode::Normal, QIcon::State::Off);
-        remove_btn_2->setIcon(icon2);
+        QIcon icon3;
+        icon3.addFile(QString::fromUtf8(":/img/src/remove.png"), QSize(), QIcon::Mode::Normal, QIcon::State::Off);
+        remove_btn_2->setIcon(icon3);
         remove_btn_2->setIconSize(QSize(22, 22));
 
         horizontalLayout_10->addWidget(remove_btn_2);
@@ -1378,9 +1594,9 @@ public:
         edit_btn_2->setMaximumSize(QSize(30, 16777215));
         edit_btn_2->setStyleSheet(QString::fromUtf8("border: none;\n"
 "background-color: none"));
-        QIcon icon3;
-        icon3.addFile(QString::fromUtf8(":/img/src/icon.ico"), QSize(), QIcon::Mode::Normal, QIcon::State::Off);
-        edit_btn_2->setIcon(icon3);
+        QIcon icon4;
+        icon4.addFile(QString::fromUtf8(":/img/src/icon.ico"), QSize(), QIcon::Mode::Normal, QIcon::State::Off);
+        edit_btn_2->setIcon(icon4);
         edit_btn_2->setIconSize(QSize(22, 22));
 
         horizontalLayout_10->addWidget(edit_btn_2);
@@ -1507,9 +1723,9 @@ public:
 "\n"
 "	background-color: rgb(154, 154, 154);\n"
 "}"));
-        QIcon icon4;
-        icon4.addFile(QString::fromUtf8(":/img/src/dashboard.png"), QSize(), QIcon::Mode::Normal, QIcon::State::Off);
-        DashBoard_btn_2->setIcon(icon4);
+        QIcon icon5;
+        icon5.addFile(QString::fromUtf8(":/img/src/dashboard.png"), QSize(), QIcon::Mode::Normal, QIcon::State::Off);
+        DashBoard_btn_2->setIcon(icon5);
         DashBoard_btn_2->setIconSize(QSize(24, 24));
 
         verticalLayout_2->addWidget(DashBoard_btn_2);
@@ -1534,9 +1750,9 @@ public:
 "\n"
 "	background-color: rgb(154, 154, 154);\n"
 "}"));
-        QIcon icon5;
-        icon5.addFile(QString::fromUtf8(":/img/src/transaction.png"), QSize(), QIcon::Mode::Normal, QIcon::State::Off);
-        expense_btn_2->setIcon(icon5);
+        QIcon icon6;
+        icon6.addFile(QString::fromUtf8(":/img/src/transaction.png"), QSize(), QIcon::Mode::Normal, QIcon::State::Off);
+        expense_btn_2->setIcon(icon6);
         expense_btn_2->setIconSize(QSize(29, 28));
 
         verticalLayout_2->addWidget(expense_btn_2);
@@ -1561,9 +1777,9 @@ public:
 "\n"
 "	background-color: rgb(154, 154, 154);\n"
 "}"));
-        QIcon icon6;
-        icon6.addFile(QString::fromUtf8(":/img/src/income.png"), QSize(), QIcon::Mode::Normal, QIcon::State::Off);
-        income_btn_2->setIcon(icon6);
+        QIcon icon7;
+        icon7.addFile(QString::fromUtf8(":/img/src/income.png"), QSize(), QIcon::Mode::Normal, QIcon::State::Off);
+        income_btn_2->setIcon(icon7);
         income_btn_2->setIconSize(QSize(30, 30));
 
         verticalLayout_2->addWidget(income_btn_2);
@@ -1588,9 +1804,9 @@ public:
 "\n"
 "	background-color: rgb(154, 154, 154);\n"
 "}"));
-        QIcon icon7;
-        icon7.addFile(QString::fromUtf8(":/img/src/piggy-bank.png"), QSize(), QIcon::Mode::Normal, QIcon::State::Off);
-        saving_btn->setIcon(icon7);
+        QIcon icon8;
+        icon8.addFile(QString::fromUtf8(":/img/src/piggy-bank.png"), QSize(), QIcon::Mode::Normal, QIcon::State::Off);
+        saving_btn->setIcon(icon8);
         saving_btn->setIconSize(QSize(30, 30));
 
         verticalLayout_2->addWidget(saving_btn);
@@ -1612,9 +1828,9 @@ public:
 "\n"
 "	background-color: rgb(154, 154, 154);\n"
 "}"));
-        QIcon icon8;
-        icon8.addFile(QString::fromUtf8(":/img/src/spending.png"), QSize(), QIcon::Mode::Normal, QIcon::State::Off);
-        dept_btn_2->setIcon(icon8);
+        QIcon icon9;
+        icon9.addFile(QString::fromUtf8(":/img/src/spending.png"), QSize(), QIcon::Mode::Normal, QIcon::State::Off);
+        dept_btn_2->setIcon(icon9);
         dept_btn_2->setIconSize(QSize(30, 30));
 
         verticalLayout_2->addWidget(dept_btn_2);
@@ -1630,7 +1846,7 @@ public:
 
         retranslateUi(Dashboard);
 
-        stackedWidget->setCurrentIndex(3);
+        stackedWidget->setCurrentIndex(4);
 
 
         QMetaObject::connectSlotsByName(Dashboard);
@@ -1638,7 +1854,7 @@ public:
 
     void retranslateUi(QMainWindow *Dashboard)
     {
-        Dashboard->setWindowTitle(QCoreApplication::translate("Dashboard", "Dashboard", nullptr));
+        Dashboard->setWindowTitle(QCoreApplication::translate("Dashboard", "H\341\273\207 th\341\273\221ng qu\341\272\243n l\303\275 chi ti\303\252u c\303\241 nh\303\242n", nullptr));
         groupBox_6->setTitle(QCoreApplication::translate("Dashboard", "T\341\273\225ng quan", nullptr));
         label_134->setText(QCoreApplication::translate("Dashboard", "<html><head/><body><p><span style=\" font-size:14pt; font-weight:700;\">T\341\273\225ng s\341\273\221 d\306\260</span></p></body></html>", nullptr));
         label_135->setText(QCoreApplication::translate("Dashboard", "<html><head/><body><p><span style=\" font-size:18pt; font-weight:700;\">225.000.000 VN\304\220</span></p></body></html>", nullptr));
@@ -1705,11 +1921,16 @@ public:
         label_8->setText(QCoreApplication::translate("Dashboard", "<html><head/><body><p><span style=\" font-size:8pt; font-weight:700; font-style:italic; color:#848484;\">D\341\273\261a tr\303\252n 3 th\303\241ng g\341\272\247n nh\341\272\245t</span></p></body></html>", nullptr));
         label_9->setText(QCoreApplication::translate("Dashboard", "<html><head/><body><p><span style=\" font-size:14pt; color:#000000;\">Chi ti\303\252u \304\221ang t\304\203ng</span></p></body></html>", nullptr));
         groupBox_2->setTitle(QCoreApplication::translate("Dashboard", "C\303\264ng c\341\273\245", nullptr));
-        addExpenseButton->setText(QCoreApplication::translate("Dashboard", "Th\303\252m", nullptr));
-        expenseSearchInput->setPlaceholderText(QCoreApplication::translate("Dashboard", "Nh\341\272\255p t\341\273\253 kh\303\263a t\303\254m ki\341\272\277m...", nullptr));
-        expenseSearchButton->setText(QCoreApplication::translate("Dashboard", "T\303\254m ki\341\272\277m", nullptr));
-        expenseClearButton->setText(QCoreApplication::translate("Dashboard", "X\303\263a", nullptr));
-        expenseExpandingButton->setText(QCoreApplication::translate("Dashboard", "N\303\242ng cao", nullptr));
+        addExpenseButton->setText(QCoreApplication::translate("Dashboard", "\342\236\225 Th\303\252m", nullptr));
+        expenseSearchInput->setPlaceholderText(QCoreApplication::translate("Dashboard", "\360\237\224\215 T\303\254m ki\341\272\277m chi ti\303\252u (m\303\264 t\341\272\243, danh m\341\273\245c, s\341\273\221 ti\341\273\201n)...", nullptr));
+        expenseSortCombo->setItemText(0, QCoreApplication::translate("Dashboard", "\360\237\223\205 M\341\273\233i nh\341\272\245t", nullptr));
+        expenseSortCombo->setItemText(1, QCoreApplication::translate("Dashboard", "\360\237\223\205 C\305\251 nh\341\272\245t", nullptr));
+        expenseSortCombo->setItemText(2, QCoreApplication::translate("Dashboard", "\360\237\222\260 Gi\303\241 cao \342\206\222 th\341\272\245p", nullptr));
+        expenseSortCombo->setItemText(3, QCoreApplication::translate("Dashboard", "\360\237\222\260 Gi\303\241 th\341\272\245p \342\206\222 cao", nullptr));
+
+        expenseClearButton->setText(QCoreApplication::translate("Dashboard", "\360\237\227\221\357\270\217 X\303\263a l\341\273\215c", nullptr));
+        expenseExpandingButton->setText(QCoreApplication::translate("Dashboard", "\360\237\224\247 N\303\242ng cao", nullptr));
+        expenseResultLabel->setText(QString());
         Category->setTitle(QCoreApplication::translate("Dashboard", "DANH M\341\273\244C CHI TI\303\212U", nullptr));
         groupBox_3->setTitle(QCoreApplication::translate("Dashboard", "QU\341\272\242N L\303\235 THU NH\341\272\254P", nullptr));
         label_10->setText(QCoreApplication::translate("Dashboard", "T\341\273\225ng thu nh\341\272\255p", nullptr));
@@ -1722,11 +1943,16 @@ public:
         label_17->setText(QCoreApplication::translate("Dashboard", "<html><head/><body><p><span style=\" font-size:8pt; font-weight:700; font-style:italic; color:#848484;\">Trong 3 th\303\241ng g\341\272\247n nh\341\272\245t</span></p></body></html>", nullptr));
         label_18->setText(QCoreApplication::translate("Dashboard", "<html><head/><body><p><span style=\" font-size:14pt; color:#000000;\">Thu nh\341\272\255p \304\221ang t\304\203ng</span></p></body></html>", nullptr));
         groupBox_4->setTitle(QCoreApplication::translate("Dashboard", "C\303\264ng c\341\273\245", nullptr));
-        addIncomeButton->setText(QCoreApplication::translate("Dashboard", "Th\303\252m", nullptr));
-        incomeSearchInput->setPlaceholderText(QCoreApplication::translate("Dashboard", "Nh\341\272\255p t\341\273\253 kh\303\263a t\303\254m ki\341\272\277m thu nh\341\272\255p...", nullptr));
-        incomeSearchButton->setText(QCoreApplication::translate("Dashboard", "T\303\254m ki\341\272\277m", nullptr));
-        incomeClearButton->setText(QCoreApplication::translate("Dashboard", "X\303\263a", nullptr));
-        incomeExpandingButton->setText(QCoreApplication::translate("Dashboard", "N\303\242ng cao", nullptr));
+        addIncomeButton->setText(QCoreApplication::translate("Dashboard", "\342\236\225 Th\303\252m", nullptr));
+        incomeSearchInput->setPlaceholderText(QCoreApplication::translate("Dashboard", "\360\237\224\215 T\303\254m ki\341\272\277m thu nh\341\272\255p (m\303\264 t\341\272\243, danh m\341\273\245c, s\341\273\221 ti\341\273\201n)...", nullptr));
+        incomeSortCombo->setItemText(0, QCoreApplication::translate("Dashboard", "\360\237\223\205 M\341\273\233i nh\341\272\245t", nullptr));
+        incomeSortCombo->setItemText(1, QCoreApplication::translate("Dashboard", "\360\237\223\205 C\305\251 nh\341\272\245t", nullptr));
+        incomeSortCombo->setItemText(2, QCoreApplication::translate("Dashboard", "\360\237\222\260 Gi\303\241 cao \342\206\222 th\341\272\245p", nullptr));
+        incomeSortCombo->setItemText(3, QCoreApplication::translate("Dashboard", "\360\237\222\260 Gi\303\241 th\341\272\245p \342\206\222 cao", nullptr));
+
+        incomeClearButton->setText(QCoreApplication::translate("Dashboard", "\360\237\227\221\357\270\217 X\303\263a l\341\273\215c", nullptr));
+        incomeExpandingButton->setText(QCoreApplication::translate("Dashboard", "\360\237\224\247 N\303\242ng cao", nullptr));
+        incomeResultLabel->setText(QString());
         Category_2->setTitle(QCoreApplication::translate("Dashboard", "DANH M\341\273\244C THU NH\341\272\254P", nullptr));
         remove_btn_2->setText(QString());
         edit_btn_2->setText(QString());

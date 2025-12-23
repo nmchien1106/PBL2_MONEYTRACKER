@@ -9,10 +9,10 @@
 
 class Debt : public Transaction {
 private:
-    QString debtorName;      // Tên người nợ/cho vay
-    QDate dueDate;          // Ngày đáo hạn
-    bool isPaid;            // Trạng thái thanh toán
-    QString debtType;       // "borrow" (vay) hoặc "lend" (cho vay)
+    QString debtorName;
+    QDate dueDate;
+    bool isPaid;
+    QString debtType;
 
 public:
     Debt(const QString& id = "", Category* category = nullptr,
@@ -36,18 +36,15 @@ public:
     void setIsPaid(bool paid) { isPaid = paid; }
     void setDebtType(const QString& type) { debtType = type; }
 
-    // Override methods from Transaction
     QString getType() const override;
     QString toString() const override;
     QString getColorCode() const override;
     QFrame* createCard(const QString& index) const override;
     QString getCardHtml() const override;
 
-    // CSV operations
     static QStringList getHeader();
     QStringList toCsvRow() const;
 
-    // Static calculation methods
     static double calculateMonthlyTotal(const QVector<Debt>& debts, int year, int month, const QString& type = "");
     static QVector<double> getLastThreeMonthsTotals(const QVector<Debt>& debts, const QString& type = "");
     static double getTotalBorrowed(const QVector<Debt>& debts);

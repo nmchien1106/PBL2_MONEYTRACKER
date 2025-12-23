@@ -133,6 +133,12 @@ private slots:
     void clearExpenseSearch();
     void searchIncome(const QString& keyword);
     void clearIncomeSearch();
+    void onExpenseFilterChanged(int index);
+    void onExpenseSortChanged(int index);
+    void onIncomeFilterChanged(int index);
+    void onIncomeSortChanged(int index);
+    void updateExpenseResultLabel(int count);
+    void updateIncomeResultLabel(int count);
     void showAddTransactionDialog(const QString& type);
 
     void on_expenseExpandingButton_clicked();

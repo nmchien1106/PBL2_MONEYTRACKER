@@ -18,7 +18,7 @@ Debt::Debt(const QString& id, Category* category,
 Debt::Debt(const QStringList& data)
 {
     qDebug() << "Loading Debt from CSV:" << data;
-    
+
     if (data.size() >= 10) {
         setID(data[0]);
         setCategory(App::findCategoryByID(data[1].trimmed()));
@@ -26,7 +26,7 @@ Debt::Debt(const QStringList& data)
         setUpdatedAt(QDate::fromString(data[3], "dd/MM/yyyy"));
         setAmount(data[4].toDouble());
         setDescription(data[5]);
-        
+
         debtorName = data[6];
         dueDate = QDate::fromString(data[7], "dd/MM/yyyy");
         isPaid = (data[8] == "1" || data[8].toLower() == "true");

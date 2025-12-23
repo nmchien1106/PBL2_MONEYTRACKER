@@ -74,6 +74,11 @@ public:
     static const QVector<Category>& getCategoryList() { return categoryList; }
     static const QVector<Debt>& getDebtList() { return debtList; }
 
+    static QVector<Expense>& getExpenseListMutable() { return expenseList; }
+    static QVector<Income>& getIncomeListMutable() { return incomeList; }
+    static QVector<Category>& getCategoryListMutable() { return categoryList; }
+    static void saveData() { writeData(); }
+
     // Debt management methods
     static void addDebt(const QString& categoryId, double amount, const QString& description,
                        const QString& debtorName, const QDate& dueDate, const QString& debtType, bool isPaid = false);

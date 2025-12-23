@@ -11,7 +11,12 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Dashboard</string>
+   <string>Hệ thống quản lý chi tiêu cá nhân</string>
+  </property>
+  <property name="windowIcon">
+   <iconset>
+    <selectedon>:/img/src/salary.png</selectedon>
+   </iconset>
   </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QStackedWidget" name="stackedWidget">
@@ -36,7 +41,7 @@
      <enum>QFrame::Shadow::Plain</enum>
     </property>
     <property name="currentIndex">
-     <number>3</number>
+     <number>4</number>
     </property>
     <widget class="QWidget" name="Dashboard_3">
      <layout class="QVBoxLayout" name="verticalLayout_8">
@@ -901,8 +906,8 @@ QScrollBar::handle:vertical:hover {
                 <rect>
                  <x>0</x>
                  <y>0</y>
-                 <width>769</width>
-                 <height>343</height>
+                 <width>515</width>
+                 <height>125</height>
                 </rect>
                </property>
                <layout class="QVBoxLayout" name="savingListContentLayout">
@@ -1328,8 +1333,8 @@ QScrollBar::handle:vertical:hover {
                 <rect>
                  <x>0</x>
                  <y>0</y>
-                 <width>769</width>
-                 <height>445</height>
+                 <width>41</width>
+                 <height>18</height>
                 </rect>
                </property>
                <property name="sizePolicy">
@@ -1629,107 +1634,275 @@ QScrollBar::handle:vertical:hover {
            <property name="checkable">
             <bool>false</bool>
            </property>
-           <layout class="QHBoxLayout" name="horizontalLayout_5">
+           <layout class="QVBoxLayout" name="verticalLayout_expense_tools">
+            <property name="spacing">
+             <number>10</number>
+            </property>
+            <property name="leftMargin">
+             <number>10</number>
+            </property>
+            <property name="topMargin">
+             <number>10</number>
+            </property>
+            <property name="rightMargin">
+             <number>10</number>
+            </property>
+            <property name="bottomMargin">
+             <number>10</number>
+            </property>
             <item>
-             <spacer name="horizontalSpacer">
-              <property name="orientation">
-               <enum>Qt::Orientation::Horizontal</enum>
+             <layout class="QHBoxLayout" name="horizontalLayout_expense_row1">
+              <property name="spacing">
+               <number>10</number>
               </property>
-              <property name="sizeHint" stdset="0">
-               <size>
-                <width>40</width>
-                <height>20</height>
-               </size>
-              </property>
-             </spacer>
+              <item>
+               <widget class="QPushButton" name="addExpenseButton">
+                <property name="minimumSize">
+                 <size>
+                  <width>100</width>
+                  <height>40</height>
+                 </size>
+                </property>
+                <property name="maximumSize">
+                 <size>
+                  <width>120</width>
+                  <height>40</height>
+                 </size>
+                </property>
+                <property name="styleSheet">
+                 <string notr="true">QPushButton {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 8px 15px;
+    font-size: 13px;
+    font-weight: bold;
+}
+QPushButton:hover {
+    background-color: #45a049;
+}
+QPushButton:pressed {
+    background-color: #3d8b40;
+}</string>
+                </property>
+                <property name="text">
+                 <string>➕ Thêm</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QLineEdit" name="expenseSearchInput">
+                <property name="minimumSize">
+                 <size>
+                  <width>350</width>
+                  <height>40</height>
+                 </size>
+                </property>
+                <property name="styleSheet">
+                 <string notr="true">QLineEdit {
+    background-color: white;
+    border: 2px solid #e0e0e0;
+    border-radius: 20px;
+    padding: 8px 15px;
+    font-size: 13px;
+}
+QLineEdit:focus {
+    border: 2px solid #4CAF50;
+    background-color: #f9f9f9;
+}</string>
+                </property>
+                <property name="placeholderText">
+                 <string>🔍 Tìm kiếm chi tiêu (mô tả, danh mục, số tiền)...</string>
+                </property>
+                <property name="clearButtonEnabled">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QComboBox" name="expenseSortCombo">
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
+                <property name="minimumSize">
+                 <size>
+                  <width>180</width>
+                  <height>38</height>
+                 </size>
+                </property>
+                <property name="styleSheet">
+                 <string notr="true">QComboBox {
+    background-color: white;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 8px 12px;
+    font-size: 12px;
+}
+QComboBox:hover {
+    border: 2px solid #4CAF50;
+}
+QComboBox::drop-down {
+    border: none;
+    width: 30px;
+}
+QComboBox::down-arrow {
+    image: none;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 5px solid #666;
+}</string>
+                </property>
+                <item>
+                 <property name="text">
+                  <string>📅 Mới nhất</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>📅 Cũ nhất</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>💰 Giá cao → thấp</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>💰 Giá thấp → cao</string>
+                 </property>
+                </item>
+               </widget>
+              </item>
+              <item>
+               <spacer name="horizontalSpacer_expense1">
+                <property name="orientation">
+                 <enum>Qt::Orientation::Horizontal</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>40</width>
+                  <height>20</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+             </layout>
             </item>
             <item>
-             <widget class="QPushButton" name="addExpenseButton">
-              <property name="sizePolicy">
-               <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-                <horstretch>0</horstretch>
-                <verstretch>0</verstretch>
-               </sizepolicy>
+             <layout class="QHBoxLayout" name="horizontalLayout_expense_row2">
+              <property name="spacing">
+               <number>10</number>
               </property>
-              <property name="styleSheet">
-               <string notr="true">font: 12pt &quot;Segoe UI&quot;;</string>
-              </property>
-              <property name="text">
-               <string>Thêm</string>
-              </property>
-              <property name="icon">
-               <iconset resource="src.qrc">
-                <normaloff>:/img/src/add.png</normaloff>:/img/src/add.png</iconset>
-              </property>
-              <property name="iconSize">
-               <size>
-                <width>16</width>
-                <height>16</height>
-               </size>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QLineEdit" name="expenseSearchInput">
-              <property name="styleSheet">
-               <string notr="true">background-color: rgb(255, 255, 255);</string>
-              </property>
-              <property name="placeholderText">
-               <string>Nhập từ khóa tìm kiếm...</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QPushButton" name="expenseSearchButton">
-              <property name="sizePolicy">
-               <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-                <horstretch>0</horstretch>
-                <verstretch>0</verstretch>
-               </sizepolicy>
-              </property>
-              <property name="styleSheet">
-               <string notr="true">font: 12pt &quot;Segoe UI&quot;;</string>
-              </property>
-              <property name="text">
-               <string>Tìm kiếm</string>
-              </property>
-              <property name="icon">
-               <iconset>
-                <normaloff>:/img/src/search.png</normaloff>:/img/src/search.png</iconset>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QPushButton" name="expenseClearButton">
-              <property name="sizePolicy">
-               <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-                <horstretch>0</horstretch>
-                <verstretch>0</verstretch>
-               </sizepolicy>
-              </property>
-              <property name="styleSheet">
-               <string notr="true">font: 12pt &quot;Segoe UI&quot;;</string>
-              </property>
-              <property name="text">
-               <string>Xóa</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QPushButton" name="expenseExpandingButton">
-              <property name="sizePolicy">
-               <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-                <horstretch>0</horstretch>
-                <verstretch>0</verstretch>
-               </sizepolicy>
-              </property>
-              <property name="styleSheet">
-               <string notr="true">font: 12pt &quot;Segoe UI&quot;;</string>
-              </property>
-              <property name="text">
-               <string>Nâng cao</string>
-              </property>
-             </widget>
+              <item>
+               <widget class="QPushButton" name="expenseClearButton">
+                <property name="minimumSize">
+                 <size>
+                  <width>110</width>
+                  <height>38</height>
+                 </size>
+                </property>
+                <property name="maximumSize">
+                 <size>
+                  <width>130</width>
+                  <height>38</height>
+                 </size>
+                </property>
+                <property name="styleSheet">
+                 <string notr="true">QPushButton {
+    background-color: #f44336;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 8px 15px;
+    font-size: 12px;
+    font-weight: bold;
+}
+QPushButton:hover {
+    background-color: #da190b;
+}
+QPushButton:pressed {
+    background-color: #b71c1c;
+}</string>
+                </property>
+                <property name="text">
+                 <string>🗑️ Xóa lọc</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QPushButton" name="expenseExpandingButton">
+                <property name="minimumSize">
+                 <size>
+                  <width>130</width>
+                  <height>38</height>
+                 </size>
+                </property>
+                <property name="maximumSize">
+                 <size>
+                  <width>150</width>
+                  <height>38</height>
+                 </size>
+                </property>
+                <property name="styleSheet">
+                 <string notr="true">QPushButton {
+    background-color: #FF9800;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 8px 15px;
+    font-size: 12px;
+    font-weight: bold;
+}
+QPushButton:hover {
+    background-color: #F57C00;
+}
+QPushButton:pressed {
+    background-color: #E65100;
+}</string>
+                </property>
+                <property name="text">
+                 <string>🔧 Nâng cao</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QLabel" name="expenseResultLabel">
+                <property name="minimumSize">
+                 <size>
+                  <width>150</width>
+                  <height>0</height>
+                 </size>
+                </property>
+                <property name="styleSheet">
+                 <string notr="true">color: #666;
+font-size: 12px;
+font-weight: bold;
+padding: 5px;</string>
+                </property>
+                <property name="text">
+                 <string/>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <spacer name="horizontalSpacer_expense2">
+                <property name="orientation">
+                 <enum>Qt::Orientation::Horizontal</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>40</width>
+                  <height>20</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+             </layout>
             </item>
            </layout>
           </widget>
@@ -1754,7 +1927,7 @@ QScrollBar::handle:vertical:hover {
                  <x>0</x>
                  <y>0</y>
                  <width>769</width>
-                 <height>445</height>
+                 <height>380</height>
                 </rect>
                </property>
                <property name="sizePolicy">
@@ -2036,103 +2209,269 @@ QScrollBar::handle:vertical:hover {
            <property name="checkable">
             <bool>false</bool>
            </property>
-           <layout class="QHBoxLayout" name="horizontalLayout_8">
+           <layout class="QVBoxLayout" name="verticalLayout_income_tools">
+            <property name="spacing">
+             <number>10</number>
+            </property>
+            <property name="leftMargin">
+             <number>10</number>
+            </property>
+            <property name="topMargin">
+             <number>10</number>
+            </property>
+            <property name="rightMargin">
+             <number>10</number>
+            </property>
+            <property name="bottomMargin">
+             <number>10</number>
+            </property>
             <item>
-             <spacer name="horizontalSpacer_3">
-              <property name="orientation">
-               <enum>Qt::Orientation::Horizontal</enum>
+             <layout class="QHBoxLayout" name="horizontalLayout_income_row1">
+              <property name="spacing">
+               <number>10</number>
               </property>
-              <property name="sizeHint" stdset="0">
-               <size>
-                <width>40</width>
-                <height>20</height>
-               </size>
-              </property>
-             </spacer>
+              <item>
+               <widget class="QPushButton" name="addIncomeButton">
+                <property name="minimumSize">
+                 <size>
+                  <width>100</width>
+                  <height>40</height>
+                 </size>
+                </property>
+                <property name="maximumSize">
+                 <size>
+                  <width>120</width>
+                  <height>40</height>
+                 </size>
+                </property>
+                <property name="styleSheet">
+                 <string notr="true">QPushButton {
+    background-color: #2196F3;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 8px 15px;
+    font-size: 13px;
+    font-weight: bold;
+}
+QPushButton:hover {
+    background-color: #0b7dda;
+}
+QPushButton:pressed {
+    background-color: #0069c0;
+}</string>
+                </property>
+                <property name="text">
+                 <string>➕ Thêm</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QLineEdit" name="incomeSearchInput">
+                <property name="minimumSize">
+                 <size>
+                  <width>350</width>
+                  <height>40</height>
+                 </size>
+                </property>
+                <property name="styleSheet">
+                 <string notr="true">QLineEdit {
+    background-color: white;
+    border: 2px solid #e0e0e0;
+    border-radius: 20px;
+    padding: 8px 15px;
+    font-size: 13px;
+}
+QLineEdit:focus {
+    border: 2px solid #2196F3;
+    background-color: #f9f9f9;
+}</string>
+                </property>
+                <property name="placeholderText">
+                 <string>🔍 Tìm kiếm thu nhập (mô tả, danh mục, số tiền)...</string>
+                </property>
+                <property name="clearButtonEnabled">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QComboBox" name="incomeSortCombo">
+                <property name="minimumSize">
+                 <size>
+                  <width>180</width>
+                  <height>38</height>
+                 </size>
+                </property>
+                <property name="styleSheet">
+                 <string notr="true">QComboBox {
+    background-color: white;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 8px 12px;
+    font-size: 12px;
+}
+QComboBox:hover {
+    border: 2px solid #2196F3;
+}
+QComboBox::drop-down {
+    border: none;
+    width: 30px;
+}
+QComboBox::down-arrow {
+    image: none;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 5px solid #666;
+}</string>
+                </property>
+                <item>
+                 <property name="text">
+                  <string>📅 Mới nhất</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>📅 Cũ nhất</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>💰 Giá cao → thấp</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>💰 Giá thấp → cao</string>
+                 </property>
+                </item>
+               </widget>
+              </item>
+              <item>
+               <spacer name="horizontalSpacer_income1">
+                <property name="orientation">
+                 <enum>Qt::Orientation::Horizontal</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>40</width>
+                  <height>20</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+             </layout>
             </item>
             <item>
-             <widget class="QPushButton" name="addIncomeButton">
-              <property name="sizePolicy">
-               <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-                <horstretch>0</horstretch>
-                <verstretch>0</verstretch>
-               </sizepolicy>
+             <layout class="QHBoxLayout" name="horizontalLayout_income_row2">
+              <property name="spacing">
+               <number>10</number>
               </property>
-              <property name="styleSheet">
-               <string notr="true">font: 12pt &quot;Segoe UI&quot;;</string>
-              </property>
-              <property name="text">
-               <string>Thêm</string>
-              </property>
-              <property name="icon">
-               <iconset resource="src.qrc">
-                <normaloff>:/img/src/add.png</normaloff>:/img/src/add.png</iconset>
-              </property>
-              <property name="iconSize">
-               <size>
-                <width>16</width>
-                <height>16</height>
-               </size>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QLineEdit" name="incomeSearchInput">
-              <property name="styleSheet">
-               <string notr="true">background-color: rgb(255, 255, 255);</string>
-              </property>
-              <property name="placeholderText">
-               <string>Nhập từ khóa tìm kiếm thu nhập...</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QPushButton" name="incomeSearchButton">
-              <property name="sizePolicy">
-               <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-                <horstretch>0</horstretch>
-                <verstretch>0</verstretch>
-               </sizepolicy>
-              </property>
-              <property name="styleSheet">
-               <string notr="true">font: 12pt &quot;Segoe UI&quot;;</string>
-              </property>
-              <property name="text">
-               <string>Tìm kiếm</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QPushButton" name="incomeClearButton">
-              <property name="sizePolicy">
-               <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-                <horstretch>0</horstretch>
-                <verstretch>0</verstretch>
-               </sizepolicy>
-              </property>
-              <property name="styleSheet">
-               <string notr="true">font: 12pt &quot;Segoe UI&quot;;</string>
-              </property>
-              <property name="text">
-               <string>Xóa</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QPushButton" name="incomeExpandingButton">
-              <property name="sizePolicy">
-               <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-                <horstretch>0</horstretch>
-                <verstretch>0</verstretch>
-               </sizepolicy>
-              </property>
-              <property name="styleSheet">
-               <string notr="true">font: 12pt &quot;Segoe UI&quot;;</string>
-              </property>
-              <property name="text">
-               <string>Nâng cao</string>
-              </property>
-             </widget>
+              <item>
+               <widget class="QPushButton" name="incomeClearButton">
+                <property name="minimumSize">
+                 <size>
+                  <width>110</width>
+                  <height>38</height>
+                 </size>
+                </property>
+                <property name="maximumSize">
+                 <size>
+                  <width>130</width>
+                  <height>38</height>
+                 </size>
+                </property>
+                <property name="styleSheet">
+                 <string notr="true">QPushButton {
+    background-color: #f44336;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 8px 15px;
+    font-size: 12px;
+    font-weight: bold;
+}
+QPushButton:hover {
+    background-color: #da190b;
+}
+QPushButton:pressed {
+    background-color: #b71c1c;
+}</string>
+                </property>
+                <property name="text">
+                 <string>🗑️ Xóa lọc</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QPushButton" name="incomeExpandingButton">
+                <property name="minimumSize">
+                 <size>
+                  <width>130</width>
+                  <height>38</height>
+                 </size>
+                </property>
+                <property name="maximumSize">
+                 <size>
+                  <width>150</width>
+                  <height>38</height>
+                 </size>
+                </property>
+                <property name="styleSheet">
+                 <string notr="true">QPushButton {
+    background-color: #FF9800;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 8px 15px;
+    font-size: 12px;
+    font-weight: bold;
+}
+QPushButton:hover {
+    background-color: #F57C00;
+}
+QPushButton:pressed {
+    background-color: #E65100;
+}</string>
+                </property>
+                <property name="text">
+                 <string>🔧 Nâng cao</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QLabel" name="incomeResultLabel">
+                <property name="minimumSize">
+                 <size>
+                  <width>150</width>
+                  <height>0</height>
+                 </size>
+                </property>
+                <property name="styleSheet">
+                 <string notr="true">color: #666;
+font-size: 12px;
+font-weight: bold;
+padding: 5px;</string>
+                </property>
+                <property name="text">
+                 <string/>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <spacer name="horizontalSpacer_income2">
+                <property name="orientation">
+                 <enum>Qt::Orientation::Horizontal</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>40</width>
+                  <height>20</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+             </layout>
             </item>
            </layout>
           </widget>
@@ -2157,7 +2496,7 @@ QScrollBar::handle:vertical:hover {
                  <x>0</x>
                  <y>0</y>
                  <width>769</width>
-                 <height>445</height>
+                 <height>380</height>
                 </rect>
                </property>
                <property name="sizePolicy">

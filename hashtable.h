@@ -24,7 +24,7 @@ private:
     LinkedList<KeyValuePair>* table;
     int count;
 
-    
+
     int hashString(const string& key) const {
         unsigned long hash = 5381;
         for (char c : key) {
@@ -180,4 +180,4 @@ public:
     }
 };
 
-#endif 
+#endif

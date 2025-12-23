@@ -901,8 +901,8 @@ QScrollBar::handle:vertical:hover {
                 <rect>
                  <x>0</x>
                  <y>0</y>
-                 <width>769</width>
-                 <height>343</height>
+                 <width>515</width>
+                 <height>125</height>
                 </rect>
                </property>
                <layout class="QVBoxLayout" name="savingListContentLayout">
@@ -1595,8 +1595,8 @@ QScrollBar::handle:vertical:hover {
                 <rect>
                  <x>0</x>
                  <y>0</y>
-                 <width>769</width>
-                 <height>445</height>
+                 <width>98</width>
+                 <height>28</height>
                 </rect>
                </property>
                <property name="sizePolicy">
@@ -2013,7 +2013,7 @@ background-color: none</string>
                   </sizepolicy>
                  </property>
                  <property name="text">
-                  <string>Tổng số giao dịch</string>
+                  <string>Xu hướng giao dịch</string>
                  </property>
                 </widget>
                </item>
@@ -2026,7 +2026,7 @@ background-color: none</string>
                   </sizepolicy>
                  </property>
                  <property name="text">
-                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:8pt; font-weight:700; font-style:italic; color:#848484;&quot;&gt;Trong tháng hiện tại&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:8pt; font-weight:700; font-style:italic; color:#848484;&quot;&gt;Trong 3 tháng gần nhất&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                  </property>
                 </widget>
                </item>

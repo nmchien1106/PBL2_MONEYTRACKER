@@ -698,7 +698,7 @@ public:
         savingList->setWidgetResizable(true);
         savingListContent = new QWidget();
         savingListContent->setObjectName("savingListContent");
-        savingListContent->setGeometry(QRect(0, 0, 769, 343));
+        savingListContent->setGeometry(QRect(0, 0, 515, 125));
         savingListContentLayout = new QVBoxLayout(savingListContent);
         savingListContentLayout->setObjectName("savingListContentLayout");
         noGoalsLabel = new QLabel(savingListContent);
@@ -1024,7 +1024,7 @@ public:
         expenseList->setWidgetResizable(true);
         DM_SrollContents = new QWidget();
         DM_SrollContents->setObjectName("DM_SrollContents");
-        DM_SrollContents->setGeometry(QRect(0, 0, 769, 445));
+        DM_SrollContents->setGeometry(QRect(0, 0, 98, 28));
         QSizePolicy sizePolicy5(QSizePolicy::Policy::Preferred, QSizePolicy::Policy::Expanding);
         sizePolicy5.setHorizontalStretch(0);
         sizePolicy5.setVerticalStretch(0);
@@ -1666,8 +1666,8 @@ public:
         label_13->setText(QCoreApplication::translate("Dashboard", "Thay \304\221\341\273\225i thu nh\341\272\255p", nullptr));
         label_14->setText(QCoreApplication::translate("Dashboard", "<html><head/><body><p><span style=\" font-size:8pt; font-weight:700; font-style:italic; color:#848484;\">So v\341\273\233i th\303\241ng tr\306\260\341\273\233c</span></p></body></html>", nullptr));
         label_15->setText(QCoreApplication::translate("Dashboard", "<html><head/><body><p><span style=\" font-size:18pt; color:#aa0b20;\"> \342\206\227  10,3%</span></p></body></html>", nullptr));
-        label_16->setText(QCoreApplication::translate("Dashboard", "T\341\273\225ng s\341\273\221 giao d\341\273\213ch", nullptr));
-        label_17->setText(QCoreApplication::translate("Dashboard", "<html><head/><body><p><span style=\" font-size:8pt; font-weight:700; font-style:italic; color:#848484;\">Trong th\303\241ng hi\341\273\207n t\341\272\241i</span></p></body></html>", nullptr));
+        label_16->setText(QCoreApplication::translate("Dashboard", "Xu h\306\260\341\273\233ng giao d\341\273\213ch", nullptr));
+        label_17->setText(QCoreApplication::translate("Dashboard", "<html><head/><body><p><span style=\" font-size:8pt; font-weight:700; font-style:italic; color:#848484;\">Trong 3 th\303\241ng g\341\272\247n nh\341\272\245t</span></p></body></html>", nullptr));
         label_18->setText(QCoreApplication::translate("Dashboard", "<html><head/><body><p><span style=\" font-size:14pt; color:#000000;\">Thu nh\341\272\255p \304\221ang t\304\203ng</span></p></body></html>", nullptr));
         groupBox_4->setTitle(QCoreApplication::translate("Dashboard", "C\303\264ng c\341\273\245", nullptr));
         addIncomeButton->setText(QCoreApplication::translate("Dashboard", "Th\303\252m", nullptr));

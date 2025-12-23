@@ -48,7 +48,7 @@ public:
 
 
 
-    
+
     static void addIncome(const QString& categoryId, double amount, const QString& description);
     static void addExpense(const QString& categoryId, double amount, const QString& description);
     static QString generateNextIncomeId();
@@ -62,4 +62,4 @@ public:
     static const QVector<Category>& getCategoryList() { return categoryList; }
 };
 
-#endif 
+#endif

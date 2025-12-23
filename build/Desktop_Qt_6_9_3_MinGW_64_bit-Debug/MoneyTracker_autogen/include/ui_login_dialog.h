@@ -137,7 +137,7 @@ public:
         label_2->setText(QCoreApplication::translate("LoginUI", "<html><head/><body><p align=\"center\"><span style=\" font-size:18pt; font-weight:700; color:#ffffff;\">H\341\273\207 th\341\273\221ng qu\341\272\243n l\303\275 chi ti\303\252u c\303\241 nh\303\242n</span></p></body></html>", nullptr));
         label_3->setText(QCoreApplication::translate("LoginUI", "<html><head/><body><p align=\"center\"><span style=\" font-size:12pt; font-weight:700;\">Sinh vi\303\252n th\341\273\261c hi\341\273\207n:</span></p></body></html>", nullptr));
         label_4->setText(QCoreApplication::translate("LoginUI", "<html><head/><body><p align=\"center\"><span style=\" font-size:12pt; font-weight:700;\">Nguy\341\273\205n Minh Chi\341\272\277n  - 24T_DT4</span></p><p align=\"center\"><span style=\" font-size:12pt; font-weight:700;\">V\303\265 V\304\203n \304\220\341\272\241t - 24T_DT4</span></p></body></html>", nullptr));
-        label_5->setText(QCoreApplication::translate("LoginUI", "<html><head/><body><p align=\"center\"><span style=\" font-size:12pt; font-weight:700;\">Gi\341\272\243ng vi\303\252n h\306\260\341\273\233ng d\341\272\253n : Nguy\341\273\205n N\304\203ng H\303\271ng V\303\242n</span></p></body></html>", nullptr));
+        label_5->setText(QCoreApplication::translate("LoginUI", "<html><head/><body><p align=\"center\"><span style=\" font-size:12pt; font-weight:700;\">Gi\341\272\243ng vi\303\252n h\306\260\341\273\233ng d\341\272\253n : TS Nguy\341\273\205n N\304\203ng H\303\271ng V\303\242n</span></p></body></html>", nullptr));
         connectDashboard_btn->setText(QCoreApplication::translate("LoginUI", "TRUY C\341\272\254P", nullptr));
     } // retranslateUi
 

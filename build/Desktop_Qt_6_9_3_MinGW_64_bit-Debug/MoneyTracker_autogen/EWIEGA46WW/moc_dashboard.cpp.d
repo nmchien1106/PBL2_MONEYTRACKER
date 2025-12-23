@@ -465,5 +465,6 @@ D:/My\ Workspace/PBL2/MoneyTracker/MoneyTracker/build/Desktop_Qt_6_9_3_MinGW_64_
   D:/App/qt/Tools/mingw1310_64/x86_64-w64-mingw32/include/vadefs.h \
   D:/App/qt/Tools/mingw1310_64/x86_64-w64-mingw32/include/wchar.h \
   D:/My\ Workspace/PBL2/MoneyTracker/MoneyTracker/category.h \
+  D:/My\ Workspace/PBL2/MoneyTracker/MoneyTracker/debt.h \
   D:/My\ Workspace/PBL2/MoneyTracker/MoneyTracker/saving.h \
   D:/My\ Workspace/PBL2/MoneyTracker/MoneyTracker/transaction.h

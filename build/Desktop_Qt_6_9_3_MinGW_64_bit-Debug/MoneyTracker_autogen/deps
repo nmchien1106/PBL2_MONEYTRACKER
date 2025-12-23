@@ -75,7 +75,6 @@ MoneyTracker_autogen/timestamp: \
 	D:/App/qt/6.9.3/mingw_64/include/QtCore/qhashfunctions.h \
 	D:/App/qt/6.9.3/mingw_64/include/QtCore/qiodevice.h \
 	D:/App/qt/6.9.3/mingw_64/include/QtCore/qiodevicebase.h \
-	D:/App/qt/6.9.3/mingw_64/include/QtCore/qitemselectionmodel.h \
 	D:/App/qt/6.9.3/mingw_64/include/QtCore/qiterable.h \
 	D:/App/qt/6.9.3/mingw_64/include/QtCore/qiterator.h \
 	D:/App/qt/6.9.3/mingw_64/include/QtCore/qlatin1stringview.h \
@@ -214,12 +213,9 @@ MoneyTracker_autogen/timestamp: \
 	D:/App/qt/6.9.3/mingw_64/include/QtWidgets/QDateEdit \
 	D:/App/qt/6.9.3/mingw_64/include/QtWidgets/QDialog \
 	D:/App/qt/6.9.3/mingw_64/include/QtWidgets/QFrame \
-	D:/App/qt/6.9.3/mingw_64/include/QtWidgets/QGridLayout \
-	D:/App/qt/6.9.3/mingw_64/include/QtWidgets/QGroupBox \
 	D:/App/qt/6.9.3/mingw_64/include/QtWidgets/QHBoxLayout \
 	D:/App/qt/6.9.3/mingw_64/include/QtWidgets/QLabel \
 	D:/App/qt/6.9.3/mingw_64/include/QtWidgets/QLineEdit \
-	D:/App/qt/6.9.3/mingw_64/include/QtWidgets/QListWidget \
 	D:/App/qt/6.9.3/mingw_64/include/QtWidgets/QMainWindow \
 	D:/App/qt/6.9.3/mingw_64/include/QtWidgets/QMessageBox \
 	D:/App/qt/6.9.3/mingw_64/include/QtWidgets/QProgressBar \
@@ -231,7 +227,6 @@ MoneyTracker_autogen/timestamp: \
 	D:/App/qt/6.9.3/mingw_64/include/QtWidgets/QWidget \
 	D:/App/qt/6.9.3/mingw_64/include/QtWidgets/qabstractbutton.h \
 	D:/App/qt/6.9.3/mingw_64/include/QtWidgets/qabstractitemdelegate.h \
-	D:/App/qt/6.9.3/mingw_64/include/QtWidgets/qabstractitemview.h \
 	D:/App/qt/6.9.3/mingw_64/include/QtWidgets/qabstractscrollarea.h \
 	D:/App/qt/6.9.3/mingw_64/include/QtWidgets/qabstractslider.h \
 	D:/App/qt/6.9.3/mingw_64/include/QtWidgets/qabstractspinbox.h \
@@ -243,13 +238,10 @@ MoneyTracker_autogen/timestamp: \
 	D:/App/qt/6.9.3/mingw_64/include/QtWidgets/qdialogbuttonbox.h \
 	D:/App/qt/6.9.3/mingw_64/include/QtWidgets/qframe.h \
 	D:/App/qt/6.9.3/mingw_64/include/QtWidgets/qgridlayout.h \
-	D:/App/qt/6.9.3/mingw_64/include/QtWidgets/qgroupbox.h \
 	D:/App/qt/6.9.3/mingw_64/include/QtWidgets/qlabel.h \
 	D:/App/qt/6.9.3/mingw_64/include/QtWidgets/qlayout.h \
 	D:/App/qt/6.9.3/mingw_64/include/QtWidgets/qlayoutitem.h \
 	D:/App/qt/6.9.3/mingw_64/include/QtWidgets/qlineedit.h \
-	D:/App/qt/6.9.3/mingw_64/include/QtWidgets/qlistview.h \
-	D:/App/qt/6.9.3/mingw_64/include/QtWidgets/qlistwidget.h \
 	D:/App/qt/6.9.3/mingw_64/include/QtWidgets/qmainwindow.h \
 	D:/App/qt/6.9.3/mingw_64/include/QtWidgets/qmessagebox.h \
 	D:/App/qt/6.9.3/mingw_64/include/QtWidgets/qprogressbar.h \
@@ -729,6 +721,8 @@ MoneyTracker_autogen/timestamp: \
 	D:/My\ Workspace/PBL2/MoneyTracker/MoneyTracker/category.h \
 	D:/My\ Workspace/PBL2/MoneyTracker/MoneyTracker/dashboard.cpp \
 	D:/My\ Workspace/PBL2/MoneyTracker/MoneyTracker/dashboard.h \
+	D:/My\ Workspace/PBL2/MoneyTracker/MoneyTracker/debt.cpp \
+	D:/My\ Workspace/PBL2/MoneyTracker/MoneyTracker/debt.h \
 	D:/My\ Workspace/PBL2/MoneyTracker/MoneyTracker/expense.cpp \
 	D:/My\ Workspace/PBL2/MoneyTracker/MoneyTracker/expense.h \
 	D:/My\ Workspace/PBL2/MoneyTracker/MoneyTracker/filehandler.cpp \

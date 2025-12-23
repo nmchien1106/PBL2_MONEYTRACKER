@@ -447,8 +447,11 @@ D:/My\ Workspace/PBL2/MoneyTracker/MoneyTracker/build/Desktop_Qt_6_9_3_MinGW_64_
   D:/App/qt/Tools/mingw1310_64/x86_64-w64-mingw32/include/wchar.h \
   D:/App/qt/Tools/mingw1310_64/x86_64-w64-mingw32/include/wctype.h \
   D:/My\ Workspace/PBL2/MoneyTracker/MoneyTracker/category.h \
+  D:/My\ Workspace/PBL2/MoneyTracker/MoneyTracker/debt.h \
   D:/My\ Workspace/PBL2/MoneyTracker/MoneyTracker/expense.h \
   D:/My\ Workspace/PBL2/MoneyTracker/MoneyTracker/filehandler.h \
+  D:/My\ Workspace/PBL2/MoneyTracker/MoneyTracker/hashtable.h \
   D:/My\ Workspace/PBL2/MoneyTracker/MoneyTracker/income.h \
+  D:/My\ Workspace/PBL2/MoneyTracker/MoneyTracker/linkedlist.h \
   D:/My\ Workspace/PBL2/MoneyTracker/MoneyTracker/saving.h \
   D:/My\ Workspace/PBL2/MoneyTracker/MoneyTracker/transaction.h

@@ -99,26 +99,41 @@ public:
     QVBoxLayout *savingListContentLayout;
     QLabel *noGoalsLabel;
     QSpacerItem *savingListSpacer;
-    QWidget *Dept_2;
-    QVBoxLayout *deptLayout;
-    QFrame *progressFrame1;
-    QVBoxLayout *progressLayout1;
-    QLabel *progressTitle1;
-    QLabel *progressPercent1;
-    QWidget *Dept_21;
-    QGroupBox *groupBox_8;
-    QFrame *frame_45;
-    QLabel *label_125;
-    QLabel *label_126;
-    QLabel *label_127;
-    QFrame *frame_46;
-    QLabel *label_128;
-    QLabel *label_129;
-    QLabel *label_130;
-    QFrame *frame_47;
-    QLabel *label_131;
-    QLabel *label_132;
-    QLabel *label_133;
+    QWidget *Debt_Page;
+    QGridLayout *gridLayout_debt;
+    QFrame *debtMainFrame;
+    QVBoxLayout *debtVerticalLayout;
+    QGroupBox *debtStatsGroup;
+    QHBoxLayout *debtStatsLayout;
+    QFrame *totalBorrowedFrame;
+    QVBoxLayout *borrowedLayout;
+    QLabel *borrowedTitleLabel;
+    QLabel *borrowedSubtitleLabel;
+    QLabel *totalBorrowedLabel;
+    QFrame *totalLentFrame;
+    QVBoxLayout *lentLayout;
+    QLabel *lentTitleLabel;
+    QLabel *lentSubtitleLabel;
+    QLabel *totalLentLabel;
+    QFrame *unpaidDebtFrame;
+    QVBoxLayout *unpaidLayout;
+    QLabel *unpaidTitleLabel;
+    QLabel *unpaidSubtitleLabel;
+    QLabel *totalUnpaidLabel;
+    QGroupBox *debtToolsGroup;
+    QHBoxLayout *debtToolsLayout;
+    QSpacerItem *debtToolsSpacer;
+    QPushButton *addDebtButton;
+    QLineEdit *debtSearchInput;
+    QPushButton *debtSearchButton;
+    QPushButton *debtClearButton;
+    QComboBox *debtFilterCombo;
+    QGroupBox *debtListGroup;
+    QGridLayout *debtListGridLayout;
+    QScrollArea *debtList;
+    QWidget *debtListContent;
+    QVBoxLayout *debtListContentLayout;
+    QSpacerItem *debtListSpacer;
     QWidget *Expense_2;
     QGridLayout *gridLayout;
     QFrame *frame;
@@ -224,6 +239,7 @@ public:
     QPushButton *expense_btn_2;
     QPushButton *income_btn_2;
     QPushButton *saving_btn;
+    QPushButton *dept_btn_2;
     QSpacerItem *verticalSpacer_2;
 
     void setupUi(QMainWindow *Dashboard)
@@ -698,7 +714,7 @@ public:
         savingList->setWidgetResizable(true);
         savingListContent = new QWidget();
         savingListContent->setObjectName("savingListContent");
-        savingListContent->setGeometry(QRect(0, 0, 515, 125));
+        savingListContent->setGeometry(QRect(0, 0, 769, 343));
         savingListContentLayout = new QVBoxLayout(savingListContent);
         savingListContentLayout->setObjectName("savingListContentLayout");
         noGoalsLabel = new QLabel(savingListContent);
@@ -723,114 +739,223 @@ public:
         gridLayout_saving->addWidget(savingMainFrame, 0, 0, 1, 1);
 
         stackedWidget->addWidget(Saving_2);
-        Dept_2 = new QWidget();
-        Dept_2->setObjectName("Dept_2");
-        Dept_2->setStyleSheet(QString::fromUtf8("\n"
-"	background-color: rgb(255, 255, 255);\n"
-"	border-radius: 8px;\n"
-"	border: 1px solid rgb(220, 220, 220);\n"
-"      "));
-        deptLayout = new QVBoxLayout(Dept_2);
-        deptLayout->setObjectName("deptLayout");
-        progressFrame1 = new QFrame(Dept_2);
-        progressFrame1->setObjectName("progressFrame1");
-        progressFrame1->setStyleSheet(QString::fromUtf8("\n"
-"	  background-color: rgb(255, 255, 255);\n"
-"	  border-radius: 8px;\n"
-"	  border: 1px solid rgb(220, 220, 220);\n"
-"         "));
-        progressFrame1->setFrameShape(QFrame::Shape::StyledPanel);
-        progressLayout1 = new QVBoxLayout(progressFrame1);
-        progressLayout1->setObjectName("progressLayout1");
-        progressTitle1 = new QLabel(progressFrame1);
-        progressTitle1->setObjectName("progressTitle1");
-        progressTitle1->setStyleSheet(QString::fromUtf8("font: 700 14pt \"Segoe UI\"; color: rgb(41, 41, 41);"));
+        Debt_Page = new QWidget();
+        Debt_Page->setObjectName("Debt_Page");
+        sizePolicy1.setHeightForWidth(Debt_Page->sizePolicy().hasHeightForWidth());
+        Debt_Page->setSizePolicy(sizePolicy1);
+        gridLayout_debt = new QGridLayout(Debt_Page);
+        gridLayout_debt->setObjectName("gridLayout_debt");
+        gridLayout_debt->setContentsMargins(0, 0, 0, 0);
+        debtMainFrame = new QFrame(Debt_Page);
+        debtMainFrame->setObjectName("debtMainFrame");
+        debtMainFrame->setFrameShape(QFrame::Shape::StyledPanel);
+        debtMainFrame->setFrameShadow(QFrame::Shadow::Raised);
+        debtVerticalLayout = new QVBoxLayout(debtMainFrame);
+        debtVerticalLayout->setObjectName("debtVerticalLayout");
+        debtStatsGroup = new QGroupBox(debtMainFrame);
+        debtStatsGroup->setObjectName("debtStatsGroup");
+        sizePolicy2.setHeightForWidth(debtStatsGroup->sizePolicy().hasHeightForWidth());
+        debtStatsGroup->setSizePolicy(sizePolicy2);
+        debtStatsGroup->setMinimumSize(QSize(0, 0));
+        debtStatsGroup->setMaximumSize(QSize(16777215, 200));
+        debtStatsGroup->setStyleSheet(QString::fromUtf8("font: 900 12pt \"Segoe UI\";"));
+        debtStatsLayout = new QHBoxLayout(debtStatsGroup);
+        debtStatsLayout->setObjectName("debtStatsLayout");
+        totalBorrowedFrame = new QFrame(debtStatsGroup);
+        totalBorrowedFrame->setObjectName("totalBorrowedFrame");
+        totalBorrowedFrame->setStyleSheet(QString::fromUtf8("background-color: rgb(255, 255, 255);"));
+        totalBorrowedFrame->setFrameShape(QFrame::Shape::StyledPanel);
+        totalBorrowedFrame->setFrameShadow(QFrame::Shadow::Raised);
+        borrowedLayout = new QVBoxLayout(totalBorrowedFrame);
+        borrowedLayout->setObjectName("borrowedLayout");
+        borrowedLayout->setContentsMargins(20, -1, 20, -1);
+        borrowedTitleLabel = new QLabel(totalBorrowedFrame);
+        borrowedTitleLabel->setObjectName("borrowedTitleLabel");
+        sizePolicy3.setHeightForWidth(borrowedTitleLabel->sizePolicy().hasHeightForWidth());
+        borrowedTitleLabel->setSizePolicy(sizePolicy3);
 
-        progressLayout1->addWidget(progressTitle1);
+        borrowedLayout->addWidget(borrowedTitleLabel);
 
-        progressPercent1 = new QLabel(progressFrame1);
-        progressPercent1->setObjectName("progressPercent1");
-        progressPercent1->setStyleSheet(QString::fromUtf8("font: 700 24pt \"Segoe UI\"; color: rgb(255, 140, 0);"));
+        borrowedSubtitleLabel = new QLabel(totalBorrowedFrame);
+        borrowedSubtitleLabel->setObjectName("borrowedSubtitleLabel");
+        sizePolicy3.setHeightForWidth(borrowedSubtitleLabel->sizePolicy().hasHeightForWidth());
+        borrowedSubtitleLabel->setSizePolicy(sizePolicy3);
 
-        progressLayout1->addWidget(progressPercent1);
+        borrowedLayout->addWidget(borrowedSubtitleLabel);
+
+        totalBorrowedLabel = new QLabel(totalBorrowedFrame);
+        totalBorrowedLabel->setObjectName("totalBorrowedLabel");
+        totalBorrowedLabel->setAlignment(Qt::AlignmentFlag::AlignCenter);
+
+        borrowedLayout->addWidget(totalBorrowedLabel);
 
 
-        deptLayout->addWidget(progressFrame1);
+        debtStatsLayout->addWidget(totalBorrowedFrame);
 
-        stackedWidget->addWidget(Dept_2);
-        Dept_21 = new QWidget();
-        Dept_21->setObjectName("Dept_21");
-        groupBox_8 = new QGroupBox(Dept_21);
-        groupBox_8->setObjectName("groupBox_8");
-        groupBox_8->setGeometry(QRect(10, 10, 951, 441));
-        groupBox_8->setStyleSheet(QString::fromUtf8("QGroupBox {\n"
-"\n"
-"	font: 900 14pt \"Segoe UI\";\n"
-"}"));
-        frame_45 = new QFrame(groupBox_8);
-        frame_45->setObjectName("frame_45");
-        frame_45->setGeometry(QRect(630, 50, 271, 141));
-        frame_45->setStyleSheet(QString::fromUtf8("QFrame {\n"
-"\n"
-"	background-color: rgb(255, 255, 255);\n"
-"	border-radius: 5px\n"
-"}"));
-        frame_45->setFrameShape(QFrame::Shape::StyledPanel);
-        frame_45->setFrameShadow(QFrame::Shadow::Raised);
-        label_125 = new QLabel(frame_45);
-        label_125->setObjectName("label_125");
-        label_125->setGeometry(QRect(11, 11, 145, 26));
-        label_126 = new QLabel(frame_45);
-        label_126->setObjectName("label_126");
-        label_126->setGeometry(QRect(11, 43, 97, 16));
-        label_127 = new QLabel(frame_45);
-        label_127->setObjectName("label_127");
-        label_127->setGeometry(QRect(11, 71, 106, 39));
-        label_127->setStyleSheet(QString::fromUtf8("background-color: rgb(255, 255, 255);"));
-        frame_46 = new QFrame(groupBox_8);
-        frame_46->setObjectName("frame_46");
-        frame_46->setGeometry(QRect(330, 50, 271, 141));
-        frame_46->setStyleSheet(QString::fromUtf8("QFrame {\n"
-"\n"
-"	background-color: rgb(255, 255, 255);\n"
-"	border-radius: 5px\n"
-"}"));
-        frame_46->setFrameShape(QFrame::Shape::StyledPanel);
-        frame_46->setFrameShadow(QFrame::Shadow::Raised);
-        label_128 = new QLabel(frame_46);
-        label_128->setObjectName("label_128");
-        label_128->setGeometry(QRect(11, 43, 123, 16));
-        label_129 = new QLabel(frame_46);
-        label_129->setObjectName("label_129");
-        label_129->setGeometry(QRect(11, 71, 167, 39));
-        label_129->setStyleSheet(QString::fromUtf8("background-color: rgb(255, 255, 255);"));
-        label_130 = new QLabel(frame_46);
-        label_130->setObjectName("label_130");
-        label_130->setGeometry(QRect(11, 11, 158, 26));
-        frame_47 = new QFrame(groupBox_8);
-        frame_47->setObjectName("frame_47");
-        frame_47->setGeometry(QRect(30, 50, 271, 141));
-        frame_47->setStyleSheet(QString::fromUtf8("QFrame {\n"
-"\n"
-"	background-color: rgb(255, 255, 255);\n"
-"	border-radius: 5px\n"
-"}"));
-        frame_47->setFrameShape(QFrame::Shape::StyledPanel);
-        frame_47->setFrameShadow(QFrame::Shadow::Raised);
-        label_131 = new QLabel(frame_47);
-        label_131->setObjectName("label_131");
-        label_131->setGeometry(QRect(11, 71, 161, 39));
-        label_131->setStyleSheet(QString::fromUtf8("background-color: rgb(255, 255, 255);"));
-        label_132 = new QLabel(frame_47);
-        label_132->setObjectName("label_132");
-        label_132->setGeometry(QRect(11, 43, 143, 16));
-        label_132->setStyleSheet(QString::fromUtf8("QVBoxLayout {\n"
-"	background-color: rgb(255, 255, 255);\n"
-"}"));
-        label_133 = new QLabel(frame_47);
-        label_133->setObjectName("label_133");
-        label_133->setGeometry(QRect(11, 11, 116, 26));
-        stackedWidget->addWidget(Dept_21);
+        totalLentFrame = new QFrame(debtStatsGroup);
+        totalLentFrame->setObjectName("totalLentFrame");
+        totalLentFrame->setStyleSheet(QString::fromUtf8("background-color: rgb(255, 255, 255);"));
+        totalLentFrame->setFrameShape(QFrame::Shape::StyledPanel);
+        totalLentFrame->setFrameShadow(QFrame::Shadow::Raised);
+        lentLayout = new QVBoxLayout(totalLentFrame);
+        lentLayout->setObjectName("lentLayout");
+        lentLayout->setContentsMargins(20, -1, 20, -1);
+        lentTitleLabel = new QLabel(totalLentFrame);
+        lentTitleLabel->setObjectName("lentTitleLabel");
+        sizePolicy3.setHeightForWidth(lentTitleLabel->sizePolicy().hasHeightForWidth());
+        lentTitleLabel->setSizePolicy(sizePolicy3);
+
+        lentLayout->addWidget(lentTitleLabel);
+
+        lentSubtitleLabel = new QLabel(totalLentFrame);
+        lentSubtitleLabel->setObjectName("lentSubtitleLabel");
+        sizePolicy3.setHeightForWidth(lentSubtitleLabel->sizePolicy().hasHeightForWidth());
+        lentSubtitleLabel->setSizePolicy(sizePolicy3);
+
+        lentLayout->addWidget(lentSubtitleLabel);
+
+        totalLentLabel = new QLabel(totalLentFrame);
+        totalLentLabel->setObjectName("totalLentLabel");
+        totalLentLabel->setAlignment(Qt::AlignmentFlag::AlignCenter);
+
+        lentLayout->addWidget(totalLentLabel);
+
+
+        debtStatsLayout->addWidget(totalLentFrame);
+
+        unpaidDebtFrame = new QFrame(debtStatsGroup);
+        unpaidDebtFrame->setObjectName("unpaidDebtFrame");
+        unpaidDebtFrame->setStyleSheet(QString::fromUtf8("background-color: rgb(255, 255, 255);"));
+        unpaidDebtFrame->setFrameShape(QFrame::Shape::StyledPanel);
+        unpaidDebtFrame->setFrameShadow(QFrame::Shadow::Raised);
+        unpaidLayout = new QVBoxLayout(unpaidDebtFrame);
+        unpaidLayout->setObjectName("unpaidLayout");
+        unpaidLayout->setContentsMargins(20, -1, 20, -1);
+        unpaidTitleLabel = new QLabel(unpaidDebtFrame);
+        unpaidTitleLabel->setObjectName("unpaidTitleLabel");
+        sizePolicy3.setHeightForWidth(unpaidTitleLabel->sizePolicy().hasHeightForWidth());
+        unpaidTitleLabel->setSizePolicy(sizePolicy3);
+
+        unpaidLayout->addWidget(unpaidTitleLabel);
+
+        unpaidSubtitleLabel = new QLabel(unpaidDebtFrame);
+        unpaidSubtitleLabel->setObjectName("unpaidSubtitleLabel");
+        sizePolicy3.setHeightForWidth(unpaidSubtitleLabel->sizePolicy().hasHeightForWidth());
+        unpaidSubtitleLabel->setSizePolicy(sizePolicy3);
+
+        unpaidLayout->addWidget(unpaidSubtitleLabel);
+
+        totalUnpaidLabel = new QLabel(unpaidDebtFrame);
+        totalUnpaidLabel->setObjectName("totalUnpaidLabel");
+        totalUnpaidLabel->setAlignment(Qt::AlignmentFlag::AlignCenter);
+
+        unpaidLayout->addWidget(totalUnpaidLabel);
+
+
+        debtStatsLayout->addWidget(unpaidDebtFrame);
+
+
+        debtVerticalLayout->addWidget(debtStatsGroup);
+
+        debtToolsGroup = new QGroupBox(debtMainFrame);
+        debtToolsGroup->setObjectName("debtToolsGroup");
+        debtToolsGroup->setStyleSheet(QString::fromUtf8("font: 900 12pt \"Segoe UI\";"));
+        debtToolsLayout = new QHBoxLayout(debtToolsGroup);
+        debtToolsLayout->setObjectName("debtToolsLayout");
+        debtToolsSpacer = new QSpacerItem(40, 20, QSizePolicy::Policy::Expanding, QSizePolicy::Policy::Minimum);
+
+        debtToolsLayout->addItem(debtToolsSpacer);
+
+        addDebtButton = new QPushButton(debtToolsGroup);
+        addDebtButton->setObjectName("addDebtButton");
+        QSizePolicy sizePolicy4(QSizePolicy::Policy::Fixed, QSizePolicy::Policy::Fixed);
+        sizePolicy4.setHorizontalStretch(0);
+        sizePolicy4.setVerticalStretch(0);
+        sizePolicy4.setHeightForWidth(addDebtButton->sizePolicy().hasHeightForWidth());
+        addDebtButton->setSizePolicy(sizePolicy4);
+        addDebtButton->setStyleSheet(QString::fromUtf8("font: 12pt \"Segoe UI\";"));
+        QIcon icon;
+        icon.addFile(QString::fromUtf8(":/img/src/add.png"), QSize(), QIcon::Mode::Normal, QIcon::State::Off);
+        addDebtButton->setIcon(icon);
+        addDebtButton->setIconSize(QSize(16, 16));
+
+        debtToolsLayout->addWidget(addDebtButton);
+
+        debtSearchInput = new QLineEdit(debtToolsGroup);
+        debtSearchInput->setObjectName("debtSearchInput");
+        debtSearchInput->setStyleSheet(QString::fromUtf8("background-color: rgb(255, 255, 255);"));
+
+        debtToolsLayout->addWidget(debtSearchInput);
+
+        debtSearchButton = new QPushButton(debtToolsGroup);
+        debtSearchButton->setObjectName("debtSearchButton");
+        sizePolicy4.setHeightForWidth(debtSearchButton->sizePolicy().hasHeightForWidth());
+        debtSearchButton->setSizePolicy(sizePolicy4);
+        debtSearchButton->setStyleSheet(QString::fromUtf8("font: 12pt \"Segoe UI\";"));
+        QIcon icon1;
+        icon1.addFile(QString::fromUtf8(":/img/src/search.png"), QSize(), QIcon::Mode::Normal, QIcon::State::Off);
+        debtSearchButton->setIcon(icon1);
+
+        debtToolsLayout->addWidget(debtSearchButton);
+
+        debtClearButton = new QPushButton(debtToolsGroup);
+        debtClearButton->setObjectName("debtClearButton");
+        sizePolicy4.setHeightForWidth(debtClearButton->sizePolicy().hasHeightForWidth());
+        debtClearButton->setSizePolicy(sizePolicy4);
+        debtClearButton->setStyleSheet(QString::fromUtf8("font: 12pt \"Segoe UI\";"));
+
+        debtToolsLayout->addWidget(debtClearButton);
+
+        debtFilterCombo = new QComboBox(debtToolsGroup);
+        debtFilterCombo->addItem(QString());
+        debtFilterCombo->addItem(QString());
+        debtFilterCombo->addItem(QString());
+        debtFilterCombo->addItem(QString());
+        debtFilterCombo->addItem(QString());
+        debtFilterCombo->setObjectName("debtFilterCombo");
+        sizePolicy4.setHeightForWidth(debtFilterCombo->sizePolicy().hasHeightForWidth());
+        debtFilterCombo->setSizePolicy(sizePolicy4);
+        debtFilterCombo->setStyleSheet(QString::fromUtf8("font: 12pt \"Segoe UI\";"));
+
+        debtToolsLayout->addWidget(debtFilterCombo);
+
+
+        debtVerticalLayout->addWidget(debtToolsGroup);
+
+        debtListGroup = new QGroupBox(debtMainFrame);
+        debtListGroup->setObjectName("debtListGroup");
+        debtListGroup->setStyleSheet(QString::fromUtf8("font: 900 12pt \"Segoe UI\";"));
+        debtListGridLayout = new QGridLayout(debtListGroup);
+        debtListGridLayout->setObjectName("debtListGridLayout");
+        debtList = new QScrollArea(debtListGroup);
+        debtList->setObjectName("debtList");
+        debtList->setWidgetResizable(true);
+        debtListContent = new QWidget();
+        debtListContent->setObjectName("debtListContent");
+        debtListContent->setGeometry(QRect(0, 0, 769, 445));
+        QSizePolicy sizePolicy5(QSizePolicy::Policy::Preferred, QSizePolicy::Policy::Expanding);
+        sizePolicy5.setHorizontalStretch(0);
+        sizePolicy5.setVerticalStretch(0);
+        sizePolicy5.setHeightForWidth(debtListContent->sizePolicy().hasHeightForWidth());
+        debtListContent->setSizePolicy(sizePolicy5);
+        debtListContentLayout = new QVBoxLayout(debtListContent);
+        debtListContentLayout->setSpacing(5);
+        debtListContentLayout->setObjectName("debtListContentLayout");
+        debtListSpacer = new QSpacerItem(20, 0, QSizePolicy::Policy::Minimum, QSizePolicy::Policy::Expanding);
+
+        debtListContentLayout->addItem(debtListSpacer);
+
+        debtList->setWidget(debtListContent);
+
+        debtListGridLayout->addWidget(debtList, 0, 0, 1, 1);
+
+
+        debtVerticalLayout->addWidget(debtListGroup);
+
+
+        gridLayout_debt->addWidget(debtMainFrame, 0, 0, 1, 1);
+
+        stackedWidget->addWidget(Debt_Page);
         Expense_2 = new QWidget();
         Expense_2->setObjectName("Expense_2");
         sizePolicy1.setHeightForWidth(Expense_2->sizePolicy().hasHeightForWidth());
@@ -965,14 +1090,9 @@ public:
 
         addExpenseButton = new QPushButton(groupBox_2);
         addExpenseButton->setObjectName("addExpenseButton");
-        QSizePolicy sizePolicy4(QSizePolicy::Policy::Fixed, QSizePolicy::Policy::Fixed);
-        sizePolicy4.setHorizontalStretch(0);
-        sizePolicy4.setVerticalStretch(0);
         sizePolicy4.setHeightForWidth(addExpenseButton->sizePolicy().hasHeightForWidth());
         addExpenseButton->setSizePolicy(sizePolicy4);
         addExpenseButton->setStyleSheet(QString::fromUtf8("font: 12pt \"Segoe UI\";"));
-        QIcon icon;
-        icon.addFile(QString::fromUtf8(":/img/src/add.png"), QSize(), QIcon::Mode::Normal, QIcon::State::Off);
         addExpenseButton->setIcon(icon);
         addExpenseButton->setIconSize(QSize(16, 16));
 
@@ -989,8 +1109,6 @@ public:
         sizePolicy4.setHeightForWidth(expenseSearchButton->sizePolicy().hasHeightForWidth());
         expenseSearchButton->setSizePolicy(sizePolicy4);
         expenseSearchButton->setStyleSheet(QString::fromUtf8("font: 12pt \"Segoe UI\";"));
-        QIcon icon1;
-        icon1.addFile(QString::fromUtf8(":/img/src/search.png"), QSize(), QIcon::Mode::Normal, QIcon::State::Off);
         expenseSearchButton->setIcon(icon1);
 
         horizontalLayout_5->addWidget(expenseSearchButton);
@@ -1024,10 +1142,7 @@ public:
         expenseList->setWidgetResizable(true);
         DM_SrollContents = new QWidget();
         DM_SrollContents->setObjectName("DM_SrollContents");
-        DM_SrollContents->setGeometry(QRect(0, 0, 98, 28));
-        QSizePolicy sizePolicy5(QSizePolicy::Policy::Preferred, QSizePolicy::Policy::Expanding);
-        sizePolicy5.setHorizontalStretch(0);
-        sizePolicy5.setVerticalStretch(0);
+        DM_SrollContents->setGeometry(QRect(0, 0, 769, 445));
         sizePolicy5.setHeightForWidth(DM_SrollContents->sizePolicy().hasHeightForWidth());
         DM_SrollContents->setSizePolicy(sizePolicy5);
         DM_SrollContents->setLayoutDirection(Qt::LayoutDirection::RightToLeft);
@@ -1315,7 +1430,7 @@ public:
         incomeList->setWidgetResizable(true);
         DM_SrollContents_2 = new QWidget();
         DM_SrollContents_2->setObjectName("DM_SrollContents_2");
-        DM_SrollContents_2->setGeometry(QRect(0, 0, 769, 445));
+        DM_SrollContents_2->setGeometry(QRect(0, 0, 41, 18));
         sizePolicy5.setHeightForWidth(DM_SrollContents_2->sizePolicy().hasHeightForWidth());
         DM_SrollContents_2->setSizePolicy(sizePolicy5);
         DM_SrollContents_2->setLayoutDirection(Qt::LayoutDirection::RightToLeft);
@@ -1486,7 +1601,7 @@ public:
 "	background-color: rgb(154, 154, 154);\n"
 "}"));
         QIcon icon4;
-        icon4.addFile(QString::fromUtf8(":/rec/src/dashboard.png"), QSize(), QIcon::Mode::Normal, QIcon::State::Off);
+        icon4.addFile(QString::fromUtf8(":/img/src/dashboard.png"), QSize(), QIcon::Mode::Normal, QIcon::State::Off);
         DashBoard_btn_2->setIcon(icon4);
         DashBoard_btn_2->setIconSize(QSize(24, 24));
 
@@ -1513,7 +1628,7 @@ public:
 "	background-color: rgb(154, 154, 154);\n"
 "}"));
         QIcon icon5;
-        icon5.addFile(QString::fromUtf8(":/src/spending.png"), QSize(), QIcon::Mode::Normal, QIcon::State::Off);
+        icon5.addFile(QString::fromUtf8(":/img/src/transaction.png"), QSize(), QIcon::Mode::Normal, QIcon::State::Off);
         expense_btn_2->setIcon(icon5);
         expense_btn_2->setIconSize(QSize(29, 28));
 
@@ -1540,7 +1655,7 @@ public:
 "	background-color: rgb(154, 154, 154);\n"
 "}"));
         QIcon icon6;
-        icon6.addFile(QString::fromUtf8(":/src/income.png"), QSize(), QIcon::Mode::Normal, QIcon::State::Off);
+        icon6.addFile(QString::fromUtf8(":/img/src/income.png"), QSize(), QIcon::Mode::Normal, QIcon::State::Off);
         income_btn_2->setIcon(icon6);
         income_btn_2->setIconSize(QSize(30, 30));
 
@@ -1566,10 +1681,36 @@ public:
 "\n"
 "	background-color: rgb(154, 154, 154);\n"
 "}"));
-        saving_btn->setIcon(icon6);
+        QIcon icon7;
+        icon7.addFile(QString::fromUtf8(":/img/src/piggy-bank.png"), QSize(), QIcon::Mode::Normal, QIcon::State::Off);
+        saving_btn->setIcon(icon7);
         saving_btn->setIconSize(QSize(30, 30));
 
         verticalLayout_2->addWidget(saving_btn);
+
+        dept_btn_2 = new QPushButton(widget);
+        dept_btn_2->setObjectName("dept_btn_2");
+        dept_btn_2->setStyleSheet(QString::fromUtf8("QPushButton {\n"
+"\n"
+"	font: 700 18pt \"Segoe UI\";\n"
+"	background-color: rgba(255, 255, 255, 0);\n"
+"	color: rgb(255, 255, 255);\n"
+"	border: 0px;\n"
+"	border-radius: 0px;\n"
+"	text-align: left;\n"
+"	margin: 0 10px;\n"
+"}\n"
+"\n"
+"QPushButton:Hover {\n"
+"\n"
+"	background-color: rgb(154, 154, 154);\n"
+"}"));
+        QIcon icon8;
+        icon8.addFile(QString::fromUtf8(":/img/src/spending.png"), QSize(), QIcon::Mode::Normal, QIcon::State::Off);
+        dept_btn_2->setIcon(icon8);
+        dept_btn_2->setIconSize(QSize(30, 30));
+
+        verticalLayout_2->addWidget(dept_btn_2);
 
 
         verticalLayout_3->addLayout(verticalLayout_2);
@@ -1582,7 +1723,7 @@ public:
 
         retranslateUi(Dashboard);
 
-        stackedWidget->setCurrentIndex(5);
+        stackedWidget->setCurrentIndex(2);
 
 
         QMetaObject::connectSlotsByName(Dashboard);
@@ -1624,18 +1765,28 @@ public:
 
         savingListGroup->setTitle(QCoreApplication::translate("Dashboard", "DANH S\303\201CH M\341\273\244C TI\303\212U TI\341\272\276T KI\341\273\206M", nullptr));
         noGoalsLabel->setText(QCoreApplication::translate("Dashboard", "Ch\306\260a c\303\263 m\341\273\245c ti\303\252u ti\341\272\277t ki\341\273\207m n\303\240o. H\303\243y th\303\252m m\341\273\245c ti\303\252u \304\221\341\272\247u ti\303\252n!", nullptr));
-        progressTitle1->setText(QCoreApplication::translate("Dashboard", "Ti\341\272\277n \304\220\341\273\231 Trung B\303\254nh", nullptr));
-        progressPercent1->setText(QCoreApplication::translate("Dashboard", "0%", nullptr));
-        groupBox_8->setTitle(QCoreApplication::translate("Dashboard", "Qu\341\272\243n l\303\275 vay n\341\273\243", nullptr));
-        label_125->setText(QCoreApplication::translate("Dashboard", "<html><head/><body><p><span style=\" font-size:14pt; font-weight:700;\">Thay \304\221\341\273\225i chi ti\303\252u</span></p></body></html>", nullptr));
-        label_126->setText(QCoreApplication::translate("Dashboard", "<html><head/><body><p><span style=\" color:#7c7c7c;\">So v\341\273\233i th\303\241ng tr\306\260\341\273\233c</span></p></body></html>", nullptr));
-        label_127->setText(QCoreApplication::translate("Dashboard", "<html><head/><body><p><span style=\" font-size:22pt; font-weight:700; color:#931706;\">\342\206\221 10,3%</span></p></body></html>", nullptr));
-        label_128->setText(QCoreApplication::translate("Dashboard", "<html><head/><body><p><span style=\" color:#7c7c7c;\">Giao d\341\273\213ch t\341\273\253 c\303\241c ngu\341\273\223n</span></p></body></html>", nullptr));
-        label_129->setText(QCoreApplication::translate("Dashboard", "<html><head/><body><p><span style=\" font-size:22pt; font-weight:700;\">13 giao d\341\273\213ch</span></p></body></html>", nullptr));
-        label_130->setText(QCoreApplication::translate("Dashboard", "<html><head/><body><p><span style=\" font-size:14pt; font-weight:700;\">T\341\273\225ng s\341\273\221 giao d\341\273\213ch</span></p></body></html>", nullptr));
-        label_131->setText(QCoreApplication::translate("Dashboard", "<html><head/><body><p><span style=\" font-size:22pt; font-weight:700;\">7.000.000 \304\221</span></p></body></html>", nullptr));
-        label_132->setText(QCoreApplication::translate("Dashboard", "<html><head/><body><p><span style=\" color:#7c7c7c;\">T\341\273\225ng chi ti\303\252u t\341\273\253 c\303\241c ngu\341\273\223n</span></p></body></html>", nullptr));
-        label_133->setText(QCoreApplication::translate("Dashboard", "<html><head/><body><p><span style=\" font-size:14pt; font-weight:700;\">T\341\273\225ng chi ti\303\252u</span></p></body></html>", nullptr));
+        debtStatsGroup->setTitle(QCoreApplication::translate("Dashboard", "QU\341\272\242N L\303\235 VAY N\341\273\242", nullptr));
+        borrowedTitleLabel->setText(QCoreApplication::translate("Dashboard", "T\341\273\225ng vay n\341\273\243", nullptr));
+        borrowedSubtitleLabel->setText(QCoreApplication::translate("Dashboard", "<html><head/><body><p><span style=\" font-size:8pt; font-weight:700; font-style:italic; color:#848484;\">S\341\273\221 ti\341\273\201n \304\221ang vay</span></p></body></html>", nullptr));
+        totalBorrowedLabel->setText(QCoreApplication::translate("Dashboard", "<html><head/><body><p><span style=\" font-size:18pt; color:#ffc107;\">0 VN\304\220</span></p></body></html>", nullptr));
+        lentTitleLabel->setText(QCoreApplication::translate("Dashboard", "T\341\273\225ng cho vay", nullptr));
+        lentSubtitleLabel->setText(QCoreApplication::translate("Dashboard", "<html><head/><body><p><span style=\" font-size:8pt; font-weight:700; font-style:italic; color:#848484;\">S\341\273\221 ti\341\273\201n \304\221\303\243 cho vay</span></p></body></html>", nullptr));
+        totalLentLabel->setText(QCoreApplication::translate("Dashboard", "<html><head/><body><p><span style=\" font-size:18pt; color:#28a745;\">0 VN\304\220</span></p></body></html>", nullptr));
+        unpaidTitleLabel->setText(QCoreApplication::translate("Dashboard", "Ch\306\260a thanh to\303\241n", nullptr));
+        unpaidSubtitleLabel->setText(QCoreApplication::translate("Dashboard", "<html><head/><body><p><span style=\" font-size:8pt; font-weight:700; font-style:italic; color:#848484;\">T\341\273\225ng n\341\273\243 ch\306\260a thanh to\303\241n</span></p></body></html>", nullptr));
+        totalUnpaidLabel->setText(QCoreApplication::translate("Dashboard", "<html><head/><body><p><span style=\" font-size:18pt; color:#dc3545;\">0 VN\304\220</span></p></body></html>", nullptr));
+        debtToolsGroup->setTitle(QCoreApplication::translate("Dashboard", "C\303\264ng c\341\273\245", nullptr));
+        addDebtButton->setText(QCoreApplication::translate("Dashboard", "Th\303\252m", nullptr));
+        debtSearchInput->setPlaceholderText(QCoreApplication::translate("Dashboard", "Nh\341\272\255p t\341\273\253 kh\303\263a t\303\254m ki\341\272\277m kho\341\272\243n n\341\273\243...", nullptr));
+        debtSearchButton->setText(QCoreApplication::translate("Dashboard", "T\303\254m ki\341\272\277m", nullptr));
+        debtClearButton->setText(QCoreApplication::translate("Dashboard", "X\303\263a", nullptr));
+        debtFilterCombo->setItemText(0, QCoreApplication::translate("Dashboard", "T\341\272\245t c\341\272\243", nullptr));
+        debtFilterCombo->setItemText(1, QCoreApplication::translate("Dashboard", "Vay n\341\273\243", nullptr));
+        debtFilterCombo->setItemText(2, QCoreApplication::translate("Dashboard", "Cho vay", nullptr));
+        debtFilterCombo->setItemText(3, QCoreApplication::translate("Dashboard", "Ch\306\260a thanh to\303\241n", nullptr));
+        debtFilterCombo->setItemText(4, QCoreApplication::translate("Dashboard", "\304\220\303\243 thanh to\303\241n", nullptr));
+
+        debtListGroup->setTitle(QCoreApplication::translate("Dashboard", "DANH S\303\201CH KHO\341\272\242N N\341\273\242", nullptr));
         groupBox->setTitle(QCoreApplication::translate("Dashboard", "QU\341\272\242N L\303\235 CHI TI\303\212U", nullptr));
         label->setText(QCoreApplication::translate("Dashboard", "T\341\273\225ng chi ti\303\252u", nullptr));
         label_5->setText(QCoreApplication::translate("Dashboard", "<html><head/><body><p><span style=\" font-size:8pt; font-weight:700; font-style:italic; color:#848484;\">T\341\273\225ng chi t\341\273\253 t\341\272\245t c\341\272\243 c\303\241c ngu\303\264n</span></p></body></html>", nullptr));
@@ -1687,6 +1838,7 @@ public:
         expense_btn_2->setText(QCoreApplication::translate("Dashboard", " Chi ti\303\252u", nullptr));
         income_btn_2->setText(QCoreApplication::translate("Dashboard", " Thu nh\341\272\255p", nullptr));
         saving_btn->setText(QCoreApplication::translate("Dashboard", " Ti\341\272\277t ki\341\273\207m", nullptr));
+        dept_btn_2->setText(QCoreApplication::translate("Dashboard", " Vay n\341\273\243", nullptr));
     } // retranslateUi
 
 };

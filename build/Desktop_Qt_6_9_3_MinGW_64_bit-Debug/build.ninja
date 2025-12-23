@@ -129,6 +129,14 @@ build CMakeFiles/MoneyTracker.dir/transaction.cpp.obj: CXX_COMPILER__MoneyTracke
   OBJECT_DIR = CMakeFiles\MoneyTracker.dir
   OBJECT_FILE_DIR = CMakeFiles\MoneyTracker.dir
 
+build CMakeFiles/MoneyTracker.dir/debt.cpp.obj: CXX_COMPILER__MoneyTracker_unscanned_Debug D$:/My$ Workspace/PBL2/MoneyTracker/MoneyTracker/debt.cpp || cmake_object_order_depends_target_MoneyTracker
+  DEFINES = -DMINGW_HAS_SECURE_API=1 -DQT_CORE_LIB -DQT_GUI_LIB -DQT_NEEDS_QMAIN -DQT_WIDGETS_LIB -DUNICODE -DWIN32 -DWIN64 -D_ENABLE_EXTENDED_ALIGNED_STORAGE -D_UNICODE -D_WIN64
+  DEP_FILE = CMakeFiles\MoneyTracker.dir\debt.cpp.obj.d
+  FLAGS = -DQT_QML_DEBUG -g -std=gnu++17 -fdiagnostics-color=always
+  INCLUDES = -I"D:/My Workspace/PBL2/MoneyTracker/MoneyTracker/build/Desktop_Qt_6_9_3_MinGW_64_bit-Debug/MoneyTracker_autogen/include" -isystem D:/App/qt/6.9.3/mingw_64/include/QtCore -isystem D:/App/qt/6.9.3/mingw_64/include -isystem D:/App/qt/6.9.3/mingw_64/mkspecs/win32-g++ -isystem D:/App/qt/6.9.3/mingw_64/include/QtWidgets -isystem D:/App/qt/6.9.3/mingw_64/include/QtGui
+  OBJECT_DIR = CMakeFiles\MoneyTracker.dir
+  OBJECT_FILE_DIR = CMakeFiles\MoneyTracker.dir
+
 build CMakeFiles/MoneyTracker.dir/saving.cpp.obj: CXX_COMPILER__MoneyTracker_unscanned_Debug D$:/My$ Workspace/PBL2/MoneyTracker/MoneyTracker/saving.cpp || cmake_object_order_depends_target_MoneyTracker
   DEFINES = -DMINGW_HAS_SECURE_API=1 -DQT_CORE_LIB -DQT_GUI_LIB -DQT_NEEDS_QMAIN -DQT_WIDGETS_LIB -DUNICODE -DWIN32 -DWIN64 -D_ENABLE_EXTENDED_ALIGNED_STORAGE -D_UNICODE -D_WIN64
   DEP_FILE = CMakeFiles\MoneyTracker.dir\saving.cpp.obj.d
@@ -153,7 +161,7 @@ build CMakeFiles/MoneyTracker.dir/MoneyTracker_autogen/EWIEGA46WW/qrc_src.cpp.ob
 #############################################
 # Link the executable MoneyTracker.exe
 
-build MoneyTracker.exe: CXX_EXECUTABLE_LINKER__MoneyTracker_Debug CMakeFiles/MoneyTracker.dir/MoneyTracker_autogen/mocs_compilation.cpp.obj CMakeFiles/MoneyTracker.dir/main.cpp.obj CMakeFiles/MoneyTracker.dir/dashboard.cpp.obj CMakeFiles/MoneyTracker.dir/login_dialog.cpp.obj CMakeFiles/MoneyTracker.dir/app.cpp.obj CMakeFiles/MoneyTracker.dir/category.cpp.obj CMakeFiles/MoneyTracker.dir/expense.cpp.obj CMakeFiles/MoneyTracker.dir/filehandler.cpp.obj CMakeFiles/MoneyTracker.dir/income.cpp.obj CMakeFiles/MoneyTracker.dir/transaction.cpp.obj CMakeFiles/MoneyTracker.dir/saving.cpp.obj CMakeFiles/MoneyTracker.dir/MoneyTracker_autogen/EWIEGA46WW/qrc_src.cpp.obj | D$:/App/qt/6.9.3/mingw_64/lib/libQt6Widgets.a D$:/App/qt/6.9.3/mingw_64/lib/libQt6Gui.a D$:/App/qt/6.9.3/mingw_64/lib/libQt6Core.a D$:/App/qt/6.9.3/mingw_64/lib/libQt6EntryPoint.a || MoneyTracker_autogen MoneyTracker_autogen_timestamp_deps
+build MoneyTracker.exe: CXX_EXECUTABLE_LINKER__MoneyTracker_Debug CMakeFiles/MoneyTracker.dir/MoneyTracker_autogen/mocs_compilation.cpp.obj CMakeFiles/MoneyTracker.dir/main.cpp.obj CMakeFiles/MoneyTracker.dir/dashboard.cpp.obj CMakeFiles/MoneyTracker.dir/login_dialog.cpp.obj CMakeFiles/MoneyTracker.dir/app.cpp.obj CMakeFiles/MoneyTracker.dir/category.cpp.obj CMakeFiles/MoneyTracker.dir/expense.cpp.obj CMakeFiles/MoneyTracker.dir/filehandler.cpp.obj CMakeFiles/MoneyTracker.dir/income.cpp.obj CMakeFiles/MoneyTracker.dir/transaction.cpp.obj CMakeFiles/MoneyTracker.dir/debt.cpp.obj CMakeFiles/MoneyTracker.dir/saving.cpp.obj CMakeFiles/MoneyTracker.dir/MoneyTracker_autogen/EWIEGA46WW/qrc_src.cpp.obj | D$:/App/qt/6.9.3/mingw_64/lib/libQt6Widgets.a D$:/App/qt/6.9.3/mingw_64/lib/libQt6Gui.a D$:/App/qt/6.9.3/mingw_64/lib/libQt6Core.a D$:/App/qt/6.9.3/mingw_64/lib/libQt6EntryPoint.a || MoneyTracker_autogen MoneyTracker_autogen_timestamp_deps
   FLAGS = -DQT_QML_DEBUG -g
   LINK_FLAGS = -mwindows
   LINK_LIBRARIES = D:/App/qt/6.9.3/mingw_64/lib/libQt6Widgets.a  D:/App/qt/6.9.3/mingw_64/lib/libQt6Gui.a  D:/App/qt/6.9.3/mingw_64/lib/libQt6Core.a  -lmpr  -luserenv  -lmingw32  D:/App/qt/6.9.3/mingw_64/lib/libQt6EntryPoint.a  -lshell32  -ld3d11  -ldxgi  -ldxguid  -ld3d12  -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32

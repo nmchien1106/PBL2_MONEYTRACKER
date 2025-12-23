@@ -1,0 +1,2 @@
+id,category,createdAt,updatedAt,amount,description,debtorName,dueDate,isPaid,debtType
+,,23/12/2025 13:39,23/12/2025,0,,AAA,23/01/2026,0,borrow

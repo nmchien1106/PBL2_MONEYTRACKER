@@ -451,6 +451,12 @@
 			null
 		],
 		[
+			"D:/My Workspace/PBL2/MoneyTracker/MoneyTracker/debt.h",
+			"MU",
+			"EWIEGA46WW/moc_debt.cpp",
+			null
+		],
+		[
 			"D:/My Workspace/PBL2/MoneyTracker/MoneyTracker/expense.h",
 			"MU",
 			"EWIEGA46WW/moc_expense.cpp",
@@ -581,6 +587,7 @@
 			"MU",
 			null
 		],
+		[ "D:/My Workspace/PBL2/MoneyTracker/MoneyTracker/debt.cpp", "MU", null ],
 		[
 			"D:/My Workspace/PBL2/MoneyTracker/MoneyTracker/expense.cpp",
 			"MU",

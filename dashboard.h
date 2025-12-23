@@ -63,39 +63,25 @@ public:
     static QVector<int> computeLPS(const QString& pattern);
     static bool KMPSearch(const QString& text, const QString& pattern);
 
-    QFrame* createCategoryCard(const QString& amount, const QString& time, const QString& title, const QString& description, QString index);
-    void renderHtmlCard(const QString &categoryName,double amount,const QDateTime &time,const QString &description,QString type, const QString& parent);
     void renderCards();
     void updateMonthlyExpenseTotal();
     void updateMonthlyIncomeTotal();
     void refreshAllDataViews();
     void clearScrollAreaSafely(QScrollArea* scrollArea);
-    void updateExpenseChange();
-    void updateExpenseTrend();
-    void updateIncomeChange();
-    void updateIncomeTrend();
     void updateDashboardOverview();
 
     QString extractCardText(QFrame* card);
     void ensureCardsAtTop(QScrollArea* scrollArea);
-    double calculateMonthlyExpense(int year, int month);
-    QVector<double> getLastThreeMonthsExpenses();
-    double calculateMonthlyIncome(int year, int month);
-    QVector<double> getLastThreeMonthsIncomes();
-
 
     void setupChart();
     void updateChart();
     double getTotalIncomeForCurrentMonth();
     double getTotalExpenseForCurrentMonth();
 
-
     void updateSavingStatistics();
     void refreshSavingGoals();
     void createSavingGoalCard(const Saving& saving);
-    QFrame* createSavingGoalWidget(const QString& goalName, double targetAmount, double currentAmount, const QString& description, const QString& goalId);
     void clearSavingGoalsDisplay();
-    double calculateProgressPercentage(double current, double target);
     void showAddSavingGoalDialog();
     void showSavingTransactionDialog(const QString& type, const QString& goalId);
     void showEditSavingGoalDialog(const QString& goalId);

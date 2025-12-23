@@ -4,6 +4,8 @@
 #include "transaction.h"
 #include <QString>
 #include <QDate>
+#include <QFrame>
+#include <QVector>
 
 class Expense : public Transaction {
 private:
@@ -11,46 +13,24 @@ private:
 public:
     Expense(const QString& id = "", Category* category= nullptr,
            const QDateTime& createdAt= QDateTime::currentDateTime(), const QDate& updatedAt= QDate::currentDate(),
-           double amount= 0.0, const QString& description= "")
-        : Transaction(id, category, createdAt, updatedAt, amount, description)
-    {}
+           double amount= 0.0, const QString& description= "");
 
-    Expense(const QStringList& data)
-        : Transaction(data)
-    {
-        qDebug() << "Expense: " << data;
-    }
+    Expense(const QStringList& data);
 
-    QString getType() const override {
-        return "Expense";
-    }
-    QString toString() const override {
-        QString categoryName = getCategory() ? getCategory()->getName() : "No Category";
-        return QString("Expense[ID: %1, Category: %2, CreatedAt: %3, UpdatedAt: %4, Amount: %5, Description: %6]")
-            .arg(getID())
-            .arg(categoryName)
-            .arg(getCreatedAt().toString("dd/MM/yyyy"))
-            .arg(getUpdatedAt().toString("dd/MM/yyyy"))
-            .arg(getAmount())
-            .arg(getDescription());
-    }
+    QString getType() const override;
+    QString toString() const override;
+    QString getColorCode() const override;
+    QFrame* createCard(const QString& index) const override;
+    QString getCardHtml() const override;
 
-    static QStringList getHeader() {
-        return {"id", "category", "createdAt", "updatedAt", "amount", "description"};
-    }
+    static QStringList getHeader();
+    QStringList toCsvRow() const;
 
-    QStringList toCsvRow() const {
-        QString categoryName = getCategory() ? getCategory()->getID() : "";
-        return {getID(), categoryName, getCreatedAt().toString("dd/MM/yyyy HH:mm"),
-                getUpdatedAt().toString("dd/MM/yyyy"), QString::number(getAmount()), getDescription()};
-    }
+    // Static calculation methods
+    static double calculateMonthlyTotal(const QVector<Expense>& expenses, int year, int month);
+    static QVector<double> getLastThreeMonthsTotals(const QVector<Expense>& expenses);
 };
 
+QDebug operator<<(QDebug dbg, const Expense &u);
 
-inline QDebug operator<<(QDebug dbg, const Expense &u)
-{
-    dbg.nospace()  << u.toString();
-    return dbg.space();
-}
-
-#endif 
+#endif

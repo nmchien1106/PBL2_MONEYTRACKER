@@ -1,0 +1,6 @@
+id,category,createdAt,updatedAt,amount,description,debtorName,dueDate,isPaid,debtType
+DT0001,CAT0001,20/12/2025 10:00,20/12/2025,5000000,Vay tiền mua laptop,Nguyễn Văn A,31/12/2025,0,borrow
+DT0002,CAT0002,18/12/2025 14:30,18/12/2025,3000000,Cho bạn vay mua xe,Trần Thị B,15/01/2026,0,lend
+DT0003,CAT0001,15/12/2025 09:15,15/12/2025,2000000,Vay ngân hàng,Ngân hàng Vietcombank,31/03/2026,0,borrow
+DT0004,CAT0003,10/12/2025 16:45,22/12/2025,1500000,Cho anh trai vay,Lê Văn C,01/01/2026,1,lend
+DT0005,CAT0002,05/12/2025 11:20,05/12/2025,4000000,Vay mẹ,Mẹ,20/12/2025,1,borrow

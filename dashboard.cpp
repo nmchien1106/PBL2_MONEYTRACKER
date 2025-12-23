@@ -17,6 +17,7 @@
 #include <QTextEdit>
 #include <QTimer>
 #include <QDateEdit>
+#include <QCheckBox>
 #include <algorithm>
 #include <QListWidget>
 
@@ -29,6 +30,19 @@ Dashboard::Dashboard(QWidget *parent)
 
     connect(ui->expenseSearchInput, &QLineEdit::returnPressed, this, &Dashboard::on_expenseSearchButton_clicked);
     connect(ui->incomeSearchInput, &QLineEdit::returnPressed, this, &Dashboard::on_incomeSearchButton_clicked);
+
+    // Connect debt search
+    QLineEdit* debtSearchInput = this->findChild<QLineEdit*>("debtSearchInput");
+    if (debtSearchInput) {
+        connect(debtSearchInput, &QLineEdit::textChanged, this, &Dashboard::searchDebt);
+        connect(debtSearchInput, &QLineEdit::returnPressed, this, &Dashboard::on_debtSearchButton_clicked);
+    }
+
+    // Connect debt filter combo
+    QComboBox* debtFilterCombo = this->findChild<QComboBox*>("debtFilterCombo");
+    if (debtFilterCombo) {
+        connect(debtFilterCombo, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &Dashboard::onDebtFilterChanged);
+    }
 
     QPushButton* expenseExpandingBtn = this->findChild<QPushButton*>("expenseExpandingButton");
     if (expenseExpandingBtn) {
@@ -110,8 +124,7 @@ Dashboard::Dashboard(QWidget *parent)
         }
     });
 
-    updateSavingStatistics();
-    refreshSavingGoals();
+    // Note: updateSavingStatistics and refreshSavingGoals are now called from App::loadData()
 }
 
 Dashboard::~Dashboard()
@@ -139,10 +152,18 @@ void Dashboard::on_saving_btn_2_clicked()
     ui->stackedWidget->setCurrentIndex(1);
 }
 
+void Dashboard::on_dept_btn_2_clicked()
+{
+    ui->stackedWidget->setCurrentIndex(2);
+    // Data already loaded on app startup, no need to reload
+}
+
 void Dashboard::on_debt_btn_2_clicked()
 {
     ui->stackedWidget->setCurrentIndex(2);
+    // Data already loaded on app startup, no need to reload
 }
+
 
 void Dashboard::on_addExpenseButton_clicked()
 {
@@ -2562,7 +2583,414 @@ QString Dashboard::generateNextSavingId()
     return QString("SV%1").arg(maxId + 1, 4, 10, QChar('0'));
 }
 
-#include "dashboard.moc"
+// Debt management methods
+void Dashboard::renderDebtCards() {
+    renderDebtCards(App::getDebtList());
+}
 
+void Dashboard::renderDebtCards(const QVector<Debt>& debts) {
+    // Try to find existing widget, if not create it dynamically
+    QWidget* debtPage = ui->stackedWidget->widget(2);  // Index 2 is for debt page
+    if (!debtPage) {
+        qDebug() << "Error: Debt page not found at index 2";
+        return;
+    }
+
+    // Look for scroll area or create one
+    QScrollArea* scrollArea = debtPage->findChild<QScrollArea*>("debtList");
+    if (!scrollArea) {
+        // Create scroll area dynamically if not in UI
+        scrollArea = new QScrollArea(debtPage);
+        scrollArea->setObjectName("debtList");
+        scrollArea->setWidgetResizable(true);
+
+        // Find or create layout for debt page
+        if (!debtPage->layout()) {
+            QVBoxLayout* pageLayout = new QVBoxLayout(debtPage);
+            pageLayout->setContentsMargins(10, 10, 10, 10);
+        }
+        debtPage->layout()->addWidget(scrollArea);
+    }
+
+    // Get or create content widget
+    QWidget* debtListContent = scrollArea->widget();
+    if (!debtListContent) {
+        debtListContent = new QWidget();
+        debtListContent->setObjectName("debtListContent");
+        scrollArea->setWidget(debtListContent);
+    }
+
+    // Clear existing layout
+    QLayout* existingLayout = debtListContent->layout();
+    if (existingLayout) {
+        QLayoutItem* item;
+        while ((item = existingLayout->takeAt(0)) != nullptr) {
+            if (item->widget()) {
+                delete item->widget();
+            }
+            delete item;
+        }
+        delete existingLayout;
+    }
+
+    QVBoxLayout* layout = new QVBoxLayout(debtListContent);
+    layout->setSpacing(10);
+    layout->setContentsMargins(10, 10, 10, 10);
+
+    originalDebtCards.clear();
+
+    for (int i = 0; i < debts.size(); ++i) {
+        const Debt& debt = debts[i];
+        QFrame* card = debt.createCard(QString::number(i));
+
+        // Connect edit button
+        QPushButton* editBtn = card->findChild<QPushButton*>("edit_" + debt.getID());
+        if (editBtn) {
+            connect(editBtn, &QPushButton::clicked, this, &Dashboard::handleDebtCardAction);
+        }
+
+        // Connect delete button
+        QPushButton* deleteBtn = card->findChild<QPushButton*>("delete_" + debt.getID());
+        if (deleteBtn) {
+            connect(deleteBtn, &QPushButton::clicked, this, &Dashboard::handleDebtCardAction);
+        }
+
+        // Connect mark paid button
+        QPushButton* markPaidBtn = card->findChild<QPushButton*>("markPaid_" + debt.getID());
+        if (markPaidBtn) {
+            connect(markPaidBtn, &QPushButton::clicked, this, &Dashboard::handleDebtCardAction);
+        }
+
+        layout->addWidget(card);
+        originalDebtCards.append(qMakePair(debt.getID(), card));
+    }
+
+    layout->addStretch();
+}
+
+void Dashboard::updateDebtOverview() {
+    const QVector<Debt>& debts = App::getDebtList();
+
+    double totalBorrowed = Debt::getTotalBorrowed(debts);
+    double totalLent = Debt::getTotalLent(debts);
+    double unpaidTotal = Debt::getTotalUnpaid(debts, "");
+
+    // Update UI labels
+    QLabel* borrowedLabel = this->findChild<QLabel*>("totalBorrowedLabel");
+    if (borrowedLabel) {
+        borrowedLabel->setText(QString("<html><head/><body><p><span style=\" font-size:18pt; color:#ffc107;\">%1</span></p></body></html>")
+                               .arg(App::formatMoney(totalBorrowed)));
+    }
+
+    QLabel* lentLabel = this->findChild<QLabel*>("totalLentLabel");
+    if (lentLabel) {
+        lentLabel->setText(QString("<html><head/><body><p><span style=\" font-size:18pt; color:#28a745;\">%1</span></p></body></html>")
+                          .arg(App::formatMoney(totalLent)));
+    }
+
+    QLabel* unpaidLabel = this->findChild<QLabel*>("totalUnpaidLabel");
+    if (unpaidLabel) {
+        unpaidLabel->setText(QString("<html><head/><body><p><span style=\" font-size:18pt; color:#dc3545;\">%1</span></p></body></html>")
+                            .arg(App::formatMoney(unpaidTotal)));
+    }
+}
+
+void Dashboard::handleDebtCardAction() {
+    QPushButton* button = qobject_cast<QPushButton*>(sender());
+    if (!button) return;
+
+    QString objectName = button->objectName();
+    QString debtId = objectName.mid(objectName.indexOf('_') + 1);
+
+    if (objectName.startsWith("edit_")) {
+        editDebtTransaction(debtId);
+    } else if (objectName.startsWith("delete_")) {
+        removeDebtTransaction(debtId);
+    } else if (objectName.startsWith("markPaid_")) {
+        markDebtAsPaid(debtId);
+    }
+}
+
+void Dashboard::editDebtTransaction(const QString& debtId) {
+    qDebug() << "Edit debt with ID:" << debtId;
+    QMessageBox::information(this, "Chỉnh sửa khoản nợ", "Chức năng chỉnh sửa đang được phát triển.");
+}
+
+void Dashboard::removeDebtTransaction(const QString& debtId) {
+    QMessageBox::StandardButton reply = QMessageBox::question(
+        this,
+        "Xác nhận xóa",
+        "Bạn có chắc chắn muốn xóa khoản nợ này?",
+        QMessageBox::Yes | QMessageBox::No
+    );
+
+    if (reply == QMessageBox::Yes) {
+        if (App::removeDebtById(debtId)) {
+            renderDebtCards();
+            updateDebtOverview();
+            App::writeData();
+            QMessageBox::information(this, "Thành công", "Đã xóa khoản nợ!");
+        } else {
+            QMessageBox::warning(this, "Lỗi", "Không tìm thấy khoản nợ!");
+        }
+    }
+}
+
+void Dashboard::markDebtAsPaid(const QString& debtId) {
+    const QVector<Debt>& debts = App::getDebtList();
+    bool currentStatus = false;
+
+    for (const Debt& debt : debts) {
+        if (debt.getID() == debtId) {
+            currentStatus = debt.getIsPaid();
+            break;
+        }
+    }
+
+    if (App::markDebtAsPaid(debtId, !currentStatus)) {
+        renderDebtCards();
+        updateDebtOverview();
+        App::writeData();
+        QString message = currentStatus ? "Đã đánh dấu chưa thanh toán!" : "Đã đánh dấu đã thanh toán!";
+        QMessageBox::information(this, "Thành công", message);
+    } else {
+        QMessageBox::warning(this, "Lỗi", "Không tìm thấy khoản nợ!");
+    }
+}
+
+void Dashboard::searchDebt(const QString& keyword) {
+    if (keyword.isEmpty()) {
+        clearDebtSearch();
+        return;
+    }
+
+    debtSearchModeActive = true;
+    QVector<Debt> filteredDebts;
+
+    for (const Debt& debt : App::getDebtList()) {
+        if (debt.getDescription().contains(keyword, Qt::CaseInsensitive) ||
+            debt.getDebtorName().contains(keyword, Qt::CaseInsensitive) ||
+            debt.getDebtType().contains(keyword, Qt::CaseInsensitive) ||
+            QString::number(debt.getAmount()).contains(keyword)) {
+            filteredDebts.append(debt);
+        }
+    }
+
+    renderDebtCards(filteredDebts);
+}
+
+void Dashboard::clearDebtSearch() {
+    debtSearchModeActive = false;
+    renderDebtCards();
+}
+
+void Dashboard::on_addDebtButton_clicked() {
+    QDialog dialog(this);
+    dialog.setWindowTitle("Thêm Khoản Nợ");
+    dialog.setModal(true);
+    dialog.resize(450, 450);
+
+    QVBoxLayout* layout = new QVBoxLayout(&dialog);
+
+    // Loại khoản nợ
+    QLabel* typeLabel = new QLabel("Loại khoản nợ:", &dialog);
+    QComboBox* typeCombo = new QComboBox(&dialog);
+    typeCombo->addItem("Vay nợ (Tôi đi vay)", "borrow");
+    typeCombo->addItem("Cho vay (Tôi cho vay)", "lend");
+
+    // Danh mục
+    QLabel* categoryLabel = new QLabel("Danh mục:", &dialog);
+    QComboBox* categoryCombo = new QComboBox(&dialog);
+    for (const Category& category : App::getCategoryList()) {
+        categoryCombo->addItem(category.getName(), category.getID());
+    }
+
+    // Tên người vay/cho vay
+    QLabel* debtorLabel = new QLabel("Tên người liên quan:", &dialog);
+    QLineEdit* debtorEdit = new QLineEdit(&dialog);
+    debtorEdit->setPlaceholderText("Nhập tên người vay/cho vay...");
+
+    // Số tiền
+    QLabel* amountLabel = new QLabel("Số tiền:", &dialog);
+    QLineEdit* amountEdit = new QLineEdit(&dialog);
+    amountEdit->setPlaceholderText("Nhập số tiền...");
+
+    // Ngày đáo hạn
+    QLabel* dueDateLabel = new QLabel("Ngày đáo hạn:", &dialog);
+    QDateEdit* dueDateEdit = new QDateEdit(&dialog);
+    dueDateEdit->setDate(QDate::currentDate().addMonths(1));
+    dueDateEdit->setCalendarPopup(true);
+    dueDateEdit->setDisplayFormat("dd/MM/yyyy");
+
+    // Mô tả
+    QLabel* descLabel = new QLabel("Mô tả:", &dialog);
+    QTextEdit* descEdit = new QTextEdit(&dialog);
+    descEdit->setPlaceholderText("Nhập mô tả (tùy chọn)...");
+    descEdit->setMaximumHeight(80);
+
+    // Trạng thái thanh toán
+    QCheckBox* paidCheckBox = new QCheckBox("Đã thanh toán", &dialog);
+
+    // Buttons
+    QHBoxLayout* buttonLayout = new QHBoxLayout();
+    QPushButton* okButton = new QPushButton("Thêm", &dialog);
+    QPushButton* cancelButton = new QPushButton("Hủy", &dialog);
+    buttonLayout->addWidget(okButton);
+    buttonLayout->addWidget(cancelButton);
+
+    // Add all widgets to layout
+    layout->addWidget(typeLabel);
+    layout->addWidget(typeCombo);
+    layout->addWidget(categoryLabel);
+    layout->addWidget(categoryCombo);
+    layout->addWidget(debtorLabel);
+    layout->addWidget(debtorEdit);
+    layout->addWidget(amountLabel);
+    layout->addWidget(amountEdit);
+    layout->addWidget(dueDateLabel);
+    layout->addWidget(dueDateEdit);
+    layout->addWidget(descLabel);
+    layout->addWidget(descEdit);
+    layout->addWidget(paidCheckBox);
+    layout->addLayout(buttonLayout);
+
+    // Update label based on debt type
+    connect(typeCombo, QOverload<int>::of(&QComboBox::currentIndexChanged), [debtorLabel, typeCombo]() {
+        QString debtType = typeCombo->currentData().toString();
+        if (debtType == "borrow") {
+            debtorLabel->setText("Tên người cho vay:");
+        } else {
+            debtorLabel->setText("Tên người đi vay:");
+        }
+    });
+
+    connect(okButton, &QPushButton::clicked, [&dialog, typeCombo, categoryCombo, debtorEdit,
+                                              amountEdit, dueDateEdit, descEdit, paidCheckBox, this]() {
+        QString debtType = typeCombo->currentData().toString();
+        QString categoryId = categoryCombo->currentData().toString();
+        QString debtorName = debtorEdit->text().trimmed();
+        QString amountText = amountEdit->text().trimmed();
+        QString description = descEdit->toPlainText().trimmed();
+        QDate dueDate = dueDateEdit->date();
+        bool isPaid = paidCheckBox->isChecked();
+
+        // Validation
+        if (categoryId.isEmpty()) {
+            QMessageBox::warning(&dialog, "Lỗi", "Vui lòng chọn danh mục!");
+            return;
+        }
+
+        if (debtorName.isEmpty()) {
+            QMessageBox::warning(&dialog, "Lỗi", "Vui lòng nhập tên người liên quan!");
+            return;
+        }
+
+        if (amountText.isEmpty()) {
+            QMessageBox::warning(&dialog, "Lỗi", "Vui lòng nhập số tiền!");
+            return;
+        }
+
+        bool ok;
+        double amount = amountText.toDouble(&ok);
+        if (!ok || amount <= 0) {
+            QMessageBox::warning(&dialog, "Lỗi", "Số tiền không hợp lệ!");
+            return;
+        }
+
+        if (!dueDate.isValid() || dueDate < QDate::currentDate()) {
+            QMessageBox::StandardButton reply = QMessageBox::question(
+                &dialog,
+                "Xác nhận",
+                "Ngày đáo hạn đã qua hoặc không hợp lệ. Bạn có muốn tiếp tục?",
+                QMessageBox::Yes | QMessageBox::No
+            );
+            if (reply == QMessageBox::No) {
+                return;
+            }
+        }
+
+        // Add debt
+        App::addDebt(categoryId, amount, description, debtorName, dueDate, debtType, isPaid);
+
+        // Refresh UI
+        renderDebtCards();
+        updateDebtOverview();
+        updateDashboardOverview();
+        App::writeData();
+
+        QString typeText = (debtType == "borrow") ? "vay nợ" : "cho vay";
+        QMessageBox::information(&dialog, "Thành công",
+                                QString("Đã thêm khoản %1 thành công!").arg(typeText));
+        dialog.accept();
+    });
+
+    connect(cancelButton, &QPushButton::clicked, &dialog, &QDialog::reject);
+
+    dialog.exec();
+}
+
+void Dashboard::on_debtSearchButton_clicked() {
+    QLineEdit* searchInput = ui->stackedWidget->findChild<QLineEdit*>("debtSearchInput");
+    if (searchInput) {
+        searchDebt(searchInput->text());
+    }
+}
+
+void Dashboard::on_debtClearButton_clicked() {
+    QLineEdit* searchInput = ui->stackedWidget->findChild<QLineEdit*>("debtSearchInput");
+    if (searchInput) {
+        searchInput->clear();
+    }
+
+    QComboBox* filterCombo = this->findChild<QComboBox*>("debtFilterCombo");
+    if (filterCombo) {
+        filterCombo->setCurrentIndex(0); // Reset to "Tất cả"
+    }
+
+    clearDebtSearch();
+}
+
+void Dashboard::onDebtFilterChanged(int index) {
+    QVector<Debt> filteredDebts;
+    const QVector<Debt>& allDebts = App::getDebtList();
+
+    switch(index) {
+        case 0: // Tất cả
+            filteredDebts = allDebts;
+            break;
+        case 1: // Vay nợ
+            for (const Debt& debt : allDebts) {
+                if (debt.getDebtType() == "borrow") {
+                    filteredDebts.append(debt);
+                }
+            }
+            break;
+        case 2: // Cho vay
+            for (const Debt& debt : allDebts) {
+                if (debt.getDebtType() == "lend") {
+                    filteredDebts.append(debt);
+                }
+            }
+            break;
+        case 3: // Chưa thanh toán
+            for (const Debt& debt : allDebts) {
+                if (!debt.getIsPaid()) {
+                    filteredDebts.append(debt);
+                }
+            }
+            break;
+        case 4: // Đã thanh toán
+            for (const Debt& debt : allDebts) {
+                if (debt.getIsPaid()) {
+                    filteredDebts.append(debt);
+                }
+            }
+            break;
+        default:
+            filteredDebts = allDebts;
+    }
+
+    renderDebtCards(filteredDebts);
+}
 
 

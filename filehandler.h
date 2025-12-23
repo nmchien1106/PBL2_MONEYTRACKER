@@ -11,6 +11,7 @@
 #include "income.h"
 #include "expense.h"
 #include "saving.h"
+#include "debt.h"
 
 class FileHandler : public QObject
 {
@@ -33,4 +34,4 @@ private:
 };
 
 
-#endif 
+#endif

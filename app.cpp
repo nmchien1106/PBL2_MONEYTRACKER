@@ -6,6 +6,11 @@ QVector<Category> App::categoryList = {};
 QVector<Income> App::incomeList = {};
 QVector<Expense> App::expenseList = {};
 QVector<Saving> App::savingList = {};
+QVector<Debt> App::debtList = {};
+
+// Initialize custom data structures
+HashTable<QString, Category*> App::categoryHashTable;
+LinkedList<QString> App::recentTransactionIds;
 
 
 App::App(QApplication &app) : m_app(app), QObject(nullptr)
@@ -48,13 +53,24 @@ void App::loadData()
     incomeList = fh.readList<Income>("data/incomeData.csv");
     savingList = fh.readList<Saving>("data/saveData.csv");
     expenseList = fh.readList<Expense>("data/expenseData.csv");
+    debtList = fh.readList<Debt>("data/deptData.csv");
 
-    qDebug() << "Loaded data - Categories:" << categoryList.size() << "Income:" << incomeList.size() << "Expense:" << expenseList.size() << "Savings:" << savingList.size();
+    // Build hash table for fast category lookup
+    buildCategoryHashTable();
+
+    qDebug() << "Loaded data - Categories:" << categoryList.size() << "Income:" << incomeList.size() << "Expense:" << expenseList.size() << "Savings:" << savingList.size() << "Debts:" << debtList.size();
 
     m_dashboard->renderCards();
     m_dashboard->updateMonthlyExpenseTotal();
     m_dashboard->updateMonthlyIncomeTotal();
     m_dashboard->updateDashboardOverview();
+    
+    // Load debt and saving data on startup
+    m_dashboard->renderDebtCards();
+    m_dashboard->updateDebtOverview();
+    m_dashboard->refreshSavingGoals();
+    m_dashboard->updateSavingStatistics();
+    
     return;
 }
 
@@ -65,6 +81,7 @@ void App::writeData()
     fh.writeList<Income>("data/incomeData.csv", App::incomeList);
     fh.writeList<Expense>("data/expenseData.csv", App::expenseList);
     fh.writeList<Saving>("data/saveData.csv", App::savingList);
+    fh.writeList<Debt>("data/deptData.csv", App::debtList);
 
     return;
 }
@@ -77,6 +94,39 @@ Category *App::findCategoryByID(const QString &id)
             return &c;
     }
     return nullptr;
+}
+
+// Optimized O(1) lookup using HashTable
+Category *App::findCategoryByIDFast(const QString &id)
+{
+    Category* result = nullptr;
+    categoryHashTable.find(id, result);  // find() returns bool and sets result
+    return result;  // Returns nullptr if not found
+}
+
+// Build hash table from category list for fast lookup
+void App::buildCategoryHashTable()
+{
+    qDebug() << "Building category hash table...";
+    for (auto &category : categoryList)
+    {
+        categoryHashTable.insert(category.getID(), &category);
+    }
+    qDebug() << "Hash table built with" << categoryList.size() << "categories";
+}
+
+// Add transaction ID to recent transactions (keep only last 50)
+void App::addToRecentTransactions(const QString& transactionId)
+{
+    // Add to front of list
+    recentTransactionIds.prepend(transactionId);
+
+    // Keep only last 50 transactions
+    while (recentTransactionIds.getSize() > 50) {
+        recentTransactionIds.removeAt(recentTransactionIds.getSize() - 1);
+    }
+
+    qDebug() << "Added transaction" << transactionId << "to recent list. Total recent:" << recentTransactionIds.getSize();
 }
 
 QString App::formatMoney(double amount)
@@ -130,23 +180,31 @@ double App::getMonthIncomeTotal()
 
 void App::addIncome(const QString& categoryId, double amount, const QString& description) {
     QString id = generateNextIncomeId();
-    Category* category = findCategoryByID(categoryId);
+    Category* category = findCategoryByIDFast(categoryId);  // Use optimized O(1) lookup
+    if (!category) {
+        category = findCategoryByID(categoryId);  // Fallback to linear search
+    }
 
     if (category) {
         Income newIncome(id, category, QDateTime::currentDateTime(),
                          QDate::currentDate(), amount, description);
         incomeList.append(newIncome);
+        addToRecentTransactions(id);  // Track recent transaction
     }
 }
 
 void App::addExpense(const QString& categoryId, double amount, const QString& description) {
     QString id = generateNextExpenseId();
-    Category* category = findCategoryByID(categoryId);
+    Category* category = findCategoryByIDFast(categoryId);  // Use optimized O(1) lookup
+    if (!category) {
+        category = findCategoryByID(categoryId);  // Fallback to linear search
+    }
 
     if (category) {
         Expense newExpense(id, category, QDateTime::currentDateTime(),
                            QDate::currentDate(), amount, description);
         expenseList.append(newExpense);
+        addToRecentTransactions(id);  // Track recent transaction
     }
 }
 
@@ -222,4 +280,57 @@ bool App::removeExpenseById(const QString& expenseId) {
     return false;
 }
 
+// Debt management methods
+void App::addDebt(const QString& categoryId, double amount, const QString& description,
+                 const QString& debtorName, const QDate& dueDate, const QString& debtType, bool isPaid) {
+    QString newId = generateNextDebtId();
+    Category* category = findCategoryByIDFast(categoryId);  // Use optimized lookup
+    if (!category) {
+        category = findCategoryByID(categoryId);  // Fallback to linear search
+    }
+    Debt newDebt(newId, category, QDateTime::currentDateTime(), QDate::currentDate(),
+                 amount, description, debtorName, dueDate, isPaid, debtType);
+    debtList.append(newDebt);
+    addToRecentTransactions(newId);  // Track recent transaction
+    qDebug() << "Added debt with ID:" << newId << "isPaid:" << isPaid;
+}
+
+QString App::generateNextDebtId() {
+    int maxId = 0;
+    for (const Debt& debt : debtList) {
+        QString idStr = debt.getID();
+        if (idStr.startsWith("DT")) {
+            bool ok;
+            int id = idStr.mid(2).toInt(&ok);
+            if (ok && id > maxId) {
+                maxId = id;
+            }
+        }
+    }
+    return QString("DT%1").arg(maxId + 1, 4, 10, QChar('0'));
+}
+
+bool App::removeDebtById(const QString& debtId) {
+    for (int i = 0; i < debtList.size(); i++) {
+        if (debtList[i].getID() == debtId) {
+            debtList.removeAt(i);
+            qDebug() << "Removed debt with ID:" << debtId;
+            return true;
+        }
+    }
+    qDebug() << "Debt with ID not found:" << debtId;
+    return false;
+}
+
+bool App::markDebtAsPaid(const QString& debtId, bool isPaid) {
+    for (int i = 0; i < debtList.size(); i++) {
+        if (debtList[i].getID() == debtId) {
+            debtList[i].setIsPaid(isPaid);
+            qDebug() << "Marked debt as" << (isPaid ? "paid" : "unpaid") << "- ID:" << debtId;
+            return true;
+        }
+    }
+    qDebug() << "Debt with ID not found:" << debtId;
+    return false;
+}
 

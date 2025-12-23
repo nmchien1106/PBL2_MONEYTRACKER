@@ -29,7 +29,7 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         app.cpp app.h
         category.cpp category.h
         expense.cpp expense.h filehandler.cpp filehandler.h hashtable.h income.cpp income.h linkedlist.h transaction.cpp transaction.h
-
+        debt.cpp debt.h
 
         src.qrc
         saving.h saving.cpp

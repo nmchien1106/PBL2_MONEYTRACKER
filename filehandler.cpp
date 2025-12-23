@@ -89,3 +89,5 @@ template QList<Saving> FileHandler::readList(const QString &filePath);
 template bool FileHandler::writeList(const QString& filePath, const QList<Saving> &list);
 template QList<Expense> FileHandler::readList(const QString &filePath);
 template bool FileHandler::writeList(const QString& filePath, const QList<Expense> &list);
+template QList<Debt> FileHandler::readList(const QString &filePath);
+template bool FileHandler::writeList(const QString& filePath, const QList<Debt> &list);

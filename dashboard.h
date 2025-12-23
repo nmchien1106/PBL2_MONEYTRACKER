@@ -24,6 +24,7 @@
 #include <QProgressBar>
 #include "transaction.h"
 #include "saving.h"
+#include "debt.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -91,11 +92,23 @@ public:
     void deleteSavingGoal(const QString& goalId);
     QString generateNextSavingId();
 
+    // Debt management methods
+    void renderDebtCards();
+    void renderDebtCards(const QVector<Debt>& debts);
+    void updateDebtOverview();
+    void searchDebt(const QString& keyword);
+    void clearDebtSearch();
+    void handleDebtCardAction();
+    void editDebtTransaction(const QString& debtId);
+    void removeDebtTransaction(const QString& debtId);
+    void markDebtAsPaid(const QString& debtId);
+
 private slots:
     void on_DashBoard_btn_2_clicked();
     void on_expense_btn_2_clicked();
     void on_income_btn_2_clicked();
     void on_saving_btn_2_clicked();
+    void on_dept_btn_2_clicked();
     void on_debt_btn_2_clicked();
     void on_expenseSearchButton_clicked();
     void on_expenseClearButton_clicked();
@@ -103,6 +116,7 @@ private slots:
     void on_incomeClearButton_clicked();
     void on_addExpenseButton_clicked();
     void on_addIncomeButton_clicked();
+    void on_addDebtButton_clicked();
 
     void on_addSavingGoalBtn_clicked();
     void on_depositBtn_clicked();
@@ -110,7 +124,10 @@ private slots:
     void on_savingReportBtn_clicked();
     void on_savingSearchButton_clicked();
     void on_savingClearButton_clicked();
+    void on_debtSearchButton_clicked();
+    void on_debtClearButton_clicked();
     void onSavingSortChanged(const QString& sortType);
+    void onDebtFilterChanged(int index);
     void on_saving_btn_clicked();
     void searchExpense(const QString& keyword);
     void clearExpenseSearch();
@@ -136,8 +153,10 @@ private slots:
 private:
     QVector<QPair<QString, QFrame*>> originalExpenseCards;
     QVector<QPair<QString, QFrame*>> originalIncomeCards;
+    QVector<QPair<QString, QFrame*>> originalDebtCards;
     bool searchModeActive = false;
     bool incomeSearchModeActive = false;
+    bool debtSearchModeActive = false;
 
     struct FilterState {
         bool active = false;

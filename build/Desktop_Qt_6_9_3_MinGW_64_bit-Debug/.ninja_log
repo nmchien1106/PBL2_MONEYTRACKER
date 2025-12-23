@@ -1,69 +1,68 @@
 # ninja log v6
-752	3842	7879848390006891	CMakeFiles/MoneyTracker.dir/category.cpp.obj	65d861e2c72044b9
-10	712	7879850708574210	MoneyTracker_autogen/mocs_compilation.cpp	7acc3cab6f494f96
 953	1202	7879179149229953	CMakeFiles/MoneyTracker.dir/income.cpp.obj	1956616e33d6c98b
-10	712	7879850708574210	MoneyTracker_autogen/timestamp	7acc3cab6f494f96
-10	712	7879850708574210	D:/My Workspace/PBL2/MoneyTracker/MoneyTracker/build/Desktop_Qt_6_9_3_MinGW_64_bit-Debug/MoneyTracker_autogen/timestamp	7acc3cab6f494f96
-722	7605	7879850715690210	CMakeFiles/MoneyTracker.dir/dashboard.cpp.obj	bb9d36077ad3201e
-10	712	7879850708574210	D:/My Workspace/PBL2/MoneyTracker/MoneyTracker/build/Desktop_Qt_6_9_3_MinGW_64_bit-Debug/MoneyTracker_autogen/mocs_compilation.cpp	7acc3cab6f494f96
+9	890	7881616186223779	MoneyTracker_autogen/timestamp	7acc3cab6f494f96
+9	890	7881616186223779	MoneyTracker_autogen/mocs_compilation.cpp	7acc3cab6f494f96
+752	3842	7879848390006891	CMakeFiles/MoneyTracker.dir/category.cpp.obj	65d861e2c72044b9
+9	890	7881616186223779	D:/My Workspace/PBL2/MoneyTracker/MoneyTracker/build/Desktop_Qt_6_9_3_MinGW_64_bit-Debug/MoneyTracker_autogen/timestamp	7acc3cab6f494f96
+9	890	7881616186223779	D:/My Workspace/PBL2/MoneyTracker/MoneyTracker/build/Desktop_Qt_6_9_3_MinGW_64_bit-Debug/MoneyTracker_autogen/mocs_compilation.cpp	7acc3cab6f494f96
+1827	18175	7879887190491647	CMakeFiles/MoneyTracker.dir/dashboard.cpp.obj	bb9d36077ad3201e
+7105	12794	7881612553881789	CMakeFiles/MoneyTracker.dir/filehandler.cpp.obj	1db638b2465513e8
 963	3576	7879179149329983	CMakeFiles/MoneyTracker.dir/user.cpp.obj	31f1e1e25a33f93b
-759	5557	7879848390068991	CMakeFiles/MoneyTracker.dir/filehandler.cpp.obj	1db638b2465513e8
-766	4699	7879848390149002	CMakeFiles/MoneyTracker.dir/transaction.cpp.obj	cc54a92bbc92ee16
-718	4608	7879850715650209	CMakeFiles/MoneyTracker.dir/main.cpp.obj	6e8e87ad14b74818
-726	4122	7879850715730206	CMakeFiles/MoneyTracker.dir/login_dialog.cpp.obj	d2ede9afd3b2e532
+7111	12144	7881612553951707	CMakeFiles/MoneyTracker.dir/transaction.cpp.obj	cc54a92bbc92ee16
+896	8155	7881616195084232	CMakeFiles/MoneyTracker.dir/main.cpp.obj	6e8e87ad14b74818
+907	6545	7881616195194227	CMakeFiles/MoneyTracker.dir/login_dialog.cpp.obj	d2ede9afd3b2e532
 555	13279	7879535304953797	CMakeFiles/MoneyTracker.dir/register_dialog.cpp.obj	1b21398b0e8cb27c
-713	4783	7879850715600239	CMakeFiles/MoneyTracker.dir/MoneyTracker_autogen/mocs_compilation.cpp.obj	74e6e8a897abe9ff
-730	5059	7879850715770219	CMakeFiles/MoneyTracker.dir/app.cpp.obj	d3a5e9f6659c37d6
+890	8718	7881616195024210	CMakeFiles/MoneyTracker.dir/MoneyTracker_autogen/mocs_compilation.cpp.obj	74e6e8a897abe9ff
+913	9633	7881616195254244	CMakeFiles/MoneyTracker.dir/app.cpp.obj	d3a5e9f6659c37d6
 958	1077	7879593507422389	CMakeFiles/MoneyTracker.dir/expense.cpp.obj	822d65d64d96c2cd
-7605	8848	7879850784519282	MoneyTracker.exe	1338a4fa40bfa1bd
+18175	21475	7879887353980623	MoneyTracker.exe	1338a4fa40bfa1bd
 709	3486	7876608684471624	CMakeFiles/MoneyTracker.dir/cardlistwidget.cpp.obj	a6002d943bdcfdb6
 328	445	7876959478005088	MoneyTracker_autogen/EWIEGA46WW/qrc_src.cpp	2ee4402f7149879b
 328	445	7876959478005088	D:/My Workspace/PBL2/MoneyTracker/MoneyTracker/build/Desktop_Qt_6_9_3_MinGW_64_bit-Debug/MoneyTracker_autogen/EWIEGA46WW/qrc_src.cpp	2ee4402f7149879b
 978	1855	7879179149479933	CMakeFiles/MoneyTracker.dir/MoneyTracker_autogen/EWIEGA46WW/qrc_src.cpp.obj	239d32115ea6977f
 973	1266	7879179149429962	CMakeFiles/MoneyTracker.dir/saving.cpp.obj	522bc260561a6c19
-13	831	7879858646190843	MoneyTracker_autogen/timestamp	7acc3cab6f494f96
-13	831	7879858646190843	MoneyTracker_autogen/mocs_compilation.cpp	7acc3cab6f494f96
-13	831	7879858646190843	D:/My Workspace/PBL2/MoneyTracker/MoneyTracker/build/Desktop_Qt_6_9_3_MinGW_64_bit-Debug/MoneyTracker_autogen/timestamp	7acc3cab6f494f96
-13	831	7879858646190843	D:/My Workspace/PBL2/MoneyTracker/MoneyTracker/build/Desktop_Qt_6_9_3_MinGW_64_bit-Debug/MoneyTracker_autogen/mocs_compilation.cpp	7acc3cab6f494f96
-63	896	7879858912078537	MoneyTracker_autogen/timestamp	7acc3cab6f494f96
-63	896	7879858912078537	MoneyTracker_autogen/mocs_compilation.cpp	7acc3cab6f494f96
-63	896	7879858912078537	D:/My Workspace/PBL2/MoneyTracker/MoneyTracker/build/Desktop_Qt_6_9_3_MinGW_64_bit-Debug/MoneyTracker_autogen/timestamp	7acc3cab6f494f96
-63	896	7879858912078537	D:/My Workspace/PBL2/MoneyTracker/MoneyTracker/build/Desktop_Qt_6_9_3_MinGW_64_bit-Debug/MoneyTracker_autogen/mocs_compilation.cpp	7acc3cab6f494f96
-925	5773	7879858913489828	CMakeFiles/MoneyTracker.dir/transaction.cpp.obj	cc54a92bbc92ee16
-912	7451	7879858913354851	CMakeFiles/MoneyTracker.dir/login_dialog.cpp.obj	d2ede9afd3b2e532
-903	9256	7879858913261563	CMakeFiles/MoneyTracker.dir/main.cpp.obj	6e8e87ad14b74818
-897	10089	7879858913201485	CMakeFiles/MoneyTracker.dir/MoneyTracker_autogen/mocs_compilation.cpp.obj	74e6e8a897abe9ff
-918	11243	7879858913408336	CMakeFiles/MoneyTracker.dir/app.cpp.obj	d3a5e9f6659c37d6
-907	15736	7879858913305383	CMakeFiles/MoneyTracker.dir/dashboard.cpp.obj	bb9d36077ad3201e
-15737	17459	7879859061598084	MoneyTracker.exe	1338a4fa40bfa1bd
-8	695	7879859604651577	MoneyTracker_autogen/timestamp	7acc3cab6f494f96
-8	695	7879859604651577	MoneyTracker_autogen/mocs_compilation.cpp	7acc3cab6f494f96
-8	695	7879859604651577	D:/My Workspace/PBL2/MoneyTracker/MoneyTracker/build/Desktop_Qt_6_9_3_MinGW_64_bit-Debug/MoneyTracker_autogen/timestamp	7acc3cab6f494f96
-8	695	7879859604651577	D:/My Workspace/PBL2/MoneyTracker/MoneyTracker/build/Desktop_Qt_6_9_3_MinGW_64_bit-Debug/MoneyTracker_autogen/mocs_compilation.cpp	7acc3cab6f494f96
-718	3360	7879859605943699	CMakeFiles/MoneyTracker.dir/transaction.cpp.obj	cc54a92bbc92ee16
-711	3902	7879859605870739	CMakeFiles/MoneyTracker.dir/login_dialog.cpp.obj	d2ede9afd3b2e532
-703	4344	7879859605785329	CMakeFiles/MoneyTracker.dir/main.cpp.obj	6e8e87ad14b74818
-696	4560	7879859605726546	CMakeFiles/MoneyTracker.dir/MoneyTracker_autogen/mocs_compilation.cpp.obj	74e6e8a897abe9ff
-715	4812	7879859605910751	CMakeFiles/MoneyTracker.dir/app.cpp.obj	d3a5e9f6659c37d6
-708	7500	7879859605840740	CMakeFiles/MoneyTracker.dir/dashboard.cpp.obj	bb9d36077ad3201e
-7501	8962	7879859673768346	MoneyTracker.exe	1338a4fa40bfa1bd
-62	359	7879860326610924	MoneyTracker_autogen/timestamp	7acc3cab6f494f96
-62	359	7879860326610924	MoneyTracker_autogen/mocs_compilation.cpp	7acc3cab6f494f96
-62	359	7879860326610924	D:/My Workspace/PBL2/MoneyTracker/MoneyTracker/build/Desktop_Qt_6_9_3_MinGW_64_bit-Debug/MoneyTracker_autogen/timestamp	7acc3cab6f494f96
-62	359	7879860326610924	D:/My Workspace/PBL2/MoneyTracker/MoneyTracker/build/Desktop_Qt_6_9_3_MinGW_64_bit-Debug/MoneyTracker_autogen/mocs_compilation.cpp	7acc3cab6f494f96
-369	3051	7879860329676660	CMakeFiles/MoneyTracker.dir/login_dialog.cpp.obj	d2ede9afd3b2e532
-363	3600	7879860329616646	CMakeFiles/MoneyTracker.dir/main.cpp.obj	6e8e87ad14b74818
-360	3702	7879860329586618	CMakeFiles/MoneyTracker.dir/MoneyTracker_autogen/mocs_compilation.cpp.obj	74e6e8a897abe9ff
-372	3973	7879860329716646	CMakeFiles/MoneyTracker.dir/app.cpp.obj	d3a5e9f6659c37d6
-366	6380	7879860329646638	CMakeFiles/MoneyTracker.dir/dashboard.cpp.obj	bb9d36077ad3201e
-6380	7667	7879860389794648	MoneyTracker.exe	1338a4fa40bfa1bd
-109	1799	7879887173314822	MoneyTracker_autogen/timestamp	7acc3cab6f494f96
-109	1799	7879887173314822	MoneyTracker_autogen/mocs_compilation.cpp	7acc3cab6f494f96
-109	1799	7879887173314822	D:/My Workspace/PBL2/MoneyTracker/MoneyTracker/build/Desktop_Qt_6_9_3_MinGW_64_bit-Debug/MoneyTracker_autogen/timestamp	7acc3cab6f494f96
-109	1799	7879887173314822	D:/My Workspace/PBL2/MoneyTracker/MoneyTracker/build/Desktop_Qt_6_9_3_MinGW_64_bit-Debug/MoneyTracker_autogen/mocs_compilation.cpp	7acc3cab6f494f96
-1830	14473	7879887190522196	CMakeFiles/MoneyTracker.dir/login_dialog.cpp.obj	d2ede9afd3b2e532
-1824	14990	7879887190460185	CMakeFiles/MoneyTracker.dir/main.cpp.obj	6e8e87ad14b74818
-1800	15209	7879887190219389	CMakeFiles/MoneyTracker.dir/MoneyTracker_autogen/mocs_compilation.cpp.obj	74e6e8a897abe9ff
-1834	15438	7879887190553833	CMakeFiles/MoneyTracker.dir/app.cpp.obj	d3a5e9f6659c37d6
-1827	18175	7879887190491647	CMakeFiles/MoneyTracker.dir/dashboard.cpp.obj	bb9d36077ad3201e
-18175	21475	7879887353980623	MoneyTracker.exe	1338a4fa40bfa1bd
+69	946	7881616602252761	MoneyTracker_autogen/timestamp	7acc3cab6f494f96
+69	946	7881616602252761	MoneyTracker_autogen/mocs_compilation.cpp	7acc3cab6f494f96
+69	946	7881616602252761	D:/My Workspace/PBL2/MoneyTracker/MoneyTracker/build/Desktop_Qt_6_9_3_MinGW_64_bit-Debug/MoneyTracker_autogen/timestamp	7acc3cab6f494f96
+69	946	7881616602252761	D:/My Workspace/PBL2/MoneyTracker/MoneyTracker/build/Desktop_Qt_6_9_3_MinGW_64_bit-Debug/MoneyTracker_autogen/mocs_compilation.cpp	7acc3cab6f494f96
+966	6391	7881616611232096	CMakeFiles/MoneyTracker.dir/login_dialog.cpp.obj	d2ede9afd3b2e532
+954	7837	7881616611111943	CMakeFiles/MoneyTracker.dir/main.cpp.obj	6e8e87ad14b74818
+947	8425	7881616611028135	CMakeFiles/MoneyTracker.dir/MoneyTracker_autogen/mocs_compilation.cpp.obj	74e6e8a897abe9ff
+972	9096	7881616611282077	CMakeFiles/MoneyTracker.dir/app.cpp.obj	d3a5e9f6659c37d6
+960	16662	7881616611163075	CMakeFiles/MoneyTracker.dir/dashboard.cpp.obj	bb9d36077ad3201e
+16662	19830	7881616768193061	MoneyTracker.exe	1338a4fa40bfa1bd
+6	73	7881617623836320	CMakeFiles/clean.additional	567071c4aa4faa23
+73	101	7881617624508309	clean	676e06fe6f741cf9
+43	1308	7881617636747714	MoneyTracker_autogen/timestamp	7acc3cab6f494f96
+43	1308	7881617636747714	MoneyTracker_autogen/mocs_compilation.cpp	7acc3cab6f494f96
+43	1308	7881617636747714	D:/My Workspace/PBL2/MoneyTracker/MoneyTracker/build/Desktop_Qt_6_9_3_MinGW_64_bit-Debug/MoneyTracker_autogen/timestamp	7acc3cab6f494f96
+43	1308	7881617636747714	D:/My Workspace/PBL2/MoneyTracker/MoneyTracker/build/Desktop_Qt_6_9_3_MinGW_64_bit-Debug/MoneyTracker_autogen/mocs_compilation.cpp	7acc3cab6f494f96
+1309	1907	7881617643792821	MoneyTracker_autogen/EWIEGA46WW/qrc_src.cpp	2ee4402f7149879b
+1309	1907	7881617643792821	D:/My Workspace/PBL2/MoneyTracker/MoneyTracker/build/Desktop_Qt_6_9_3_MinGW_64_bit-Debug/MoneyTracker_autogen/EWIEGA46WW/qrc_src.cpp	2ee4402f7149879b
+1933	2111	7881617644232852	CMakeFiles/MoneyTracker.dir/expense.cpp.obj	822d65d64d96c2cd
+1942	2145	7881617644322850	CMakeFiles/MoneyTracker.dir/income.cpp.obj	1956616e33d6c98b
+1950	2152	7881617644403484	CMakeFiles/MoneyTracker.dir/saving.cpp.obj	522bc260561a6c19
+1956	2591	7881617644463477	CMakeFiles/MoneyTracker.dir/MoneyTracker_autogen/EWIEGA46WW/qrc_src.cpp.obj	239d32115ea6977f
+1928	5916	7881617644192852	CMakeFiles/MoneyTracker.dir/category.cpp.obj	65d861e2c72044b9
+1945	11176	7881617644363469	CMakeFiles/MoneyTracker.dir/transaction.cpp.obj	cc54a92bbc92ee16
+1918	11555	7881617644092850	CMakeFiles/MoneyTracker.dir/login_dialog.cpp.obj	d2ede9afd3b2e532
+1910	13140	7881617644012827	CMakeFiles/MoneyTracker.dir/main.cpp.obj	6e8e87ad14b74818
+1907	13761	7881617643972840	CMakeFiles/MoneyTracker.dir/MoneyTracker_autogen/mocs_compilation.cpp.obj	74e6e8a897abe9ff
+1937	13783	7881617644282845	CMakeFiles/MoneyTracker.dir/filehandler.cpp.obj	1db638b2465513e8
+1924	14543	7881617644142847	CMakeFiles/MoneyTracker.dir/app.cpp.obj	d3a5e9f6659c37d6
+1914	22243	7881617644052843	CMakeFiles/MoneyTracker.dir/dashboard.cpp.obj	bb9d36077ad3201e
+22244	23575	7881617847347748	MoneyTracker.exe	1338a4fa40bfa1bd
+9	916	7881622138616174	MoneyTracker_autogen/timestamp	7acc3cab6f494f96
+9	916	7881622138616174	MoneyTracker_autogen/mocs_compilation.cpp	7acc3cab6f494f96
+9	916	7881622138616174	D:/My Workspace/PBL2/MoneyTracker/MoneyTracker/build/Desktop_Qt_6_9_3_MinGW_64_bit-Debug/MoneyTracker_autogen/timestamp	7acc3cab6f494f96
+9	916	7881622138616174	D:/My Workspace/PBL2/MoneyTracker/MoneyTracker/build/Desktop_Qt_6_9_3_MinGW_64_bit-Debug/MoneyTracker_autogen/mocs_compilation.cpp	7acc3cab6f494f96
+949	5356	7881622140023541	CMakeFiles/MoneyTracker.dir/income.cpp.obj	1956616e33d6c98b
+940	5494	7881622139932023	CMakeFiles/MoneyTracker.dir/expense.cpp.obj	822d65d64d96c2cd
+956	5967	7881622140083711	CMakeFiles/MoneyTracker.dir/transaction.cpp.obj	cc54a92bbc92ee16
+929	6093	7881622139817206	CMakeFiles/MoneyTracker.dir/login_dialog.cpp.obj	d2ede9afd3b2e532
+921	6657	7881622139727257	CMakeFiles/MoneyTracker.dir/main.cpp.obj	6e8e87ad14b74818
+945	6787	7881622139976828	CMakeFiles/MoneyTracker.dir/filehandler.cpp.obj	1db638b2465513e8
+917	6867	7881622139697187	CMakeFiles/MoneyTracker.dir/MoneyTracker_autogen/mocs_compilation.cpp.obj	74e6e8a897abe9ff
+934	7163	7881622139869738	CMakeFiles/MoneyTracker.dir/app.cpp.obj	d3a5e9f6659c37d6
+925	9848	7881622139777211	CMakeFiles/MoneyTracker.dir/dashboard.cpp.obj	bb9d36077ad3201e
+9848	11280	7881622229013086	MoneyTracker.exe	1338a4fa40bfa1bd

@@ -43,6 +43,7 @@ D:/My\ Workspace/PBL2/MoneyTracker/MoneyTracker/build/Desktop_Qt_6_9_3_MinGW_64_
   D:/App/qt/6.9.3/mingw_64/include/QtCore/qdatastream.h \
   D:/App/qt/6.9.3/mingw_64/include/QtCore/qdatetime.h \
   D:/App/qt/6.9.3/mingw_64/include/QtCore/qdebug.h \
+  D:/App/qt/6.9.3/mingw_64/include/QtCore/qendian.h \
   D:/App/qt/6.9.3/mingw_64/include/QtCore/qexceptionhandling.h \
   D:/App/qt/6.9.3/mingw_64/include/QtCore/qfile.h \
   D:/App/qt/6.9.3/mingw_64/include/QtCore/qfiledevice.h \
@@ -61,11 +62,13 @@ D:/My\ Workspace/PBL2/MoneyTracker/MoneyTracker/build/Desktop_Qt_6_9_3_MinGW_64_
   D:/App/qt/6.9.3/mingw_64/include/QtCore/qiterable.h \
   D:/App/qt/6.9.3/mingw_64/include/QtCore/qiterator.h \
   D:/App/qt/6.9.3/mingw_64/include/QtCore/qlatin1stringview.h \
+  D:/App/qt/6.9.3/mingw_64/include/QtCore/qline.h \
   D:/App/qt/6.9.3/mingw_64/include/QtCore/qlist.h \
   D:/App/qt/6.9.3/mingw_64/include/QtCore/qlocale.h \
   D:/App/qt/6.9.3/mingw_64/include/QtCore/qlogging.h \
   D:/App/qt/6.9.3/mingw_64/include/QtCore/qmalloc.h \
   D:/App/qt/6.9.3/mingw_64/include/QtCore/qmap.h \
+  D:/App/qt/6.9.3/mingw_64/include/QtCore/qmargins.h \
   D:/App/qt/6.9.3/mingw_64/include/QtCore/qmath.h \
   D:/App/qt/6.9.3/mingw_64/include/QtCore/qmetacontainer.h \
   D:/App/qt/6.9.3/mingw_64/include/QtCore/qmetatype.h \
@@ -78,7 +81,9 @@ D:/My\ Workspace/PBL2/MoneyTracker/MoneyTracker/build/Desktop_Qt_6_9_3_MinGW_64_
   D:/App/qt/6.9.3/mingw_64/include/QtCore/qobjectdefs_impl.h \
   D:/App/qt/6.9.3/mingw_64/include/QtCore/qoverload.h \
   D:/App/qt/6.9.3/mingw_64/include/QtCore/qpair.h \
+  D:/App/qt/6.9.3/mingw_64/include/QtCore/qpoint.h \
   D:/App/qt/6.9.3/mingw_64/include/QtCore/qprocessordetection.h \
+  D:/App/qt/6.9.3/mingw_64/include/QtCore/qrect.h \
   D:/App/qt/6.9.3/mingw_64/include/QtCore/qrefcount.h \
   D:/App/qt/6.9.3/mingw_64/include/QtCore/qscopedpointer.h \
   D:/App/qt/6.9.3/mingw_64/include/QtCore/qscopeguard.h \
@@ -87,6 +92,7 @@ D:/My\ Workspace/PBL2/MoneyTracker/MoneyTracker/build/Desktop_Qt_6_9_3_MinGW_64_
   D:/App/qt/6.9.3/mingw_64/include/QtCore/qshareddata_impl.h \
   D:/App/qt/6.9.3/mingw_64/include/QtCore/qsharedpointer.h \
   D:/App/qt/6.9.3/mingw_64/include/QtCore/qsharedpointer_impl.h \
+  D:/App/qt/6.9.3/mingw_64/include/QtCore/qsize.h \
   D:/App/qt/6.9.3/mingw_64/include/QtCore/qspan.h \
   D:/App/qt/6.9.3/mingw_64/include/QtCore/qstdlibdetection.h \
   D:/App/qt/6.9.3/mingw_64/include/QtCore/qstring.h \
@@ -125,6 +131,7 @@ D:/My\ Workspace/PBL2/MoneyTracker/MoneyTracker/build/Desktop_Qt_6_9_3_MinGW_64_
   D:/App/qt/6.9.3/mingw_64/include/QtCore/qtversionchecks.h \
   D:/App/qt/6.9.3/mingw_64/include/QtCore/qtypeinfo.h \
   D:/App/qt/6.9.3/mingw_64/include/QtCore/qtypes.h \
+  D:/App/qt/6.9.3/mingw_64/include/QtCore/qurl.h \
   D:/App/qt/6.9.3/mingw_64/include/QtCore/qutf8stringview.h \
   D:/App/qt/6.9.3/mingw_64/include/QtCore/qvariant.h \
   D:/App/qt/6.9.3/mingw_64/include/QtCore/qvarlengtharray.h \
@@ -132,6 +139,54 @@ D:/My\ Workspace/PBL2/MoneyTracker/MoneyTracker/build/Desktop_Qt_6_9_3_MinGW_64_
   D:/App/qt/6.9.3/mingw_64/include/QtCore/qversiontagging.h \
   D:/App/qt/6.9.3/mingw_64/include/QtCore/qxptype_traits.h \
   D:/App/qt/6.9.3/mingw_64/include/QtCore/qyieldcpu.h \
+  D:/App/qt/6.9.3/mingw_64/include/QtGui/qaction.h \
+  D:/App/qt/6.9.3/mingw_64/include/QtGui/qbitmap.h \
+  D:/App/qt/6.9.3/mingw_64/include/QtGui/qbrush.h \
+  D:/App/qt/6.9.3/mingw_64/include/QtGui/qcolor.h \
+  D:/App/qt/6.9.3/mingw_64/include/QtGui/qcursor.h \
+  D:/App/qt/6.9.3/mingw_64/include/QtGui/qfont.h \
+  D:/App/qt/6.9.3/mingw_64/include/QtGui/qfontinfo.h \
+  D:/App/qt/6.9.3/mingw_64/include/QtGui/qfontmetrics.h \
+  D:/App/qt/6.9.3/mingw_64/include/QtGui/qfontvariableaxis.h \
+  D:/App/qt/6.9.3/mingw_64/include/QtGui/qicon.h \
+  D:/App/qt/6.9.3/mingw_64/include/QtGui/qimage.h \
+  D:/App/qt/6.9.3/mingw_64/include/QtGui/qkeysequence.h \
+  D:/App/qt/6.9.3/mingw_64/include/QtGui/qpaintdevice.h \
+  D:/App/qt/6.9.3/mingw_64/include/QtGui/qpalette.h \
+  D:/App/qt/6.9.3/mingw_64/include/QtGui/qpicture.h \
+  D:/App/qt/6.9.3/mingw_64/include/QtGui/qpixelformat.h \
+  D:/App/qt/6.9.3/mingw_64/include/QtGui/qpixmap.h \
+  D:/App/qt/6.9.3/mingw_64/include/QtGui/qpolygon.h \
+  D:/App/qt/6.9.3/mingw_64/include/QtGui/qregion.h \
+  D:/App/qt/6.9.3/mingw_64/include/QtGui/qrgb.h \
+  D:/App/qt/6.9.3/mingw_64/include/QtGui/qrgba64.h \
+  D:/App/qt/6.9.3/mingw_64/include/QtGui/qtextdocument.h \
+  D:/App/qt/6.9.3/mingw_64/include/QtGui/qtgui-config.h \
+  D:/App/qt/6.9.3/mingw_64/include/QtGui/qtguiexports.h \
+  D:/App/qt/6.9.3/mingw_64/include/QtGui/qtguiglobal.h \
+  D:/App/qt/6.9.3/mingw_64/include/QtGui/qtransform.h \
+  D:/App/qt/6.9.3/mingw_64/include/QtGui/qwindowdefs.h \
+  D:/App/qt/6.9.3/mingw_64/include/QtGui/qwindowdefs_win.h \
+  D:/App/qt/6.9.3/mingw_64/include/QtWidgets/QFrame \
+  D:/App/qt/6.9.3/mingw_64/include/QtWidgets/QHBoxLayout \
+  D:/App/qt/6.9.3/mingw_64/include/QtWidgets/QLabel \
+  D:/App/qt/6.9.3/mingw_64/include/QtWidgets/QProgressBar \
+  D:/App/qt/6.9.3/mingw_64/include/QtWidgets/QPushButton \
+  D:/App/qt/6.9.3/mingw_64/include/QtWidgets/QVBoxLayout \
+  D:/App/qt/6.9.3/mingw_64/include/QtWidgets/qabstractbutton.h \
+  D:/App/qt/6.9.3/mingw_64/include/QtWidgets/qboxlayout.h \
+  D:/App/qt/6.9.3/mingw_64/include/QtWidgets/qframe.h \
+  D:/App/qt/6.9.3/mingw_64/include/QtWidgets/qgridlayout.h \
+  D:/App/qt/6.9.3/mingw_64/include/QtWidgets/qlabel.h \
+  D:/App/qt/6.9.3/mingw_64/include/QtWidgets/qlayout.h \
+  D:/App/qt/6.9.3/mingw_64/include/QtWidgets/qlayoutitem.h \
+  D:/App/qt/6.9.3/mingw_64/include/QtWidgets/qprogressbar.h \
+  D:/App/qt/6.9.3/mingw_64/include/QtWidgets/qpushbutton.h \
+  D:/App/qt/6.9.3/mingw_64/include/QtWidgets/qsizepolicy.h \
+  D:/App/qt/6.9.3/mingw_64/include/QtWidgets/qtwidgets-config.h \
+  D:/App/qt/6.9.3/mingw_64/include/QtWidgets/qtwidgetsexports.h \
+  D:/App/qt/6.9.3/mingw_64/include/QtWidgets/qtwidgetsglobal.h \
+  D:/App/qt/6.9.3/mingw_64/include/QtWidgets/qwidget.h \
   D:/App/qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/algorithm \
   D:/App/qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/array \
   D:/App/qt/Tools/mingw1310_64/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/atomic \

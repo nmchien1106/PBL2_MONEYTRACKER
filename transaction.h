@@ -56,7 +56,6 @@ public:
         this->description = description;
     }
 
-    // Abstract methods to be implemented by derived classes
     virtual QString getType() const = 0;
     virtual QString toString() const = 0;
     virtual QFrame* createCard(const QString& index) const = 0;

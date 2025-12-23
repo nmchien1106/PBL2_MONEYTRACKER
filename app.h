@@ -34,9 +34,9 @@ private:
     static QVector<Saving> savingList;
     static QVector<Debt> debtList;
 
-    // Custom data structures for optimization
+
     static HashTable<QString, Category*> categoryHashTable;
-    static LinkedList<QString> recentTransactionIds;  // Keep track of recent 50 transactions
+    static LinkedList<QString> recentTransactionIds;
 public:
     App(QApplication&);
     ~App();
@@ -49,8 +49,8 @@ public:
     static void writeData();
 
     static Category* findCategoryByID(const QString&);
-    static Category* findCategoryByIDFast(const QString&);  // Using HashTable O(1)
-    static void buildCategoryHashTable();  // Build hash table from category list
+    static Category* findCategoryByIDFast(const QString&);
+    static void buildCategoryHashTable();
     static void addToRecentTransactions(const QString& transactionId);
     static LinkedList<QString>& getRecentTransactions() { return recentTransactionIds; }
     static QString formatMoney(double amount);

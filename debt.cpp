@@ -1,4 +1,5 @@
 #include "debt.h"
+#include "app.h"
 #include <QVBoxLayout>
 #include <QHBoxLayout>
 #include <QLabel>
@@ -15,15 +16,22 @@ Debt::Debt(const QString& id, Category* category,
 }
 
 Debt::Debt(const QStringList& data)
-    : Transaction(data)
 {
+    qDebug() << "Loading Debt from CSV:" << data;
+    
     if (data.size() >= 10) {
+        setID(data[0]);
+        setCategory(App::findCategoryByID(data[1].trimmed()));
+        setCreatedAt(QDateTime::fromString(data[2], "dd/MM/yyyy HH:mm"));
+        setUpdatedAt(QDate::fromString(data[3], "dd/MM/yyyy"));
+        setAmount(data[4].toDouble());
+        setDescription(data[5]);
+        
         debtorName = data[6];
         dueDate = QDate::fromString(data[7], "dd/MM/yyyy");
         isPaid = (data[8] == "1" || data[8].toLower() == "true");
         debtType = data[9];
     }
-    qDebug() << "Debt: " << data;
 }
 
 QString Debt::getType() const {

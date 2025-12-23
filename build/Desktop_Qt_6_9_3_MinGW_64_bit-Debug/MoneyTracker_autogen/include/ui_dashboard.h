@@ -169,18 +169,6 @@ public:
     QWidget *DM_SrollContents;
     QVBoxLayout *verticalLayout_10;
     QSpacerItem *topSpacer_expense;
-    QFrame *card_danhmuc;
-    QHBoxLayout *horizontalLayout;
-    QHBoxLayout *horizontalLayout_4;
-    QPushButton *remove_btn;
-    QPushButton *edit_btn;
-    QLabel *amount_giaodich;
-    QSpacerItem *horizontalSpacer_5;
-    QLabel *time_giaodich;
-    QSpacerItem *horizontalSpacer_2;
-    QVBoxLayout *verticalLayout_11;
-    QLabel *Title_danhmuc;
-    QLabel *Desc_danhmuc;
     QWidget *Income_2;
     QGridLayout *gridLayout_5;
     QFrame *frame_7;
@@ -1153,91 +1141,6 @@ public:
 
         verticalLayout_10->addItem(topSpacer_expense);
 
-        card_danhmuc = new QFrame(DM_SrollContents);
-        card_danhmuc->setObjectName("card_danhmuc");
-        card_danhmuc->setEnabled(true);
-        card_danhmuc->setMinimumSize(QSize(60, 0));
-        card_danhmuc->setMaximumSize(QSize(12000000, 60));
-        card_danhmuc->setVisible(false);
-        card_danhmuc->setStyleSheet(QString::fromUtf8("background-color: rgb(255, 255, 255);"));
-        card_danhmuc->setFrameShape(QFrame::Shape::StyledPanel);
-        card_danhmuc->setFrameShadow(QFrame::Shadow::Raised);
-        horizontalLayout = new QHBoxLayout(card_danhmuc);
-        horizontalLayout->setObjectName("horizontalLayout");
-        horizontalLayout_4 = new QHBoxLayout();
-        horizontalLayout_4->setObjectName("horizontalLayout_4");
-        horizontalLayout_4->setSizeConstraint(QLayout::SizeConstraint::SetMinAndMaxSize);
-        remove_btn = new QPushButton(card_danhmuc);
-        remove_btn->setObjectName("remove_btn");
-        sizePolicy4.setHeightForWidth(remove_btn->sizePolicy().hasHeightForWidth());
-        remove_btn->setSizePolicy(sizePolicy4);
-        remove_btn->setMaximumSize(QSize(30, 16777215));
-        remove_btn->setStyleSheet(QString::fromUtf8("border: none;\n"
-"background-color: none"));
-        QIcon icon2;
-        icon2.addFile(QString::fromUtf8(":/img/src/remove.png"), QSize(), QIcon::Mode::Normal, QIcon::State::Off);
-        remove_btn->setIcon(icon2);
-        remove_btn->setIconSize(QSize(22, 22));
-
-        horizontalLayout_4->addWidget(remove_btn);
-
-        edit_btn = new QPushButton(card_danhmuc);
-        edit_btn->setObjectName("edit_btn");
-        sizePolicy4.setHeightForWidth(edit_btn->sizePolicy().hasHeightForWidth());
-        edit_btn->setSizePolicy(sizePolicy4);
-        edit_btn->setMaximumSize(QSize(30, 16777215));
-        edit_btn->setStyleSheet(QString::fromUtf8("border: none;\n"
-"background-color: none"));
-        QIcon icon3;
-        icon3.addFile(QString::fromUtf8(":/img/src/icon.ico"), QSize(), QIcon::Mode::Normal, QIcon::State::Off);
-        edit_btn->setIcon(icon3);
-        edit_btn->setIconSize(QSize(22, 22));
-
-        horizontalLayout_4->addWidget(edit_btn);
-
-
-        horizontalLayout->addLayout(horizontalLayout_4);
-
-        amount_giaodich = new QLabel(card_danhmuc);
-        amount_giaodich->setObjectName("amount_giaodich");
-
-        horizontalLayout->addWidget(amount_giaodich);
-
-        horizontalSpacer_5 = new QSpacerItem(40, 20, QSizePolicy::Policy::Expanding, QSizePolicy::Policy::Minimum);
-
-        horizontalLayout->addItem(horizontalSpacer_5);
-
-        time_giaodich = new QLabel(card_danhmuc);
-        time_giaodich->setObjectName("time_giaodich");
-
-        horizontalLayout->addWidget(time_giaodich);
-
-        horizontalSpacer_2 = new QSpacerItem(40, 20, QSizePolicy::Policy::Expanding, QSizePolicy::Policy::Minimum);
-
-        horizontalLayout->addItem(horizontalSpacer_2);
-
-        verticalLayout_11 = new QVBoxLayout();
-        verticalLayout_11->setSpacing(0);
-        verticalLayout_11->setObjectName("verticalLayout_11");
-        verticalLayout_11->setContentsMargins(0, 0, 0, 0);
-        Title_danhmuc = new QLabel(card_danhmuc);
-        Title_danhmuc->setObjectName("Title_danhmuc");
-
-        verticalLayout_11->addWidget(Title_danhmuc);
-
-        Desc_danhmuc = new QLabel(card_danhmuc);
-        Desc_danhmuc->setObjectName("Desc_danhmuc");
-        sizePolicy3.setHeightForWidth(Desc_danhmuc->sizePolicy().hasHeightForWidth());
-        Desc_danhmuc->setSizePolicy(sizePolicy3);
-
-        verticalLayout_11->addWidget(Desc_danhmuc);
-
-
-        horizontalLayout->addLayout(verticalLayout_11);
-
-
-        verticalLayout_10->addWidget(card_danhmuc);
-
         expenseList->setWidget(DM_SrollContents);
 
         gridLayout_2->addWidget(expenseList, 0, 0, 1, 1);
@@ -1430,7 +1333,7 @@ public:
         incomeList->setWidgetResizable(true);
         DM_SrollContents_2 = new QWidget();
         DM_SrollContents_2->setObjectName("DM_SrollContents_2");
-        DM_SrollContents_2->setGeometry(QRect(0, 0, 41, 18));
+        DM_SrollContents_2->setGeometry(QRect(0, 0, 769, 445));
         sizePolicy5.setHeightForWidth(DM_SrollContents_2->sizePolicy().hasHeightForWidth());
         DM_SrollContents_2->setSizePolicy(sizePolicy5);
         DM_SrollContents_2->setLayoutDirection(Qt::LayoutDirection::RightToLeft);
@@ -1461,6 +1364,8 @@ public:
         remove_btn_2->setMaximumSize(QSize(30, 16777215));
         remove_btn_2->setStyleSheet(QString::fromUtf8("border: none;\n"
 "background-color: none"));
+        QIcon icon2;
+        icon2.addFile(QString::fromUtf8(":/img/src/remove.png"), QSize(), QIcon::Mode::Normal, QIcon::State::Off);
         remove_btn_2->setIcon(icon2);
         remove_btn_2->setIconSize(QSize(22, 22));
 
@@ -1473,6 +1378,8 @@ public:
         edit_btn_2->setMaximumSize(QSize(30, 16777215));
         edit_btn_2->setStyleSheet(QString::fromUtf8("border: none;\n"
 "background-color: none"));
+        QIcon icon3;
+        icon3.addFile(QString::fromUtf8(":/img/src/icon.ico"), QSize(), QIcon::Mode::Normal, QIcon::State::Off);
         edit_btn_2->setIcon(icon3);
         edit_btn_2->setIconSize(QSize(22, 22));
 
@@ -1723,7 +1630,7 @@ public:
 
         retranslateUi(Dashboard);
 
-        stackedWidget->setCurrentIndex(2);
+        stackedWidget->setCurrentIndex(3);
 
 
         QMetaObject::connectSlotsByName(Dashboard);
@@ -1804,12 +1711,6 @@ public:
         expenseClearButton->setText(QCoreApplication::translate("Dashboard", "X\303\263a", nullptr));
         expenseExpandingButton->setText(QCoreApplication::translate("Dashboard", "N\303\242ng cao", nullptr));
         Category->setTitle(QCoreApplication::translate("Dashboard", "DANH M\341\273\244C CHI TI\303\212U", nullptr));
-        remove_btn->setText(QString());
-        edit_btn->setText(QString());
-        amount_giaodich->setText(QCoreApplication::translate("Dashboard", "<html><head/><body><p><span style=\" font-size:10pt;\">-20.000 VN\304\220</span></p></body></html>", nullptr));
-        time_giaodich->setText(QCoreApplication::translate("Dashboard", "18/12/2025 12:31", nullptr));
-        Title_danhmuc->setText(QCoreApplication::translate("Dashboard", "<html><head/><body><p>\304\202n u\341\273\221ng</p></body></html>", nullptr));
-        Desc_danhmuc->setText(QCoreApplication::translate("Dashboard", "<html><head/><body><p><span style=\" font-size:8pt; font-weight:700; font-style:italic; color:#848484;\">Mua s\341\272\257m t\341\272\241i c\341\273\247a h\303\240ng ABC</span></p></body></html>", nullptr));
         groupBox_3->setTitle(QCoreApplication::translate("Dashboard", "QU\341\272\242N L\303\235 THU NH\341\272\254P", nullptr));
         label_10->setText(QCoreApplication::translate("Dashboard", "T\341\273\225ng thu nh\341\272\255p", nullptr));
         label_11->setText(QCoreApplication::translate("Dashboard", "<html><head/><body><p><span style=\" font-size:8pt; font-weight:700; font-style:italic; color:#848484;\">T\341\273\225ng chi t\341\273\253 t\341\272\245t c\341\272\243 c\303\241c ngu\303\264n</span></p></body></html>", nullptr));

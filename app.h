@@ -58,9 +58,6 @@ public:
     static double getMonthIncomeTotal();
     static double getCurrentBalance();
 
-
-
-
     static void addIncome(const QString& categoryId, double amount, const QString& description);
     static void addExpense(const QString& categoryId, double amount, const QString& description);
     static QString generateNextIncomeId();
@@ -79,7 +76,6 @@ public:
     static QVector<Category>& getCategoryListMutable() { return categoryList; }
     static void saveData() { writeData(); }
 
-    // Debt management methods
     static void addDebt(const QString& categoryId, double amount, const QString& description,
                        const QString& debtorName, const QDate& dueDate, const QString& debtType, bool isPaid = false);
     static QString generateNextDebtId();

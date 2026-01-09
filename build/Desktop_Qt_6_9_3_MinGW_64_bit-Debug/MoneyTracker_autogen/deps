@@ -1,5 +1,6 @@
 MoneyTracker_autogen/timestamp: \
 	D:/App/qt/6.9.3/mingw_64/include/QtCore/QDate \
+	D:/App/qt/6.9.3/mingw_64/include/QtCore/QDateTime \
 	D:/App/qt/6.9.3/mingw_64/include/QtCore/QDebug \
 	D:/App/qt/6.9.3/mingw_64/include/QtCore/QFile \
 	D:/App/qt/6.9.3/mingw_64/include/QtCore/QList \
@@ -710,6 +711,10 @@ MoneyTracker_autogen/timestamp: \
 	D:/App/qt/Tools/mingw1310_64/x86_64-w64-mingw32/include/wchar.h \
 	D:/App/qt/Tools/mingw1310_64/x86_64-w64-mingw32/include/wctype.h \
 	D:/My\ Workspace/PBL2/MoneyTracker/MoneyTracker/CMakeLists.txt \
+	D:/My\ Workspace/PBL2/MoneyTracker/MoneyTracker/add_debt_dialog.cpp \
+	D:/My\ Workspace/PBL2/MoneyTracker/MoneyTracker/add_debt_dialog.h \
+	D:/My\ Workspace/PBL2/MoneyTracker/MoneyTracker/add_saving_dialog.cpp \
+	D:/My\ Workspace/PBL2/MoneyTracker/MoneyTracker/add_saving_dialog.h \
 	D:/My\ Workspace/PBL2/MoneyTracker/MoneyTracker/add_transaction_dialog.cpp \
 	D:/My\ Workspace/PBL2/MoneyTracker/MoneyTracker/add_transaction_dialog.h \
 	D:/My\ Workspace/PBL2/MoneyTracker/MoneyTracker/app.cpp \
@@ -742,6 +747,8 @@ MoneyTracker_autogen/timestamp: \
 	D:/My\ Workspace/PBL2/MoneyTracker/MoneyTracker/src.qrc \
 	D:/My\ Workspace/PBL2/MoneyTracker/MoneyTracker/transaction.cpp \
 	D:/My\ Workspace/PBL2/MoneyTracker/MoneyTracker/transaction.h \
+	D:/My\ Workspace/PBL2/MoneyTracker/MoneyTracker/add_debt_dialog.ui \
+	D:/My\ Workspace/PBL2/MoneyTracker/MoneyTracker/add_saving_dialog.ui \
 	D:/My\ Workspace/PBL2/MoneyTracker/MoneyTracker/add_transaction_dialog.ui \
 	D:/My\ Workspace/PBL2/MoneyTracker/MoneyTracker/dashboard.ui \
 	D:/My\ Workspace/PBL2/MoneyTracker/MoneyTracker/login_dialog.ui \

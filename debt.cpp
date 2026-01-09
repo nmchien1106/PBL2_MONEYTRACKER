@@ -55,9 +55,9 @@ QString Debt::toString() const {
 
 QString Debt::getColorCode() const {
     if (debtType == "lend") {
-        return "#28a745"; // Green for lending (positive)
+        return "#28a745";
     } else {
-        return "#ffc107"; // Yellow/Orange for borrowing (caution)
+        return "#ffc107";
     }
 }
 
@@ -80,7 +80,6 @@ QFrame* Debt::createCard(const QString& index) const {
     QVBoxLayout* mainLayout = new QVBoxLayout(card);
     mainLayout->setContentsMargins(10, 10, 10, 10);
 
-    // Top row: Amount and Type badge
     QHBoxLayout* topRow = new QHBoxLayout();
     QString prefix = (debtType == "lend") ? "+" : "-";
     QLabel* amountLabel = new QLabel(QString("%1%2 VNĐ").arg(prefix).arg(getAmount(), 0, 'f', 0));
@@ -99,13 +98,11 @@ QFrame* Debt::createCard(const QString& index) const {
     topRow->addStretch();
     topRow->addWidget(typeLabel);
 
-    // Debtor name row
     QHBoxLayout* debtorRow = new QHBoxLayout();
     QLabel* debtorLabel = new QLabel((debtType == "lend" ? "Người vay: " : "Người cho vay: ") + debtorName);
     debtorLabel->setStyleSheet("font-weight: bold; font-size: 14px; color: #333;");
     debtorRow->addWidget(debtorLabel);
 
-    // Due date and status row
     QHBoxLayout* dateRow = new QHBoxLayout();
     QLabel* dueDateLabel = new QLabel("Đáo hạn: " + dueDate.toString("dd/MM/yyyy"));
     dueDateLabel->setStyleSheet("color: #666; font-size: 12px;");
@@ -119,12 +116,10 @@ QFrame* Debt::createCard(const QString& index) const {
     dateRow->addStretch();
     dateRow->addWidget(statusLabel);
 
-    // Description
     QLabel* descLabel = new QLabel(getDescription());
     descLabel->setStyleSheet("color: #666; font-size: 12px;");
     descLabel->setWordWrap(true);
 
-    // Action buttons
     QHBoxLayout* actionRow = new QHBoxLayout();
     QPushButton* markPaidBtn = new QPushButton(isPaid ? "Đánh dấu chưa trả" : "Đánh dấu đã trả");
     QPushButton* editBtn = new QPushButton("Sửa");

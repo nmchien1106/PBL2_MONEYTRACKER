@@ -25,7 +25,6 @@ public:
     static QStringList getHeader();
     QStringList toCsvRow() const;
 
-    // Static calculation methods
     static double calculateMonthlyTotal(const QVector<Income>& incomes, int year, int month);
     static QVector<double> getLastThreeMonthsTotals(const QVector<Income>& incomes);
 };

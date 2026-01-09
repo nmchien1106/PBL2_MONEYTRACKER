@@ -433,6 +433,18 @@
 	"HEADERS" : 
 	[
 		[
+			"D:/My Workspace/PBL2/MoneyTracker/MoneyTracker/add_debt_dialog.h",
+			"MU",
+			"EWIEGA46WW/moc_add_debt_dialog.cpp",
+			null
+		],
+		[
+			"D:/My Workspace/PBL2/MoneyTracker/MoneyTracker/add_saving_dialog.h",
+			"MU",
+			"EWIEGA46WW/moc_add_saving_dialog.cpp",
+			null
+		],
+		[
 			"D:/My Workspace/PBL2/MoneyTracker/MoneyTracker/add_transaction_dialog.h",
 			"MU",
 			"EWIEGA46WW/moc_add_transaction_dialog.cpp",
@@ -582,6 +594,16 @@
 	"SETTINGS_FILE" : "D:/My Workspace/PBL2/MoneyTracker/MoneyTracker/build/Desktop_Qt_6_9_3_MinGW_64_bit-Debug/CMakeFiles/MoneyTracker_autogen.dir/AutogenUsed.txt",
 	"SOURCES" : 
 	[
+		[
+			"D:/My Workspace/PBL2/MoneyTracker/MoneyTracker/add_debt_dialog.cpp",
+			"MU",
+			null
+		],
+		[
+			"D:/My Workspace/PBL2/MoneyTracker/MoneyTracker/add_saving_dialog.cpp",
+			"MU",
+			null
+		],
 		[
 			"D:/My Workspace/PBL2/MoneyTracker/MoneyTracker/add_transaction_dialog.cpp",
 			"MU",

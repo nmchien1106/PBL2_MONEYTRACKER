@@ -55,7 +55,6 @@ QFrame* Expense::createCard(const QString& index) const {
     QVBoxLayout* mainLayout = new QVBoxLayout(card);
     mainLayout->setContentsMargins(10, 10, 10, 10);
 
-    // Amount and date row
     QHBoxLayout* topRow = new QHBoxLayout();
     QLabel* amountLabel = new QLabel(QString("-%1 VNĐ").arg(getAmount(), 0, 'f', 0));
     amountLabel->setStyleSheet("color: " + getColorCode() + "; font-weight: bold; font-size: 18px;");
@@ -65,16 +64,13 @@ QFrame* Expense::createCard(const QString& index) const {
     topRow->addStretch();
     topRow->addWidget(dateLabel);
 
-    // Category
     QLabel* categoryLabel = new QLabel(getCategory() ? getCategory()->getName() : "No Category");
     categoryLabel->setStyleSheet("font-weight: bold; font-size: 14px; color: #333;");
 
-    // Description
     QLabel* descLabel = new QLabel(getDescription());
     descLabel->setStyleSheet("color: #666; font-size: 12px;");
     descLabel->setWordWrap(true);
 
-    // Action buttons
     QHBoxLayout* actionRow = new QHBoxLayout();
     QPushButton* editBtn = new QPushButton("Sửa");
     QPushButton* deleteBtn = new QPushButton("Xóa");

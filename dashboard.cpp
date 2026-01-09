@@ -2,6 +2,8 @@
 #include "./ui_dashboard.h"
 #include "app.h"
 #include "add_transaction_dialog.h"
+#include "add_debt_dialog.h"
+#include "add_saving_dialog.h"
 #include <QVBoxLayout>
 #include <QHBoxLayout>
 #include <QGridLayout>
@@ -18,6 +20,7 @@
 #include <QTextEdit>
 #include <QTimer>
 #include <QDateEdit>
+#include <QDateTimeEdit>
 #include <QCheckBox>
 #include <algorithm>
 #include <QListWidget>
@@ -2304,78 +2307,35 @@ void Dashboard::onSavingSortChanged(const QString& sortType)
 
 void Dashboard::showAddSavingGoalDialog()
 {
-    QDialog dialog(this);
-    dialog.setWindowTitle("Thêm Mục Tiêu Tiết Kiệm");
-    dialog.setModal(true);
-    dialog.resize(400, 300);
+    AddSavingDialog dialog(this);
 
-    QVBoxLayout* layout = new QVBoxLayout(&dialog);
+    if (dialog.exec() == QDialog::Accepted) {
+        // Get data from dialog
+        QString name = dialog.getName();
+        double targetAmount = dialog.getTargetAmount();
+        double currentAmount = dialog.getCurrentAmount();
+        QDateTime creationDateTime = dialog.getDateTime();
+        QString description = dialog.getDescription();
 
-
-    QLabel* nameLabel = new QLabel("Tên mục tiêu:");
-    QLineEdit* nameEdit = new QLineEdit();
-    nameEdit->setPlaceholderText("VD: Mua nhà, Du lịch...");
-
-
-    QLabel* amountLabel = new QLabel("Số tiền mục tiêu:");
-    QSpinBox* amountSpinBox = new QSpinBox();
-    amountSpinBox->setRange(1000, 999999999);
-    amountSpinBox->setSuffix(" VNĐ");
-    amountSpinBox->setValue(1000000);
-
-
-    QLabel* descLabel = new QLabel("Mô tả:");
-    QTextEdit* descEdit = new QTextEdit();
-    descEdit->setMaximumHeight(80);
-    descEdit->setPlaceholderText("Mô tả chi tiết về mục tiêu tiết kiệm...");
-
-
-    QHBoxLayout* buttonLayout = new QHBoxLayout();
-    QPushButton* okBtn = new QPushButton("Thêm");
-    QPushButton* cancelBtn = new QPushButton("Hủy");
-
-    okBtn->setStyleSheet("QPushButton { background-color: rgb(34, 139, 34); color: white; padding: 8px 16px; border-radius: 4px; }");
-    cancelBtn->setStyleSheet("QPushButton { background-color: rgb(128, 128, 128); color: white; padding: 8px 16px; border-radius: 4px; }");
-
-    buttonLayout->addStretch();
-    buttonLayout->addWidget(okBtn);
-    buttonLayout->addWidget(cancelBtn);
-
-    layout->addWidget(nameLabel);
-    layout->addWidget(nameEdit);
-    layout->addWidget(amountLabel);
-    layout->addWidget(amountSpinBox);
-    layout->addWidget(descLabel);
-    layout->addWidget(descEdit);
-    layout->addLayout(buttonLayout);
-
-    connect(okBtn, &QPushButton::clicked, [&dialog, nameEdit, amountSpinBox, descEdit, this]() {
-        QString name = nameEdit->text().trimmed();
-        if (name.isEmpty()) {
-            QMessageBox::warning(&dialog, "Lỗi", "Vui lòng nhập tên mục tiêu!");
-            return;
-        }
-
-
+        // Generate ID
         QString id = generateNextSavingId();
-        Saving newSaving(id, QDateTime::currentDateTime(), QDate::currentDate(),
-                        0.0, descEdit->toPlainText(), name, QDate::currentDate(),
-                        amountSpinBox->value());
 
+        // Create new saving
+        Saving newSaving(id, creationDateTime, QDate::currentDate(),
+                        currentAmount, description, name, QDate::currentDate(),
+                        targetAmount);
 
+        // Add to app
         const_cast<QVector<Saving>&>(App::getSavingList()).append(newSaving);
         App::writeData();
 
-
+        // Update UI
         updateSavingStatistics();
         refreshSavingGoals();
 
-        dialog.accept();
-    });
-
-    connect(cancelBtn, &QPushButton::clicked, &dialog, &QDialog::reject);
-
-    dialog.exec();
+        QMessageBox::information(this, "Thành công",
+            QString("Đã thêm mục tiêu tiết kiệm \"%1\" thành công!").arg(name));
+    }
 }
 
 void Dashboard::showSavingTransactionDialog(const QString& type, const QString& goalId)
@@ -2477,13 +2437,14 @@ void Dashboard::showSavingTransactionDialog(const QString& type, const QString& 
 
 void Dashboard::showEditSavingGoalDialog(const QString& goalId)
 {
+    QVector<Saving>& savingsRef = const_cast<QVector<Saving>&>(App::getSavingList());
+    Saving* targetSaving = nullptr;
+    int savingIndex = -1;
 
-    const QVector<Saving>& savings = App::getSavingList();
-    const Saving* targetSaving = nullptr;
-
-    for (const Saving& saving : savings) {
-        if (saving.getID() == goalId) {
-            targetSaving = &saving;
+    for (int i = 0; i < savingsRef.size(); ++i) {
+        if (savingsRef[i].getID() == goalId) {
+            targetSaving = &savingsRef[i];
+            savingIndex = i;
             break;
         }
     }
@@ -2493,78 +2454,35 @@ void Dashboard::showEditSavingGoalDialog(const QString& goalId)
         return;
     }
 
-    QDialog dialog(this);
-    dialog.setWindowTitle("Chỉnh Sửa Mục Tiêu");
-    dialog.setModal(true);
-    dialog.resize(400, 300);
+    // Create dialog and set edit mode
+    AddSavingDialog dialog(this);
+    dialog.setEditMode(true);
+    dialog.setSavingData(*targetSaving);
 
-    QVBoxLayout* layout = new QVBoxLayout(&dialog);
+    if (dialog.exec() == QDialog::Accepted) {
+        // Update saving data
+        QString name = dialog.getName();
+        double targetAmount = dialog.getTargetAmount();
+        double currentAmount = dialog.getCurrentAmount();
+        QDateTime creationDateTime = dialog.getDateTime();
+        QString description = dialog.getDescription();
 
-
-    QLabel* nameLabel = new QLabel("Tên mục tiêu:");
-    QLineEdit* nameEdit = new QLineEdit(targetSaving->getName());
-
-
-    QLabel* amountLabel = new QLabel("Số tiền mục tiêu:");
-    QSpinBox* amountSpinBox = new QSpinBox();
-    amountSpinBox->setRange(1000, 999999999);
-    amountSpinBox->setSuffix(" VNĐ");
-    amountSpinBox->setValue(targetSaving->getTargetAmount());
-
-
-    QLabel* descLabel = new QLabel("Mô tả:");
-    QTextEdit* descEdit = new QTextEdit();
-    descEdit->setMaximumHeight(80);
-    descEdit->setPlainText(targetSaving->getDescription());
-
-
-    QHBoxLayout* buttonLayout = new QHBoxLayout();
-    QPushButton* okBtn = new QPushButton("Lưu");
-    QPushButton* cancelBtn = new QPushButton("Hủy");
-
-    okBtn->setStyleSheet("QPushButton { background-color: rgb(0, 123, 255); color: white; padding: 8px 16px; border-radius: 4px; }");
-    cancelBtn->setStyleSheet("QPushButton { background-color: rgb(128, 128, 128); color: white; padding: 8px 16px; border-radius: 4px; }");
-
-    buttonLayout->addStretch();
-    buttonLayout->addWidget(okBtn);
-    buttonLayout->addWidget(cancelBtn);
-
-    layout->addWidget(nameLabel);
-    layout->addWidget(nameEdit);
-    layout->addWidget(amountLabel);
-    layout->addWidget(amountSpinBox);
-    layout->addWidget(descLabel);
-    layout->addWidget(descEdit);
-    layout->addLayout(buttonLayout);
-
-    connect(okBtn, &QPushButton::clicked, [&dialog, nameEdit, amountSpinBox, descEdit, goalId, this]() {
-        QString name = nameEdit->text().trimmed();
-        if (name.isEmpty()) {
-            QMessageBox::warning(&dialog, "Lỗi", "Vui lòng nhập tên mục tiêu!");
-            return;
-        }
-
-
-        QVector<Saving>& savingsRef = const_cast<QVector<Saving>&>(App::getSavingList());
-        for (Saving& saving : savingsRef) {
-            if (saving.getID() == goalId) {
-                saving.setName(name);
-                saving.setTargetAmount(amountSpinBox->value());
-                saving.setDescription(descEdit->toPlainText());
-                break;
-            }
-        }
+        // Update saving
+        savingsRef[savingIndex].setName(name);
+        savingsRef[savingIndex].setTargetAmount(targetAmount);
+        savingsRef[savingIndex].setAmount(currentAmount);
+        savingsRef[savingIndex].setCreatedAt(creationDateTime);
+        savingsRef[savingIndex].setDescription(description);
+        savingsRef[savingIndex].setUpdatedAt(QDate::currentDate());
 
         App::writeData();
+
+        // Update UI
         updateSavingStatistics();
         refreshSavingGoals();
 
-        dialog.accept();
-    });
-
-    connect(cancelBtn, &QPushButton::clicked, &dialog, &QDialog::reject);
-
-    dialog.exec();
+        QMessageBox::information(this, "Thành công", "Đã cập nhật mục tiêu tiết kiệm!");
+    }
 }
 
 void Dashboard::showSavingReportDialog()
@@ -2771,22 +2689,18 @@ void Dashboard::renderDebtCards() {
 }
 
 void Dashboard::renderDebtCards(const QVector<Debt>& debts) {
-    // Try to find existing widget, if not create it dynamically
-    QWidget* debtPage = ui->stackedWidget->widget(2);  // Index 2 is for debt page
+    QWidget* debtPage = ui->stackedWidget->widget(2);
     if (!debtPage) {
         qDebug() << "Error: Debt page not found at index 2";
         return;
     }
 
-    // Look for scroll area or create one
     QScrollArea* scrollArea = debtPage->findChild<QScrollArea*>("debtList");
     if (!scrollArea) {
-        // Create scroll area dynamically if not in UI
         scrollArea = new QScrollArea(debtPage);
         scrollArea->setObjectName("debtList");
         scrollArea->setWidgetResizable(true);
 
-        // Find or create layout for debt page
         if (!debtPage->layout()) {
             QVBoxLayout* pageLayout = new QVBoxLayout(debtPage);
             pageLayout->setContentsMargins(10, 10, 10, 10);
@@ -2794,7 +2708,6 @@ void Dashboard::renderDebtCards(const QVector<Debt>& debts) {
         debtPage->layout()->addWidget(scrollArea);
     }
 
-    // Get or create content widget
     QWidget* debtListContent = scrollArea->widget();
     if (!debtListContent) {
         debtListContent = new QWidget();
@@ -2802,7 +2715,6 @@ void Dashboard::renderDebtCards(const QVector<Debt>& debts) {
         scrollArea->setWidget(debtListContent);
     }
 
-    // Clear existing layout
     QLayout* existingLayout = debtListContent->layout();
     if (existingLayout) {
         QLayoutItem* item;
@@ -2825,19 +2737,16 @@ void Dashboard::renderDebtCards(const QVector<Debt>& debts) {
         const Debt& debt = debts[i];
         QFrame* card = debt.createCard(QString::number(i));
 
-        // Connect edit button
         QPushButton* editBtn = card->findChild<QPushButton*>("edit_" + debt.getID());
         if (editBtn) {
             connect(editBtn, &QPushButton::clicked, this, &Dashboard::handleDebtCardAction);
         }
 
-        // Connect delete button
         QPushButton* deleteBtn = card->findChild<QPushButton*>("delete_" + debt.getID());
         if (deleteBtn) {
             connect(deleteBtn, &QPushButton::clicked, this, &Dashboard::handleDebtCardAction);
         }
 
-        // Connect mark paid button
         QPushButton* markPaidBtn = card->findChild<QPushButton*>("markPaid_" + debt.getID());
         if (markPaidBtn) {
             connect(markPaidBtn, &QPushButton::clicked, this, &Dashboard::handleDebtCardAction);
@@ -2857,7 +2766,6 @@ void Dashboard::updateDebtOverview() {
     double totalLent = Debt::getTotalLent(debts);
     double unpaidTotal = Debt::getTotalUnpaid(debts, "");
 
-    // Update UI labels
     QLabel* borrowedLabel = this->findChild<QLabel*>("totalBorrowedLabel");
     if (borrowedLabel) {
         borrowedLabel->setText(QString("<html><head/><body><p><span style=\" font-size:18pt; color:#ffc107;\">%1</span></p></body></html>")
@@ -2894,8 +2802,61 @@ void Dashboard::handleDebtCardAction() {
 }
 
 void Dashboard::editDebtTransaction(const QString& debtId) {
-    qDebug() << "Edit debt with ID:" << debtId;
-    QMessageBox::information(this, "Chỉnh sửa khoản nợ", "Chức năng chỉnh sửa đang được phát triển.");
+    QVector<Debt>& debtListRef = const_cast<QVector<Debt>&>(App::getDebtList());
+    Debt* targetDebt = nullptr;
+    int debtIndex = -1;
+
+    for (int i = 0; i < debtListRef.size(); ++i) {
+        if (debtListRef[i].getID() == debtId) {
+            targetDebt = &debtListRef[i];
+            debtIndex = i;
+            break;
+        }
+    }
+
+    if (!targetDebt) {
+        QMessageBox::warning(this, "Lỗi", "Không tìm thấy khoản nợ!");
+        return;
+    }
+
+    AddDebtDialog dialog(this);
+    dialog.setEditMode(true);
+    dialog.setDebtData(*targetDebt);
+
+    if (dialog.exec() == QDialog::Accepted) {
+        QString type = dialog.getType();
+        QString categoryID = dialog.getCategory();
+        QString debtor = dialog.getDebtor();
+        double amount = dialog.getAmount();
+        QDateTime dueDateTime = dialog.getDueDate();
+        QDateTime creationDateTime = dialog.getDateTime();
+        QString description = dialog.getDescription();
+        bool isPaid = dialog.isPaid();
+
+        Category* category = App::findCategoryByIDFast(categoryID);
+        if (!category) {
+            category = App::findCategoryByID(categoryID);
+        }
+
+        debtListRef[debtIndex].setCategory(category);
+        debtListRef[debtIndex].setAmount(amount);
+        debtListRef[debtIndex].setCreatedAt(creationDateTime);
+        debtListRef[debtIndex].setDescription(description);
+        debtListRef[debtIndex].setDebtorName(debtor);
+        debtListRef[debtIndex].setDueDate(dueDateTime.date());
+        debtListRef[debtIndex].setDebtType(type);
+        debtListRef[debtIndex].setIsPaid(isPaid);
+        debtListRef[debtIndex].setUpdatedAt(QDate::currentDate());
+
+        App::writeData();
+
+        // Update UI
+        renderDebtCards();
+        updateDebtOverview();
+        updateDashboardOverview();
+
+        QMessageBox::information(this, "Thành công", "Đã cập nhật khoản nợ!");
+    }
 }
 
 void Dashboard::removeDebtTransaction(const QString& debtId) {
@@ -2967,146 +2928,38 @@ void Dashboard::clearDebtSearch() {
 }
 
 void Dashboard::on_addDebtButton_clicked() {
-    QDialog dialog(this);
-    dialog.setWindowTitle("Thêm Khoản Nợ");
-    dialog.setModal(true);
-    dialog.resize(450, 450);
+    AddDebtDialog dialog(this);
 
-    QVBoxLayout* layout = new QVBoxLayout(&dialog);
+    if (dialog.exec() == QDialog::Accepted) {
+        // Get data from dialog
+        QString type = dialog.getType();
+        QString categoryID = dialog.getCategory();
+        QString debtor = dialog.getDebtor();
+        double amount = dialog.getAmount();
+        QDateTime dueDateTime = dialog.getDueDate();
+        QDateTime creationDateTime = dialog.getDateTime();
+        QString description = dialog.getDescription();
+        bool isPaid = dialog.isPaid();
 
-    // Loại khoản nợ
-    QLabel* typeLabel = new QLabel("Loại khoản nợ:", &dialog);
-    QComboBox* typeCombo = new QComboBox(&dialog);
-    typeCombo->addItem("Vay nợ (Tôi đi vay)", "borrow");
-    typeCombo->addItem("Cho vay (Tôi cho vay)", "lend");
+        App::addDebt(categoryID, amount, description, debtor,
+                    dueDateTime.date(), type, isPaid);
 
-    // Danh mục
-    QLabel* categoryLabel = new QLabel("Danh mục:", &dialog);
-    QComboBox* categoryCombo = new QComboBox(&dialog);
-    for (const Category& category : App::getCategoryList()) {
-        categoryCombo->addItem(category.getName(), category.getID());
-    }
-
-    // Tên người vay/cho vay
-    QLabel* debtorLabel = new QLabel("Tên người liên quan:", &dialog);
-    QLineEdit* debtorEdit = new QLineEdit(&dialog);
-    debtorEdit->setPlaceholderText("Nhập tên người vay/cho vay...");
-
-    // Số tiền
-    QLabel* amountLabel = new QLabel("Số tiền:", &dialog);
-    QLineEdit* amountEdit = new QLineEdit(&dialog);
-    amountEdit->setPlaceholderText("Nhập số tiền...");
-
-    // Ngày đáo hạn
-    QLabel* dueDateLabel = new QLabel("Ngày đáo hạn:", &dialog);
-    QDateEdit* dueDateEdit = new QDateEdit(&dialog);
-    dueDateEdit->setDate(QDate::currentDate().addMonths(1));
-    dueDateEdit->setCalendarPopup(true);
-    dueDateEdit->setDisplayFormat("dd/MM/yyyy");
-
-    // Mô tả
-    QLabel* descLabel = new QLabel("Mô tả:", &dialog);
-    QTextEdit* descEdit = new QTextEdit(&dialog);
-    descEdit->setPlaceholderText("Nhập mô tả (tùy chọn)...");
-    descEdit->setMaximumHeight(80);
-
-    // Trạng thái thanh toán
-    QCheckBox* paidCheckBox = new QCheckBox("Đã thanh toán", &dialog);
-
-    // Buttons
-    QHBoxLayout* buttonLayout = new QHBoxLayout();
-    QPushButton* okButton = new QPushButton("Thêm", &dialog);
-    QPushButton* cancelButton = new QPushButton("Hủy", &dialog);
-    buttonLayout->addWidget(okButton);
-    buttonLayout->addWidget(cancelButton);
-
-    // Add all widgets to layout
-    layout->addWidget(typeLabel);
-    layout->addWidget(typeCombo);
-    layout->addWidget(categoryLabel);
-    layout->addWidget(categoryCombo);
-    layout->addWidget(debtorLabel);
-    layout->addWidget(debtorEdit);
-    layout->addWidget(amountLabel);
-    layout->addWidget(amountEdit);
-    layout->addWidget(dueDateLabel);
-    layout->addWidget(dueDateEdit);
-    layout->addWidget(descLabel);
-    layout->addWidget(descEdit);
-    layout->addWidget(paidCheckBox);
-    layout->addLayout(buttonLayout);
-
-    // Update label based on debt type
-    connect(typeCombo, QOverload<int>::of(&QComboBox::currentIndexChanged), [debtorLabel, typeCombo]() {
-        QString debtType = typeCombo->currentData().toString();
-        if (debtType == "borrow") {
-            debtorLabel->setText("Tên người cho vay:");
-        } else {
-            debtorLabel->setText("Tên người đi vay:");
-        }
-    });
-
-    connect(okButton, &QPushButton::clicked, [&dialog, typeCombo, categoryCombo, debtorEdit,
-                                              amountEdit, dueDateEdit, descEdit, paidCheckBox, this]() {
-        QString debtType = typeCombo->currentData().toString();
-        QString categoryId = categoryCombo->currentData().toString();
-        QString debtorName = debtorEdit->text().trimmed();
-        QString amountText = amountEdit->text().trimmed();
-        QString description = descEdit->toPlainText().trimmed();
-        QDate dueDate = dueDateEdit->date();
-        bool isPaid = paidCheckBox->isChecked();
-
-        // Validation
-        if (categoryId.isEmpty()) {
-            QMessageBox::warning(&dialog, "Lỗi", "Vui lòng chọn danh mục!");
-            return;
+        QVector<Debt>& debtListRef = const_cast<QVector<Debt>&>(App::getDebtList());
+        if (!debtListRef.isEmpty()) {
+            Debt& lastDebt = debtListRef.last();
+            lastDebt.setCreatedAt(creationDateTime);
         }
 
-        if (debtorName.isEmpty()) {
-            QMessageBox::warning(&dialog, "Lỗi", "Vui lòng nhập tên người liên quan!");
-            return;
-        }
-
-        if (amountText.isEmpty()) {
-            QMessageBox::warning(&dialog, "Lỗi", "Vui lòng nhập số tiền!");
-            return;
-        }
-
-        bool ok;
-        double amount = amountText.toDouble(&ok);
-        if (!ok || amount <= 0) {
-            QMessageBox::warning(&dialog, "Lỗi", "Số tiền không hợp lệ!");
-            return;
-        }
-
-        if (!dueDate.isValid() || dueDate < QDate::currentDate()) {
-            QMessageBox::StandardButton reply = QMessageBox::question(
-                &dialog,
-                "Xác nhận",
-                "Ngày đáo hạn đã qua hoặc không hợp lệ. Bạn có muốn tiếp tục?",
-                QMessageBox::Yes | QMessageBox::No
-            );
-            if (reply == QMessageBox::No) {
-                return;
-            }
-        }
-
-        App::addDebt(categoryId, amount, description, debtorName, dueDate, debtType, isPaid);
+        App::writeData();
 
         renderDebtCards();
         updateDebtOverview();
         updateDashboardOverview();
-        App::writeData();
 
-        QString typeText = (debtType == "borrow") ? "vay nợ" : "cho vay";
-        QMessageBox::information(&dialog, "Thành công",
+        QString typeText = (type == "borrow") ? "vay nợ" : "cho vay";
+        QMessageBox::information(this, "Thành công",
                                 QString("Đã thêm khoản %1 thành công!").arg(typeText));
-        dialog.accept();
-    });
-
-    connect(cancelButton, &QPushButton::clicked, &dialog, &QDialog::reject);
-
-    dialog.exec();
+    }
 }
 
 void Dashboard::on_debtSearchButton_clicked() {
@@ -3135,31 +2988,31 @@ void Dashboard::onDebtFilterChanged(int index) {
     const QVector<Debt>& allDebts = App::getDebtList();
 
     switch(index) {
-        case 0: // Tất cả
+        case 0:
             filteredDebts = allDebts;
             break;
-        case 1: // Vay nợ
+        case 1:
             for (const Debt& debt : allDebts) {
                 if (debt.getDebtType() == "borrow") {
                     filteredDebts.append(debt);
                 }
             }
             break;
-        case 2: // Cho vay
+        case 2:
             for (const Debt& debt : allDebts) {
                 if (debt.getDebtType() == "lend") {
                     filteredDebts.append(debt);
                 }
             }
             break;
-        case 3: // Chưa thanh toán
+        case 3:
             for (const Debt& debt : allDebts) {
                 if (!debt.getIsPaid()) {
                     filteredDebts.append(debt);
                 }
             }
             break;
-        case 4: // Đã thanh toán
+        case 4:
             for (const Debt& debt : allDebts) {
                 if (debt.getIsPaid()) {
                     filteredDebts.append(debt);

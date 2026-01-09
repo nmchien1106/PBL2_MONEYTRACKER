@@ -31,6 +31,8 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         expense.cpp expense.h filehandler.cpp filehandler.h hashtable.h income.cpp income.h linkedlist.h transaction.cpp transaction.h
         debt.cpp debt.h
         add_transaction_dialog.cpp add_transaction_dialog.h add_transaction_dialog.ui
+        add_debt_dialog.cpp add_debt_dialog.h add_debt_dialog.ui
+        add_saving_dialog.cpp add_saving_dialog.h add_saving_dialog.ui
 
         src.qrc
         saving.h saving.cpp
